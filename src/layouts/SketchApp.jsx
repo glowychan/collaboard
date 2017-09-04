@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import SketchPad from './SketchPad'
-import Pencil, { TOOL_PENCIL } from './tools/Pencil'
-import Line, { TOOL_LINE } from './tools/Line'
-import Ellipse, { TOOL_ELLIPSE} from './tools/Ellipse'
-import Rectangle, { TOOL_RECTANGLE } from './tools/Rectangle'
+import React, { Component } from 'react';
+import SketchPad from '../components/SketchPad';
+import { TOOL_PENCIL } from '../components/tools/Pencil';
+import { TOOL_LINE } from '../components/tools/Line';
+import { TOOL_ELLIPSE } from '../components/tools/Ellipse';
+import { TOOL_RECTANGLE } from '../components/tools/Rectangle';
 
 export default class SketchApp extends Component
 {
