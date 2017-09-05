@@ -3,29 +3,41 @@ import axios from 'axios';
 
 export default class Homepage extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: ''
+    }
+
+
+    this.submitForm = this.submitForm.bind(this)
+  }
+
+  // NOTE: there should be a limited acceptable characters for the bordname
   render() {
      return (
       <div>
         <form onSubmit={this.submitForm}>
-          <input placeholder="Twoodle Name" name="boardId"/>
+          <input placeholder="Twoodle Name" name="boardName"/>
           <button>submit</button>
         </form>
-
+        <p>{this.state.error}</p>
       </div>
     );
   }
 
   submitForm = (event) => {
     event.preventDefault();
-    console.log(event.target.boardId.value);
+    event.persist();
+    let boardName = event.target.boardName.value
+    boardName = boardName.replace(' ','-')
 
-    axios.get(`http://localhost:3001/?newURL=${event.target.boardId.value}`)
-      .then(function (response) {
-        console.log("this is a response");
-        //window.location.href(`/${event.target.boardId.value}`);
+    axios.get(`http://localhost:3001/?boardName=${boardName}`)
+      .then((response) => {
+        window.location = `/twoodles/${boardName}`;
       })
-      .catch(function (error) {
-        console.log("this is an error");
-      });
+      .catch((error) => {
+        this.setState({error: 'The borad name is already taken.'})
+      })
   }
 }

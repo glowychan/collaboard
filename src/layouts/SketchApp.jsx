@@ -22,16 +22,10 @@ export default class SketchApp extends Component
       color: '#000000',
       fill: false,
       fillColor: '#444444',
-      items: []
+      items: this.props.items
     }
   }
 
-  // componentDidMount() {
-
-  //   this.socket = new WebSocket("ws://localhost:3001")
-  //   // Wait for new items and then add them to the DOM
-  //   this.socket.onmessage = this.addNewItem;
-  // }
 
   changeColor(color) {
     this.setState({
@@ -53,7 +47,7 @@ export default class SketchApp extends Component
   }
 
 render() {
-    const { tool, size, color, fill, fillColor, items } = this.state;
+    const { tool, size, color, fill, fillColor } = this.state;
     return (
       <div>
         <h1><img className='logo' src={logo} />TWOODLE</h1>
@@ -66,9 +60,9 @@ render() {
             size={size}
             color={color}
             fillColor={fill ? fillColor : ''}
-            items={items}
+            items={this.props.items}
             tool={tool}
-            //onCompleteItem={(item) => this.socket.send(JSON.stringify(item))}
+            onCompleteItem={(item) => this.props.addNewItem(item, this.props.boardName)}
           />
         </div>
         <div className='toolbar' style={{float:'left'}}>
