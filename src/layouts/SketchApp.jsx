@@ -70,31 +70,31 @@ render() {
             //onCompleteItem={(item) => this.socket.send(JSON.stringify(item))}
           />
         </div>
-        <div style={{float:'left'}}>
+        <div className='toolbar' style={{float:'left'}}>
           <div className="tools" style={{marginBottom:20}}>
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_PENCIL})}
-            >Pencil</button>
+            >PENCIL</button>
             <br />
             <button
               style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_LINE  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_LINE})}
-            >Line</button>
+            >LINE</button>
             <br />
             <button
               style={tool == TOOL_ELLIPSE ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_ELLIPSE  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_ELLIPSE})}
-            >Ellipse</button>
+            >ELLIPSE</button>
             <br />
             <button
               style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_RECTANGLE})}
-            >Rectangle</button>
+            >RECTANGLE</button>
             <br />
           </div>
           <div className="options" style={{marginBottom:20}}>

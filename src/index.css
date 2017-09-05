@@ -4,6 +4,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Patrick Hand', cursive;
+  font-size: 62.5%;
+  width: 100%;
 }
  .brand {
   margin: 30px 150px;
@@ -79,3 +81,21 @@ font-size: 2rem;
   left: 0;
 }
 
+.toolbar {
+  font-size: 3.5em;
+}
+
+button {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  font-size: 1.0em;
+  font-family: 'Patrick Hand SC', cursive;
+}
+
+button.item-active{
+  color: #9068BE;
+}
