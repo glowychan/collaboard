@@ -91,12 +91,6 @@ const Routes = () => (
   <Router>
     <div>
       <Sidebar />
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/twoodles">Twoodles</Link></li>
-      </ul>
-
-      <hr/>
 
       <Route exact path="/" component={Home}/>
       <Route path="/twoodles" component={Twoodles}/>
