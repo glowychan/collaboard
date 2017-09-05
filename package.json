@@ -15,14 +15,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "webpack",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "babel-loader": "^7.1.2",
-    "css-loader": "^0.28.7",
-    "webpack": "^3.5.5",
-    "webpack-dev-server": "^2.7.1"
+   
   }
 }
