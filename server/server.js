@@ -15,7 +15,7 @@ const PORT = 3001
 const db = [
   {
     borderid: 1,
-    name: 'conference-call',
+    boardName: 'conference-call',
     items:  [
       {
         color: "#000000",
@@ -34,7 +34,7 @@ const db = [
   },
   {
     borderid: 2,
-    name: 'chem-class',
+    boardName: 'chem-class',
     items:  [
       {
         color: "#000000",
@@ -79,6 +79,8 @@ wss.on('connection', (ws) => {
 
   // Broadcast back the recieved messages to all clients
   ws.on('message', (message) => {
+    // should be added later:
+    // when you get this data update the database too
     broadcastBackMessages(message)
   })
 
@@ -113,7 +115,7 @@ app.get('/', (req, res) => {
 
   const boardName = req.query.boardName
   //check the database (For now the dumy database)
-  let board = db.find(board => board.name === boardName)
+  let board = db.find(board => board.boardName === boardName)
 
   if (!board) {
     res.status(200).send()
