@@ -7,7 +7,7 @@ export default class Homepage extends Component {
      return (
       <div>
         <form onSubmit={this.submitForm}>
-          <input placeholder="Your Name (Optional)" name="username"/>
+          <input placeholder="Twoodle Name" name="boardId"/>
           <button>submit</button>
         </form>
 
@@ -17,11 +17,12 @@ export default class Homepage extends Component {
 
   submitForm = (event) => {
     event.preventDefault();
-    console.log(event.target.username.value);
+    console.log(event.target.boardId.value);
 
-    axios.get(`http://localhost:3001/?newURL=${event.target.username.value}`)
+    axios.get(`http://localhost:3001/?newURL=${event.target.boardId.value}`)
       .then(function (response) {
         console.log("this is a response");
+        //window.location.href(`/${event.target.boardId.value}`);
       })
       .catch(function (error) {
         console.log("this is an error");
