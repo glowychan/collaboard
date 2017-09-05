@@ -4,6 +4,7 @@ import { TOOL_PENCIL } from '../components/tools/Pencil';
 import { TOOL_LINE } from '../components/tools/Line';
 import { TOOL_ELLIPSE } from '../components/tools/Ellipse';
 import { TOOL_RECTANGLE } from '../components/tools/Rectangle';
+import SideBar from '../Sidebar';
 
 export default class SketchApp extends Component
 {
@@ -36,12 +37,13 @@ export default class SketchApp extends Component
     console.log(JSON.parse(receivedItem.data))
     this.setState({items: this.state.items.concat([JSON.parse(receivedItem.data)])})
   }
-
-  render() {
+render() {
     const { tool, size, color, fill, fillColor, items } = this.state;
     return (
-      <div>
-        <h1>React SketchPad</h1>
+      <div id="outer-container">
+      <SideBar />
+      <main id="page-wrap">
+        <h1 className='brand'>TWOODLE</h1>
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
             width={500}
@@ -97,6 +99,7 @@ export default class SketchApp extends Component
                 </span> : ''}
             </div> : ''}
         </div>
+        </main>
       </div>
     );
   }
