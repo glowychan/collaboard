@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import SketchPad from './components/SketchPad';
-import { TOOL_PENCIL } from './src/components/tools/Pencil';
-import { TOOL_LINE } from './src/components/tools/Line';
-import { TOOL_ELLIPSE } from './src/components/tools/Ellipse';
-import { TOOL_RECTANGLE } from './src/components/tools/Rectangle';
+import { TOOL_PENCIL } from './components/tools/Pencil';
+import { TOOL_LINE } from './components/tools/Line';
+import { TOOL_ELLIPSE } from './components/tools/Ellipse';
+import { TOOL_RECTANGLE } from './components/tools/Rectangle';
 import SideBar from './Sidebar';
 
 export default class SketchApp extends Component
@@ -41,8 +41,9 @@ export default class SketchApp extends Component
   render() {
     const { tool, size, color, fill, fillColor, items } = this.state;
     return (
-      <div>
+      <div id="outer-container">
       <SideBar />
+      <main id="page-wrap">
         <h1 className='brand'>TWOODLE</h1>
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
@@ -99,6 +100,7 @@ export default class SketchApp extends Component
                 </span> : ''}
             </div> : ''}
         </div>
+        </main>
       </div>
     );
   }

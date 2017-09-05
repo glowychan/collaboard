@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Patrick+Hand');
+@import url('https://fonts.googleapis.com/css?family=Patrick+Hand|Patrick+Hand+SC');
 
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Patrick Hand', cursive;
 }
  .brand {
   margin: 30px 150px;
@@ -49,6 +49,7 @@ background: #bdc3c7;
 background: #373a47;
 padding: 2.5em 1.5em 0;
 font-size: 1.15em;
+font-family: 'Patrick Hand SC', cursive;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -60,10 +61,6 @@ fill: #373a47;
 .bm-item-list {
 color: #b8b7ad;
 padding: 0.8em;
-}
-
-.bm-overlay {
-  display: none;
 }
 
 .bm-menu-wrap {
