@@ -17,12 +17,13 @@ export default class Homepage extends Component {
 
   submitForm = (event) => {
     event.preventDefault();
+    event.persist();
     console.log(event.target.boardId.value);
 
     axios.get(`http://localhost:3001/?newURL=${event.target.boardId.value}`)
       .then(function (response) {
         console.log("this is a response");
-        //window.location.href(`/${event.target.boardId.value}`);
+        window.location = `/twoodles/${event.target.boardId.value}`;
       })
       .catch(function (error) {
         console.log("this is an error");
