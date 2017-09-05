@@ -25,12 +25,12 @@ export default class SketchApp extends Component
     }
   }
 
-  componentDidMount() {
+  // componentDidMount() {
 
-    this.socket = new WebSocket("ws://localhost:3001")
-    // Wait for new items and then add them to the DOM
-    this.socket.onmessage = this.addNewItem;
-  }
+  //   this.socket = new WebSocket("ws://localhost:3001")
+  //   // Wait for new items and then add them to the DOM
+  //   this.socket.onmessage = this.addNewItem;
+  // }
 
   changeColor(color) {
     this.setState({
@@ -53,10 +53,16 @@ export default class SketchApp extends Component
 render() {
     const { tool, size, color, fill, fillColor, items } = this.state;
     return (
+<<<<<<< HEAD
       <div id="outer-container">
       <SideBar />
       <main id="page-wrap">
         <h1 className='brand'>TWOODLE</h1>
+=======
+      <div>
+        <h1>React SketchPad</h1>
+        <p>{this.state.items}</p>
+>>>>>>> routing
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
             width={1200}
@@ -67,7 +73,7 @@ render() {
             fillColor={fill ? fillColor : ''}
             items={items}
             tool={tool}
-            onCompleteItem={(item) => this.socket.send(JSON.stringify(item))}
+            //onCompleteItem={(item) => this.socket.send(JSON.stringify(item))}
           />
         </div>
         <div style={{float:'left'}}>

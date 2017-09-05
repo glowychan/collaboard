@@ -1,15 +1,17 @@
 // Required Packages
 const express      = require('express')
 const SocketServer = require('ws').Server
-
+const cors = require('cors')
 
 
 // Set the port to 3001
 const PORT = 3001
 
+const app = express();
+app.use(cors())
 
 // Create a new express server
-const server = express()
+const server = app
    // Make the express server serve static assets (html, javascript, css) from the /public folder
 .use(express.static('public'))
 .listen(
@@ -56,6 +58,19 @@ wss.broadcast = function(data) {
 };
 
 
+// Ajax calls
+app.get('/', (req, res) => {
 
+  const object = {
+    hi: "hi"
+  }
+
+  console.log("YOOO");
+  if (req.query.newURL) {
+    res.json(object);
+  } else {
+    res.json(object);
+  }
+})
 
 
