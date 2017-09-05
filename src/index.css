@@ -1,19 +1,69 @@
 @import url('https://fonts.googleapis.com/css?family=Patrick+Hand|Patrick+Hand+SC');
 
+
+@media screen and (min-width: 480px) {
+  button.item {
+      font-size: 40px;
+  }
+  button.item-active {
+    font-size: 40px;
+}
+}
+@media screen and (max-width: 480px) {
+  button.item {
+      font-size: 15px;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Patrick Hand', cursive;
+  font-size: 62.5%;
+  color: #5B5A56;
 }
- .brand {
+
+button.item {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  font-family: 'Patrick Hand', cursive;
+  color: #5B5A56;
+}
+
+button.item-active {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  color: #9068BE;
+  font-family: 'Patrick Hand', cursive;
+}
+
+div.outer-container {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+ h1.brand {
   margin: 30px 150px;
   font-family: 'Patrick Hand', cursive;
-  font-size: 3rem;
+  font-size: 4em;
   line-height: 30px;
+  color: #000000;
+  display: flex;
  }
 
 .canvas-div {
   margin: 0 30px 0 80px;
+  display: flex;
 }
 
 a.active {
@@ -53,8 +103,8 @@ background: #bdc3c7;
 /* General sidebar styles */
 .bm-menu {
 background: #6ED3CF;
-padding: 2.5em 1.5em 0;
-font-size: 1.15em;
+padding: 1.0em 0.5em 0;
+font-size: 2em;
 font-family: 'Patrick Hand SC', cursive;
 }
 
@@ -70,7 +120,7 @@ fill: #373a47;
 /* Wrapper for item list */
 .bm-item-list {
 color: #5B5A56;
-padding: 0.8em;
+padding: 0.5em;
 font-size: 2rem;
 }
 
@@ -79,3 +129,24 @@ font-size: 2rem;
   left: 0;
 }
 
+.circle-picker {
+  margin-top: 10px;
+}
+
+div.toolbar {
+  float: left;
+  width: 15%;
+  padding: 4px;
+  font-size: 4em;
+  margin-left: 3%;
+}
+
+div.canvas-div {
+  width: 75%;
+  height: 1200px;
+  float: left;
+  margin: 0 30px 0 30px;
+}
+canvas.canvas {
+  width: 100%;
+}

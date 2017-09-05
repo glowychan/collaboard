@@ -117,7 +117,7 @@ export default class SketchPad extends Component {
   render() {
     const { width, height, canvasClassName } = this.props;
     return (
-      <div className="canvas-div">
+      <div className='canvas-div'>
         <canvas
           ref={(canvas) => { this.canvasRef = canvas; }}
           className={canvasClassName}
@@ -125,8 +125,6 @@ export default class SketchPad extends Component {
           onMouseMove={this.onMouseMove}
           onMouseOut={this.onMouseUp}
           onMouseUp={this.onMouseUp}
-          width={width}
-          height={height}
         />
         <toolsMap />
       </div>

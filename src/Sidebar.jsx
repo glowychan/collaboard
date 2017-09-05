@@ -7,10 +7,10 @@ class SideBar extends Component {
     <Menu className="bm-menu" 
     pageWrapId={ "page-wrap" } 
     outerContainerId={ "outer-container" }
-    width={ '20%' } >
-        <a className="bm-item-list" to="/">+ Home</a>
-        <a className="bm-item-list" to="/courses">+ New</a>
-        <a className="bm-item-list" to="/about">+ Share</a>
+    width={ '15%' } >
+        <a className="bm-item-list" to="/">Home</a>
+        <a className="bm-item-list" to="/courses">New</a>
+        <a className="bm-item-list" to="/about">Share</a>
     </Menu>
 
     );

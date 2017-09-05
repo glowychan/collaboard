@@ -1,5 +1,4 @@
 import React from 'react'
-import reactCSS from 'reactcss'
 import { CirclePicker } from 'react-color'
 
 class ColorPicker extends React.Component {
