@@ -4,6 +4,8 @@ import Pencil, { TOOL_PENCIL } from './tools/Pencil'
 import Line, { TOOL_LINE } from './tools/Line'
 import Ellipse, { TOOL_ELLIPSE} from './tools/Ellipse'
 import Rectangle, { TOOL_RECTANGLE } from './tools/Rectangle'
+import SideBar from './Sidebar';
+
 
 export default class SketchApp extends Component
 {
@@ -43,7 +45,8 @@ export default class SketchApp extends Component
     const { tool, size, color, fill, fillColor, items } = this.state;
     return (
       <div>
-        <h1>React SketchPad</h1>
+      <SideBar />
+        <h1 className='brand'>TWOODLE</h1>
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
             width={500}
