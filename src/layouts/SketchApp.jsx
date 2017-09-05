@@ -50,19 +50,13 @@ export default class SketchApp extends Component
     console.log(JSON.parse(receivedItem.data))
     this.setState({items: this.state.items.concat([JSON.parse(receivedItem.data)])})
   }
+
 render() {
     const { tool, size, color, fill, fillColor, items } = this.state;
     return (
-<<<<<<< HEAD
-      <div id="outer-container">
-      <SideBar />
-      <main id="page-wrap">
-        <h1 className='brand'>TWOODLE</h1>
-=======
       <div>
         <h1>React SketchPad</h1>
         <p>{this.state.items}</p>
->>>>>>> routing
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
             width={1200}
@@ -120,7 +114,6 @@ render() {
                 </span> : ''}
             </div> : ''}
         </div>
-        </main>
       </div>
     );
   }
