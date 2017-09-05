@@ -17,6 +17,9 @@ const Home = () => (
   </div>
 )
 
+// ajax call inside the Home to /?query, the query will come from the form
+//form on the home page
+
 /*
 class Twoodle extends React.Component {
   constructor(props) {
@@ -43,12 +46,29 @@ class Twoodle extends React.Component {
 */
 
 
-const Twoodle = ({ match }) => (
-  <div>
-    <h3>Your twoodle code is {match.params.boardId}</h3>
-    <SketchApp />
-  </div>
-);
+class Twoodle extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      boardId: props.match.params.boardId,
+      items: []
+    }
+  }
+  componentDidMount() {
+    // websokcket connection with bordid
+    // get items
+    this.setState({items: []})
+
+  }
+  render() {
+    return (
+      <div>
+        <h3>Your twoodle code is {this.state.boardId}</h3>
+        <SketchApp items ={this.state.items} />
+      </div>
+    )
+  }
+}
 /*
 const Twoodles = ({ match }) => (
   <div>
@@ -58,27 +78,21 @@ const Twoodles = ({ match }) => (
 )
 */
 class Twoodles extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {url: ''}
-  }
 
-  componentWillMount() {
-    this.socket = new WebSocket("ws://localhost:3001")
-    // Wait for new items and then add them to the DOM
-    this.socket.onmessage = this.setURL
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {url: ''}
+  // }
 
-  }
-
-  setURL = (recievedURL) {
-
-    this.setState({url: 123 })
-  }
-
+  // componentWillMount() {
+  //   this.setState({url: 123})
+  // }
+  //REDIRECT TWOODLES PAGE TO MAIN PAGE
   render() {
     return (
       <div>
-        <Link to={`${this.props.match.url}/${this.state.url}`}><h3>New Twoodle</h3></Link>
+        {console.log(this.props.match.url)}
+        <Link to={`${this.props.location.pathname}`}><h3>New Twoodle</h3></Link>
         <Route path={`${this.props.match.url}/:boardId`} component={Twoodle}/>
       </div>
     )
