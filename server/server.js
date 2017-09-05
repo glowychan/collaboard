@@ -111,17 +111,14 @@ wss.broadcast = function(data) {
 // Ajax calls
 app.get('/', (req, res) => {
 
-  const boardName = req.query.newURL
-  //check the database
+  const boardName = req.query.boardName
+  //check the database (For now the dumy database)
   let board = db.find(board => board.name === boardName)
 
-  let response = {}
-
-  if (req.query.newURL) {
-    res.json(response);
+  if (!board) {
+    res.status(200).send()
   } else {
-    response.error = 'The bord name is already taken'
-    res.json(response);
+    res.status(400).send()
   }
 })
 
