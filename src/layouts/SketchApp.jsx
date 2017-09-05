@@ -6,6 +6,7 @@ import { TOOL_ELLIPSE } from '../components/tools/Ellipse';
 import { TOOL_RECTANGLE } from '../components/tools/Rectangle';
 import SideBar from '../Sidebar';
 import ColorPicker from '../ColorPicker';
+import FillPicker from '../FillPicker';
 
 export default class SketchApp extends Component
 {
@@ -31,6 +32,17 @@ export default class SketchApp extends Component
     this.socket.onmessage = this.addNewItem;
   }
 
+  changeColor(color) {
+    this.setState({
+      color: color
+    })
+  }
+
+  changeFill(color) {
+    this.setState({
+      fillColor: color
+    })
+  }
 
   // UPDATE THE STATE WITH THE NEW MESSAGES
   addNewItem = (receivedItem) => {
@@ -90,16 +102,15 @@ render() {
             <input min="1" max="20" type="range" value={size} onChange={(e) => this.setState({size: parseInt(e.target.value)})} />
           </div>
           <div className="options" style={{marginBottom:20}}>
-            <ColorPicker value={color} onChange={(e) => this.setState({color: e.target.value})}/>
+            <ColorPicker value={color} newColor={this.changeColor.bind(this)}/>
           </div>
           {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
             <div>
-              <label htmlFor="">fill in:</label>
+              <label htmlFor="">FILL IN:</label>
               <input type="checkbox" value={fill} style={{margin:'0 8'}}
                      onChange={(e) => this.setState({fill: e.target.checked})} />
               {fill ? <span>
-                  <label htmlFor="">with color:</label>
-                  <input type="color" value={fillColor} onChange={(e) => this.setState({fillColor: e.target.value})} />
+                  <FillPicker value={fill} newFill={this.changeFill.bind(this)}/>
                 </span> : ''}
             </div> : ''}
         </div>

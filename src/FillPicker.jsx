@@ -1,15 +1,16 @@
+
 import React from 'react'
 import reactCSS from 'reactcss'
 import { CirclePicker } from 'react-color'
 
-class ColorPicker extends React.Component {
+class FillPicker extends React.Component {
   state = {
     background: '#fff',
   };
 
   handleChangeComplete = (color) => {
     this.setState({ background: color.hex });
-    this.props.newColor(this.state.background)
+    this.props.newFill(this.state.background)
   };
 
   render() {
@@ -22,4 +23,4 @@ class ColorPicker extends React.Component {
   }
 }
 
-export default ColorPicker
+export default FillPicker

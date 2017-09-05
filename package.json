@@ -6,12 +6,13 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-burger-menu": "^2.1.5",
+    "react-color": "^2.13.5",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.13",
+    "reactcss": "^1.2.2",
     "uuid": "^3.1.0",
     "webpack": "^3.5.5",
-    "ws": "^3.1.0",
-    "uuid": "^3.1.0"
+    "ws": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

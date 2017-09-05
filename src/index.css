@@ -8,9 +8,13 @@ body {
  .brand {
   margin: 30px 150px;
   font-family: 'Patrick Hand', cursive;
-  font-size: 2.5rem;
+  font-size: 3rem;
   line-height: 30px;
  }
+
+.canvas-div {
+  margin: 0 30px 0 80px;
+}
 
 a.active {
   color: orange;
@@ -75,44 +79,3 @@ font-size: 2rem;
   left: 0;
 }
 
-label.color-picker {
-  width: 150px; /* Width of color picker */
-  border: 1px solid #ccc; /* Outer border */
-  border-radius: 3px; /* Border radius of outer border */
-  padding: 5px; /* Space between outer border and color picker */
-  background: #fff; /* Color between outer border and color picker */
-
-  display: block; /* Contain color picker within label */
-}
-
-label.color-picker > span {
-  border: 1px solid #ccc; /* Border around color in color picker */
-
-  display: block; /* Contain color picker within span */
-}
-
-label.color-picker > span > input[type=color] {
-  height: 10px; /* Height of color picker */
-
-  display: block; /* Avoids space above/below color picker */
-  width: 100%; /* Fill available horizontal space */
-  border: none; /* Remove browser's border */
-  padding: 0px; /* Remove space around color picker in Chrome */
-}
-
-/* Chrome styles */
-label.color-picker > span > input[type=color]::-webkit-color-swatch-wrapper {
-  padding: 0; /* Remove browser's padding around color picker */
-}
-label.color-picker > span > input[type=color]::-webkit-color-swatch {
-  border: none; /* Remove browser's border around color in color picker */
-}
-
-/* Firefox styles */
-label.color-picker > span > input[type=color]::-moz-color-swatch {
-  border: none; /* Remove browser's border around color in color picker */
-}
-label.color-picker > span > input[type=color]::-moz-focus-inner {
-  border: none; /* Remove browser's padding around color in color picker */
-  padding: 0; /* Remove browser's padding around color in color picker */
-}
