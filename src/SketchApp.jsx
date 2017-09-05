@@ -44,8 +44,9 @@ export default class SketchApp extends Component
   render() {
     const { tool, size, color, fill, fillColor, items } = this.state;
     return (
-      <div>
+      <div id="outer-container">
       <SideBar />
+      <main id="page-wrap">
         <h1 className='brand'>TWOODLE</h1>
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
@@ -107,6 +108,7 @@ export default class SketchApp extends Component
                 </span> : ''}
             </div> : ''}
         </div>
+        </main>
       </div>
     );
   }
