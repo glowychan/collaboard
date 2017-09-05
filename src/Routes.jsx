@@ -43,12 +43,29 @@ class Twoodle extends React.Component {
 */
 
 
-const Twoodle = ({ match }) => (
-  <div>
-    <h3>Your twoodle code is {match.params.boardId}</h3>
-    <SketchApp />
-  </div>
-);
+class Twoodle extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      boardId: props.match.params.boardId,
+      items: []
+    }
+  }
+  componentDidMount() {
+    // websokcket connection with bordid
+    // get items
+    this.setState({items: []})
+
+  }
+  render() {
+    return (
+      <div>
+        <h3>Your twoodle code is {this.state.boardId}</h3>
+        <SketchApp items ={this.state.items} />
+      </div>
+    )
+  }
+}
 /*
 const Twoodles = ({ match }) => (
   <div>
@@ -58,19 +75,19 @@ const Twoodles = ({ match }) => (
 )
 */
 class Twoodles extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {url: ''}
-  }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {url: ''}
+  // }
 
-  componentWillMount() {
-    this.setState({url: 123 })
-  }
+  // componentWillMount() {
+  //   this.setState({url: 123})
+  // }
 
   render() {
     return (
       <div>
-        <Link to={`${this.props.match.url}/${this.state.url}`}><h3>New Twoodle</h3></Link>
+        <Link to={`${this.props.match.url}/:/boardId`}><h3>New Twoodle</h3></Link>
         <Route path={`${this.props.match.url}/:boardId`} component={Twoodle}/>
       </div>
     )
