@@ -24,11 +24,9 @@ export default class SketchApp extends Component
 
   componentDidMount() {
 
-    //this.socket = new WebSocket("ws://localhost:3001")
-    //console.log('Connected to the server!')
-
-    // Wait for new messages and then add them to the DOM
-    //this.socket.onmessage = this.addNewItem;
+    this.socket = new WebSocket("ws://localhost:3001")
+    // Wait for new items and then add them to the DOM
+    this.socket.onmessage = this.addNewItem;
   }
 
 
@@ -54,12 +52,7 @@ export default class SketchApp extends Component
             fillColor={fill ? fillColor : ''}
             items={items}
             tool={tool}
-            // onCompleteItem={(i) => wsClient.emit('addItem', i)}
-            onCompleteItem={(item) => {
-              console.log(item)
-              //this.socket.send(JSON.stringify(item))
-            }
-            }
+            onCompleteItem={(item) => this.socket.send(JSON.stringify(item))}
           />
         </div>
         <div style={{float:'left'}}>
