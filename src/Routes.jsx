@@ -19,15 +19,14 @@ const Home = () => (
 
 const Twoodle = ({ match }) => (
   <div>
-    <h3>{match.params.boardId}</h3>
+    <h3>Your twoodle code is {match.params.boardId}</h3>
     <SketchApp />
   </div>
 );
 
 const Twoodles = ({ match }) => (
   <div>
-    <h3>Create a New Twoodle</h3>
-    <a href={`${match.url}/${randomStringFunction()}`}>Link!!</a>
+    <Link to={`${match.url}/${randomStringFunction()}`}><h3>New Twoodle</h3></Link>
     <Route path={`${match.url}/:boardId`} component={Twoodle}/>
   </div>
 )
