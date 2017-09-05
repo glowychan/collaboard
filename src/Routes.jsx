@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import SketchApp from './layouts/SketchApp';
+import Homepage from './layouts/Homepage';
 
 const randomStringFunction = function() {
   let id = "";
@@ -13,7 +14,7 @@ const randomStringFunction = function() {
 
 const Home = () => (
   <div>
-    <h1>Insert Home page component from layouts folder</h1>
+    <Homepage />
   </div>
 )
 
