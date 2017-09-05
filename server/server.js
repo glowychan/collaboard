@@ -4,9 +4,58 @@ const SocketServer = require('ws').Server
 const cors = require('cors')
 
 
+
+
 // Set the port to 3001
 const PORT = 3001
 
+
+
+// TEMPORARY DB
+const db = [
+  {
+    borderid: 1,
+    boardName: 'conference-call',
+    items:  [
+      {
+        color: "#000000",
+        id: "78f61f62-d291-4853-a7a2-390810f1e5f5",
+        points: [
+          {'x': 140, 'y': 123.85415649414062},
+          {'x': 141, 'y': 123.85415649414062},
+          {'x': 152, 'y': 123.85415649414062},
+          {'x': 168, 'y': 123.85415649414062},
+          {'x': 191, 'y': 123.85415649414062},
+          {'x': 213, 'y': 125.85415649414062}
+        ],
+        tool: "pencil"
+      }
+    ]
+  },
+  {
+    borderid: 2,
+    boardName: 'chem-class',
+    items:  [
+      {
+        color: "#000000",
+        id: "78f61f62-d291-4853-a7a2-390810f1e5f5",
+        points: [
+          {'x': 140, 'y': 171.85415649414062},
+          {'x': 141, 'y': 171.85415649414062},
+          {'x': 152, 'y': 171.85415649414062},
+          {'x': 168, 'y': 171.85415649414062},
+          {'x': 191, 'y': 171.85415649414062},
+          {'x': 213, 'y': 171.85415649414062}
+        ],
+        tool: "pencil"
+      }
+    ]
+  }
+]
+
+
+
+// Create a new express server
 const app = express();
 app.use(cors())
 
@@ -30,6 +79,8 @@ wss.on('connection', (ws) => {
 
   // Broadcast back the recieved messages to all clients
   ws.on('message', (message) => {
+    // should be added later:
+    // when you get this data update the database too
     broadcastBackMessages(message)
   })
 
@@ -58,19 +109,18 @@ wss.broadcast = function(data) {
 };
 
 
+
 // Ajax calls
 app.get('/', (req, res) => {
 
-  const object = {
-    hi: "hi"
-  }
+  const boardName = req.query.boardName
+  //check the database (For now the dumy database)
+  let board = db.find(board => board.boardName === boardName)
 
-  console.log("YOOO");
-  if (req.query.newURL) {
-    res.json(object);
+  if (!board) {
+    res.status(200).send()
   } else {
-    res.json(object);
+    res.status(400).send()
   }
 })
-
 

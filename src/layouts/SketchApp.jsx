@@ -18,31 +18,15 @@ export default class SketchApp extends Component
       color: '#000000',
       fill: false,
       fillColor: '#444444',
-      items: []
+      items: this.props.items
     }
   }
 
-  // componentDidMount() {
-
-  //   this.socket = new WebSocket("ws://localhost:3001")
-  //   // Wait for new items and then add them to the DOM
-  //   this.socket.onmessage = this.addNewItem;
-  // }
-
-
-  // UPDATE THE STATE WITH THE NEW MESSAGES
-  addNewItem = (receivedItem) => {
-    // Parsed the recived messages object
-    console.log(JSON.parse(receivedItem.data))
-    this.setState({items: this.state.items.concat([JSON.parse(receivedItem.data)])})
-  }
-
   render() {
-    const { tool, size, color, fill, fillColor, items } = this.state;
+    const { tool, size, color, fill, fillColor} = this.state;
     return (
       <div>
         <h1>React SketchPad</h1>
-        <p>{this.state.items}</p>
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
             width={500}
@@ -51,9 +35,9 @@ export default class SketchApp extends Component
             size={size}
             color={color}
             fillColor={fill ? fillColor : ''}
-            items={items}
+            items={this.props.items}
             tool={tool}
-            //onCompleteItem={(item) => this.socket.send(JSON.stringify(item))}
+            onCompleteItem={(item) => this.props.addNewItem(item, this.props.boardName)}
           />
         </div>
         <div style={{float:'left'}}>
