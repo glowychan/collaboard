@@ -64,6 +64,14 @@ class Twoodles extends React.Component {
   }
 
   componentWillMount() {
+    this.socket = new WebSocket("ws://localhost:3001")
+    // Wait for new items and then add them to the DOM
+    this.socket.onmessage = this.setURL
+
+  }
+
+  setURL = (recievedURL) {
+
     this.setState({url: 123 })
   }
 
