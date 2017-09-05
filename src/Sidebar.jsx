@@ -8,9 +8,9 @@ class SideBar extends Component {
     pageWrapId={ "page-wrap" } 
     outerContainerId={ "outer-container" }
     width={ '20%' } >
-        <a className="bm-item-list" to="/">One</a>
-        <a className="bm-item-list" to="/courses">Two</a>
-        <a className="bm-item-list" to="/about">Three</a>
+        <a className="bm-item-list" to="/">+ Home</a>
+        <a className="bm-item-list" to="/courses">+ New</a>
+        <a className="bm-item-list" to="/about">+ Share</a>
     </Menu>
 
     );
