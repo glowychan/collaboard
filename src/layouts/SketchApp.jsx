@@ -7,6 +7,7 @@ import { TOOL_RECTANGLE } from '../components/tools/Rectangle';
 import SideBar from '../Sidebar';
 import ColorPicker from '../ColorPicker';
 import FillPicker from '../FillPicker';
+import  logo from '../icons/007-square.png';
 
 export default class SketchApp extends Component
 {
@@ -55,7 +56,7 @@ render() {
     const { tool, size, color, fill, fillColor, items } = this.state;
     return (
       <div>
-        <h1>React SketchPad</h1>
+        <h1><img className='logo' src={logo} />TWOODLE</h1>
         <p>{this.state.items}</p>
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
@@ -107,7 +108,7 @@ render() {
           {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
             <div>
               <label htmlFor="">FILL IN:</label>
-              <input type="checkbox" value={fill} style={{margin:'0 8'}}
+              <input className="checkbox" type="checkbox" value={fill} style={{margin:'0 8'}}
                      onChange={(e) => this.setState({fill: e.target.checked})} />
               {fill ? <span>
                   <FillPicker value={fill} newFill={this.changeFill.bind(this)}/>
