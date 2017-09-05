@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom'
-import Pencil, { TOOL_PENCIL } from './tools/Pencil'
-import Line, { TOOL_LINE } from './tools/Line'
-import Ellipse, { TOOL_ELLIPSE} from './tools/Ellipse'
-import Rectangle, { TOOL_RECTANGLE } from './tools/Rectangle'
+import { findDOMNode } from 'react-dom';
+import Pencil, { TOOL_PENCIL } from './tools/Pencil';
+import Line, { TOOL_LINE } from './tools/Line';
+import Ellipse, { TOOL_ELLIPSE} from './tools/Ellipse';
+import Rectangle, { TOOL_RECTANGLE } from './tools/Rectangle';
 
 export const toolsMap = {
   [TOOL_PENCIL]: Pencil,

@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
-import SketchPad from './SketchPad'
-import Pencil, { TOOL_PENCIL } from './tools/Pencil'
-import Line, { TOOL_LINE } from './tools/Line'
-import Ellipse, { TOOL_ELLIPSE} from './tools/Ellipse'
-import Rectangle, { TOOL_RECTANGLE } from './tools/Rectangle'
+import React, { Component } from 'react';
+import SketchPad from './components/SketchPad';
+import { TOOL_PENCIL } from './src/components/tools/Pencil';
+import { TOOL_LINE } from './src/components/tools/Line';
+import { TOOL_ELLIPSE } from './src/components/tools/Ellipse';
+import { TOOL_RECTANGLE } from './src/components/tools/Rectangle';
 import SideBar from './Sidebar';
-
 
 export default class SketchApp extends Component
 {
@@ -26,11 +25,9 @@ export default class SketchApp extends Component
 
   componentDidMount() {
 
-    //this.socket = new WebSocket("ws://localhost:3001")
-    //console.log('Connected to the server!')
-
-    // Wait for new messages and then add them to the DOM
-    //this.socket.onmessage = this.addNewItem;
+    this.socket = new WebSocket("ws://localhost:3001")
+    // Wait for new items and then add them to the DOM
+    this.socket.onmessage = this.addNewItem;
   }
 
 
@@ -57,12 +54,7 @@ export default class SketchApp extends Component
             fillColor={fill ? fillColor : ''}
             items={items}
             tool={tool}
-            // onCompleteItem={(i) => wsClient.emit('addItem', i)}
-            onCompleteItem={(item) => {
-              console.log(item)
-              //this.socket.send(JSON.stringify(item))
-            }
-            }
+            onCompleteItem={(item) => this.socket.send(JSON.stringify(item))}
           />
         </div>
         <div style={{float:'left'}}>

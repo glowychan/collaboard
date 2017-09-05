@@ -4,10 +4,7 @@ var path = require('path');
 var BUILD_DIR = path.resolve(__dirname, 'public');
 
 var config = {
-  entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    './src/index.jsx'
-  ],
+  entry: "./src/index.js",
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js'
@@ -27,7 +24,8 @@ var config = {
         ]
       }
     ]
-  }
+  },
+  resolve: { modulesDirectories: ['node_modules', 'src'], extension: ['', '.js', '.scss'] },
 };
 
 
