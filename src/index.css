@@ -137,7 +137,7 @@ div.toolbar {
   float: left;
   width: 15%;
   padding: 4px;
-  font-size: 4em;
+  font-size: 3.5em;
   margin-left: 3%;
 }
 
@@ -149,4 +149,16 @@ div.canvas-div {
 }
 canvas.canvas {
   width: 100%;
+}
+
+input.checkbox {
+  -webkit-appearance: none;
+	background-color: #fafafa;
+	border: 1px solid #5B5A56;
+  padding: 9px;
+  transform: scale(1.5);
+  margin-left: 5%;
+	border-radius: 3px;
+	display: inline-block;
+	position: relative;
 }

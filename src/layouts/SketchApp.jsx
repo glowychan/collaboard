@@ -64,7 +64,7 @@ render() {
             fillColor={fill ? fillColor : ''}
             items={items}
             tool={tool}
-            onCompleteItem={(item) => this.socket.send(JSON.stringify(item))}
+            // onCompleteItem={(item) => this.socket.send(JSON.stringify(item))}
           />
         <div className="toolbar" style={{float:'left'}}>
           <div className="tools" style={{marginBottom:20}}>
@@ -103,7 +103,7 @@ render() {
           {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
             <div>
               <label htmlFor="">FILL IN:</label>
-              <input type="checkbox" value={fill} style={{margin:'0 8'}}
+              <input type="checkbox" className='checkbox' value={fill} style={{margin:'0 8'}}
                      onChange={(e) => this.setState({fill: e.target.checked})} />
               {fill ? <span className="fill-picker">
                    <br />
