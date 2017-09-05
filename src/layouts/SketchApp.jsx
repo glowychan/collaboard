@@ -97,6 +97,11 @@ render() {
               onClick={() => this.setState({tool:TOOL_RECTANGLE})}
             >RECTANGLE</button>
             <br />
+            <button
+              style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
+              className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
+              onClick={() => this.setState({tool:TOOL_RECTANGLE})}
+            >TEXT BOX</button>
           </div>
           <div className="options" style={{marginBottom:20}}>
             <label htmlFor="">SIZE: </label>
