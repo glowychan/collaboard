@@ -4,9 +4,58 @@ const SocketServer = require('ws').Server
 const cors = require('cors')
 
 
+
+
 // Set the port to 3001
 const PORT = 3001
 
+
+
+// TEMPORARY DB
+const db = [
+  {
+    borderid: 1,
+    name: 'conference-call',
+    items:  [
+      {
+        color: "#000000",
+        id: "78f61f62-d291-4853-a7a2-390810f1e5f5",
+        points: [
+          {'x': 140, 'y': 123.85415649414062},
+          {'x': 141, 'y': 123.85415649414062},
+          {'x': 152, 'y': 123.85415649414062},
+          {'x': 168, 'y': 123.85415649414062},
+          {'x': 191, 'y': 123.85415649414062},
+          {'x': 213, 'y': 125.85415649414062}
+        ],
+        tool: "pencil"
+      }
+    ]
+  },
+  {
+    borderid: 2,
+    name: 'chem-class',
+    items:  [
+      {
+        color: "#000000",
+        id: "78f61f62-d291-4853-a7a2-390810f1e5f5",
+        points: [
+          {'x': 140, 'y': 171.85415649414062},
+          {'x': 141, 'y': 171.85415649414062},
+          {'x': 152, 'y': 171.85415649414062},
+          {'x': 168, 'y': 171.85415649414062},
+          {'x': 191, 'y': 171.85415649414062},
+          {'x': 213, 'y': 171.85415649414062}
+        ],
+        tool: "pencil"
+      }
+    ]
+  }
+]
+
+
+
+// Create a new express server
 const app = express();
 app.use(cors())
 
@@ -58,19 +107,21 @@ wss.broadcast = function(data) {
 };
 
 
+
 // Ajax calls
 app.get('/', (req, res) => {
 
-  const object = {
-    hi: "hi"
-  }
+  const boardName = req.query.newURL
+  //check the database
+  let board = db.find(board => board.name === boardName)
 
-  console.log("YOOO");
+  let response = {}
+
   if (req.query.newURL) {
-    res.json(object);
+    res.json(response);
   } else {
-    res.json(object);
+    response.error = 'The bord name is already taken'
+    res.json(response);
   }
 })
-
 
