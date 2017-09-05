@@ -2,50 +2,15 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import SketchApp from './layouts/SketchApp';
 import Homepage from './layouts/Homepage';
+import Sidebar from './Sidebar';
+import { push as Menu } from 'react-burger-menu'
 
-const randomStringFunction = function() {
-  let id = "";
-  const source = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (let i = 0; i < 6; i++) {
-    id += source.charAt(Math.floor(Math.random() * source.length));
-  }
-  return id;
-};
 
 const Home = () => (
   <div>
     <Homepage />
   </div>
 )
-
-// ajax call inside the Home to /?query, the query will come from the form
-//form on the home page
-
-/*
-class Twoodle extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {url: ''}
-  }
-
-  componentWillMount() {
-    new websocket
-    this.
-    onmessage....setstate (messagetype: newUrl)
-    check if need to redirect
-
-    this.state....
-  }
-
-  render() {
-    return (
-      <div>
-      </div>
-    )
-  }
-}
-*/
-
 
 class Twoodle extends React.Component {
   constructor(props) {
@@ -55,12 +20,11 @@ class Twoodle extends React.Component {
       items: []
     }
   }
-  componentDidMount() {
-    // websokcket connection with bordid
-    // get items
-    this.setState({items: []})
 
+  componentDidMount() {
+    this.setState({items: []})
   }
+
   render() {
     return (
       <div>
@@ -79,16 +43,6 @@ const Twoodles = ({ match }) => (
 )
 */
 class Twoodles extends React.Component {
-
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {url: ''}
-  // }
-
-  // componentWillMount() {
-  //   this.setState({url: 123})
-  // }
-  //REDIRECT TWOODLES PAGE TO MAIN PAGE
   render() {
     return (
       <div>
@@ -100,9 +54,43 @@ class Twoodles extends React.Component {
   }
 }
 
+// const Routes = () => (
+//   <Router>
+//     <div>
+//       <ul>
+//         <li><Link to="/">Home</Link></li>
+//         <li><Link to="/twoodles">Twoodles</Link></li>
+//       </ul>
+
+//       <hr/>
+
+//       <Route exact path="/" component={Home}/>
+//       <Route path="/twoodles" component={Twoodles}/>
+//     </div>
+//   </Router>
+// )
+
+// const Routes = () => (
+//   <Router>
+//     <Menu className="bm-menu"
+//     pageWrapId={ "page-wrap" }
+//     outerContainerId={ "outer-container" }
+//     width={ '20%' } >
+//         <a className="bm-item-list"><Link to="/">Home</Link></a>
+//         <a className="bm-item-list"><Link to="/twoodles">Twoodles</Link></a>
+
+//         <hr/>
+
+//         <Route exact path="/" component={Home}/>
+//         <Route path="/twoodles" component={Twoodles}/>
+//     </Menu>
+//   </Router>
+// )
+
 const Routes = () => (
   <Router>
     <div>
+      <Sidebar />
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/twoodles">Twoodles</Link></li>
@@ -115,5 +103,6 @@ const Routes = () => (
     </div>
   </Router>
 )
+
 export default Routes
 
