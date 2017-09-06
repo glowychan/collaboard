@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import brand from '../icons/TWOODLE.png';
+import background from '../icons/BACKGROUND.png';
 export default class Homepage extends Component {
 
   constructor(props) {
@@ -16,13 +17,17 @@ export default class Homepage extends Component {
   // NOTE: there should be a limited acceptable characters for the bordname
   render() {
      return (
-      <div>
-        <form onSubmit={this.submitForm}>
-          <input placeholder="Twoodle Name" name="boardName"/>
-          <button>submit</button>
+      <div className='outer-container'>
+      <div className='jumbotron'>
+      <img className='home-logo' src={brand} />
+        <form className='new-twoodle'
+        onSubmit={this.submitForm}>
+          <input className='twoodle-name' name="boardName"/>
+          <button className='twoodle-submit'>submit</button>
         </form>
         <p>{this.state.error}</p>
       </div>
+    </div>
     );
   }
 
@@ -37,7 +42,7 @@ export default class Homepage extends Component {
         window.location = `/twoodles/${boardName}`;
       })
       .catch((error) => {
-        this.setState({error: 'The borad name is already taken.'})
+        this.setState({error: 'The board name is already taken.'})
       })
   }
 }

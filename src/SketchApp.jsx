@@ -45,7 +45,7 @@ export default class SketchApp extends Component
       <SideBar />
       <main id="page-wrap">
         <h1 className='brand'>TWOODLE</h1>
-        <div style={{float:'left', marginRight:20}}>
+        <div style={{float:'left', marginRight:20, flex: 1}}>
           <SketchPad
             width={500}
             height={500}
