@@ -5,16 +5,20 @@ module.exports = function makeDataHelpers(db) {
   return {
 
     // GET BOARDS BASED ON THE FILTER
-    getBoards: function (filter, callback) {
-      db.collection('boards').find(filter).toArray((err, boards) => {
-        console.log(boards)
-        if (err) {
-          return callback(err)
-        }
-        callback(null, boards)
+    getBoards: function (filter) {
+
+      return new Promise((resolve, reject) => {
+        db.collection('boards').find(filter).toArray((err, boards) => {
+          if (err) {
+            reject(err)
+          }
+          else {
+            resolve(boards)
+          }
+        })
+
       })
     }
-
 
   }
 }
