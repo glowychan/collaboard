@@ -14,3 +14,9 @@
 * From the project folder go to /server/db/
 * Run the following command:
   `mongoimport --db twoodle --collection boards --drop --jsonArray --file seed.json`
+
+
+## Strat
+* Run `npm start` in the root directory
+* Run `node server.js` in /server directory
+* Run `mongod`
