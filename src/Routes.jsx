@@ -22,13 +22,21 @@ class Twoodle extends React.Component {
   }
 
   componentDidMount() {
-    this.socket = new WebSocket("ws://localhost:3001")
+    this.socket = new WebSocket("ws://localhost:3001" + window.location.pathname)
+
+    this.socket.onopen = () => {
+      const message = {
+        type: 'newConnection',
+        boardName: this.state.boardName
+      }
+      this.socket.send(JSON.stringify(message))
+    }
+
     this.socket.onmessage = (receivedData) => {
       const data = JSON.parse(receivedData.data)
-
       if (data.boardName === this.state.boardName) {
-        console.log(this.state.items)
-        this.setState({items: [...this.state.items, data.item]})
+        // this.setState({items: [...this.state.items, data.items]})
+        this.setState({items: this.state.items.concat(data.items)})
       }
     }
   }
@@ -47,7 +55,7 @@ class Twoodle extends React.Component {
   addNewItem = (item, boardName) => {
     const data = {
       boardName: boardName,
-      item:  item
+      items:  item
     }
     this.socket.send(JSON.stringify(data))
   }
@@ -61,7 +69,6 @@ class Twoodles extends React.Component {
   render() {
     return (
       <div>
-        {console.log(this.props.match.url)}
         <Link to={`${this.props.location.pathname}`}><h3>New Twoodle</h3></Link>
         <Route path={`${this.props.match.url}/:boardName`} component={Twoodle}/>
       </div>
