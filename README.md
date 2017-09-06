@@ -4,7 +4,7 @@
 * `brew install mongodb`
 * `mkdir -p /data/db`
 * `sudo chown -R `id -un` /data/db`
-  > # Enter your password
+* Enter your password on prompt
 
 ## To connect to DB
 * Run `mongod` on one terminal (always)
