@@ -9,8 +9,8 @@ export default class Homepage extends Component {
       error: ''
     }
 
+    this.submitForm = this.submitForm.bind(this);
 
-    this.submitForm = this.submitForm.bind(this)
   }
 
   // NOTE: there should be a limited acceptable characters for the bordname
@@ -29,15 +29,23 @@ export default class Homepage extends Component {
   submitForm = (event) => {
     event.preventDefault();
     event.persist();
-    let boardName = event.target.boardName.value
-    boardName = boardName.replace(' ','-')
+    const regex = /^[a-z0-9]+$/;
+    let boardName = event.target.boardName.value;
+    boardName = boardName.replace(' ','-');
 
-    axios.get(`http://localhost:3001/?boardName=${boardName}`)
-      .then((response) => {
-        window.location = `/twoodles/${boardName}`;
-      })
-      .catch((error) => {
-        this.setState({error: 'The borad name is already taken.'})
-      })
+     if (regex.test(boardName)) {
+
+      axios.get(`http://localhost:3001/?boardName=${boardName}`)
+        .then((response) => {
+          window.location = `/twoodles/${boardName}`;
+        })
+        .catch((error) => {
+          this.setState({error: 'Twoodle name is already taken.'});
+        });
+
+     }
+     else {
+       this.setState({error: 'Please use alphanumerical characters'});
+     }
   }
 }
