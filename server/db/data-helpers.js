@@ -18,7 +18,48 @@ module.exports = function makeDataHelpers(db) {
         })
 
       })
+    },
+
+    // SAVE NEW ITEM TO AN EXISTING BOARD
+    saveItem: function(filter, edit) {
+      return new Promise((resolve, reject) => {
+        db.collection('boards').findOneAndUpdate(filter, edit, (err) => {
+          if (err) {
+            reject(err)
+          }
+          else {
+            resolve(null)
+          }
+        })
+      })
+    },
+
+    // SAVE NEW BOARD
+    saveBoard: function(board) {
+      return new Promise((resolve, reject) => {
+        db.collection('boards').insert(board, (err) => {
+          if (err) {
+            reject(err)
+          }
+          else {
+            resolve(null)
+          }
+        })
+
+      })
+
     }
+
 
   }
 }
+
+
+
+
+
+
+
+
+
+
