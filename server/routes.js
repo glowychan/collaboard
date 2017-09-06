@@ -11,17 +11,18 @@ module.exports = function(DataHelpers) {
 
     const filter = {boardName: req.query.boardName}
     // Board Name is Unique, so getBoards will return just one board here
-    DataHelpers.getBoards(filter, (err, boards) => {
-      if (err) {
-        return res.status(500).send()
-      } else {
+    DataHelpers.getBoards(filter)
+      .then((boards) => {
         if (!boards[0]) {
           res.status(200).send()
         } else {
           res.status(400).send()
         }
-      }
-    })
+      })
+      .catch((err) => {
+        return res.status(500).send()
+      })
+
   })
 
   return routes
