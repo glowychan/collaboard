@@ -175,7 +175,7 @@ display: flex;
 flex-wrap: wrap;
 align-items: center;
 background-image: url('./icons/BACKGROUND.png');
-height: 700px;
+height: 100%;
 flex-shrink: 1;
 justify-content: center;
 padding-top: 100px;
@@ -222,4 +222,8 @@ span.purple {
 }
 
 
+img.about {
+  width: 200px;
+  align-self: baseline;
+}
 
