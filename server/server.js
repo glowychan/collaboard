@@ -37,15 +37,15 @@ MongoClient.connect(MONGODB_URI)
     console.log(`Connected to mongodb: ${MONGODB_URI}`)
 
     // A interface to the database
-    const DataHelpers = require('./db/data-helpers.js')(db)
+    const dataHelpers = require('./db/data-helpers.js')(db)
 
     // An interface to the routes
-    const routes = require('./routes.js')(DataHelpers)
+    const routes = require('./routes.js')(dataHelpers)
     app.use('/', routes)
 
     // An interface to the websockets
     const socketHelpers = require('./socketHelpers.js')(wss)
-    require('./sockets')(wss, socketHelpers)
+    require('./sockets')(wss, socketHelpers, dataHelpers)
 
   })
   .catch((err) => {
