@@ -1,58 +1,13 @@
 // Required Packages
 const express      = require('express')
 const SocketServer = require('ws').Server
-const cors = require('cors')
-
+const cors         = require('cors')
+require('dotenv').config()
 
 
 
 // Set the port to 3001
 const PORT = 3001
-
-
-
-// TEMPORARY DB
-const db = [
-  {
-    borderid: 1,
-    boardName: 'conference-call',
-    items:  [
-      {
-        color: "#000000",
-        id: "78f61f62-d291-4853-a7a2-390810f1e5f5",
-        points: [
-          {'x': 140, 'y': 123.85415649414062},
-          {'x': 141, 'y': 123.85415649414062},
-          {'x': 152, 'y': 123.85415649414062},
-          {'x': 168, 'y': 123.85415649414062},
-          {'x': 191, 'y': 123.85415649414062},
-          {'x': 213, 'y': 125.85415649414062}
-        ],
-        tool: "pencil"
-      }
-    ]
-  },
-  {
-    borderid: 2,
-    boardName: 'chem-class',
-    items:  [
-      {
-        color: "#000000",
-        id: "78f61f62-d291-4853-a7a2-390810f1e5f5",
-        points: [
-          {'x': 140, 'y': 171.85415649414062},
-          {'x': 141, 'y': 171.85415649414062},
-          {'x': 152, 'y': 171.85415649414062},
-          {'x': 168, 'y': 171.85415649414062},
-          {'x': 191, 'y': 171.85415649414062},
-          {'x': 213, 'y': 171.85415649414062}
-        ],
-        tool: "pencil"
-      }
-    ]
-  }
-]
-
 
 
 // Create a new express server
@@ -67,6 +22,30 @@ const server = app
   PORT, '0.0.0.0', 'localhost',
   () => console.log(`Listening on ${ PORT }`)
   )
+
+
+const MongoClient = require('mongodb').MongoClient
+const MONGODB_URI = process.env.MONGODB_URI
+
+MongoClient.connect(MONGODB_URI, (err, db) => {
+  // Error while connecting to the database
+  if (err) {
+    console.error(`Failed to connect: ${MONGODB_URI}`)
+    throw err
+  }
+  // We have a connection to the 'twoodle' db
+  console.log(`Connected to mongodb: ${MONGODB_URI}`)
+
+  const DataHelpers = require('./db/data-helpers.js')(db)
+  // This module provide an interface to the database of tweets.
+
+  const routes = require('./routes.js')(DataHelpers)
+
+  app.use('/', routes)
+
+
+})
+
 
 // Create the WebSockets server
 const wss = new SocketServer({ server });
@@ -111,16 +90,16 @@ wss.broadcast = function(data) {
 
 
 // Ajax calls
-app.get('/', (req, res) => {
+// app.get('/', (req, res) => {
 
-  const boardName = req.query.boardName
-  //check the database (For now the dumy database)
-  let board = db.find(board => board.boardName === boardName)
+//   const boardName = req.query.boardName
+//   //check the database (For now the dumy database)
+//   let board = db.find(board => board.boardName === boardName)
 
-  if (!board) {
-    res.status(200).send()
-  } else {
-    res.status(400).send()
-  }
-})
+//   if (!board) {
+//     res.status(200).send()
+//   } else {
+//     res.status(400).send()
+//   }
+// })
 
