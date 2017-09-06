@@ -31,7 +31,7 @@ export default class Homepage extends Component {
     event.persist();
     const regex = /^[a-z0-9]+$/;
     let boardName = event.target.boardName.value;
-    boardName = boardName.replace(' ','-');
+    boardName = boardName.toLowerCase().replace(' ','-');
 
      if (regex.test(boardName)) {
 
