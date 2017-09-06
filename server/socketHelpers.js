@@ -1,10 +1,12 @@
 module.exports = function makeSocketHelper(wss) {
   return {
-    broadcastBackMessages: (message) => {
+    broadcastBackMessages: (data) => {
       wss.clients.forEach((client) => {
-        client.send(message)
+        client.send(data)
       })
-
-    }
+    },
+    // initializeBoard: (data, client) => {
+    //   client.send(data)
+    // }
   }
 }

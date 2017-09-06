@@ -39,19 +39,11 @@ export default class SketchApp extends Component
     })
   }
 
-  // UPDATE THE STATE WITH THE NEW MESSAGES
-  addNewItem = (receivedItem) => {
-    // Parsed the recived messages object
-    console.log(JSON.parse(receivedItem.data))
-    this.setState({items: this.state.items.concat([JSON.parse(receivedItem.data)])})
-  }
-
 render() {
     const { tool, size, color, fill, fillColor } = this.state;
     return (
       <div>
         <h1><img className='logo' src={logo} />TWOODLE</h1>
-        <p>{this.state.items}</p>
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
             width={1200}
