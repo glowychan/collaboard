@@ -5,29 +5,38 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
     ws.on('message', (data) => {
 
       const parsedData = JSON.parse(data)
-
-      console.log(parsedData)
       const filter = {boardName: parsedData.boardName}
 
-      // Borad Name is unique, this function return zero/one board here
-      dataHelpers.getBoards(filter)
-        .then((boards) => {
-          console.log(boards)
-          if (boards[0]) {
-            dataHelpers.saveItem(filter, {$push: {items: parsedData.item}})
-          }
-          else {
-            const board = {
-              boardName: parsedData.boardName,
-              items: parsedData.item
+      if (parsedData.type === 'newConnection') {
+        dataHelpers.getBoards(filter)
+          .then((boards) => {
+            ws.send(JSON.stringify(boards[0]))
+          })
+          .catch((err) => {
+            // fix this later
+          })
+      }
+      else {
+
+        // Borad Name is unique, this function return zero/one board here
+        dataHelpers.getBoards(filter)
+          .then((boards) => {
+            if (boards[0]) {
+              dataHelpers.saveItem(filter, {$push: {items: parsedData.items}})
             }
-            dataHelpers.saveBoard(board)
-          }
-        })
-        .catch((err) => {
-          return res.status(500).send()
-        })
-      socketHelpers.broadcastBackMessages(data)
+            else {
+              const board = {
+                boardName: parsedData.boardName,
+                items: [parsedData.items]
+              }
+              dataHelpers.saveBoard(board)
+            }
+          })
+          .catch((err) => {
+            // fix this later
+          })
+        socketHelpers.broadcastBackMessages(data)
+      }
     })
 
     // Set up a callback for when a client closes the socket.
