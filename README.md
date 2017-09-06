@@ -1,9 +1,9 @@
 ## Mongo DB installation
 
-* `brew update`
-* `brew install mongodb`
-* `mkdir -p /data/db`
-* `sudo chown -R `id -un` /data/db`
+* brew update
+* brew install mongodb
+* mkdir -p /data/db
+* sudo chown -R `id -un` /data/db
 * Enter your password on prompt
 
 ## To connect to DB
