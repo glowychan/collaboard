@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import brand from '../icons/TWOODLE.png';
 import background from '../icons/BACKGROUND.png';
+
 export default class Homepage extends Component {
 
   constructor(props) {
@@ -13,24 +14,7 @@ export default class Homepage extends Component {
 
     this.submitForm = this.submitForm.bind(this)
   }
-
-  // NOTE: there should be a limited acceptable characters for the bordname
-  render() {
-     return (
-      <div className='outer-container'>
-      <div className='jumbotron'>
-      <img className='home-logo' src={brand} />
-        <form className='new-twoodle'
-        onSubmit={this.submitForm}>
-          <input className='twoodle-name' name="boardName"/>
-          <button className='twoodle-submit'>submit</button>
-        </form>
-        <p>{this.state.error}</p>
-      </div>
-    </div>
-    );
-  }
-
+  
   submitForm = (event) => {
     event.preventDefault();
     event.persist();
@@ -44,5 +28,23 @@ export default class Homepage extends Component {
       .catch((error) => {
         this.setState({error: 'The board name is already taken.'})
       })
+  }
+
+  // NOTE: there should be a limited acceptable characters for the bordname
+  render() {
+     return (
+      <div className='outer-container'>
+      <div className='jumbotron' background={background}>
+      <img className='home-logo' src={brand} />
+        <form className='new-twoodle'
+        onSubmit={this.submitForm}>
+          <input className='twoodle-name' name="boardName"/>
+          <button className='twoodle-submit'>submit</button>
+        </form>
+        <h2 className='slogan'>Welcome to your whiteboard <span className='purple'>on the web</span></h2>
+        <p>{this.state.error}</p>
+      </div>
+    </div>
+    );
   }
 }
