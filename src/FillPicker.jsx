@@ -13,14 +13,18 @@ class FillPicker extends React.Component {
     this.props.newFill(this.state.background)
   };
 
-  render() {
+    render() {
     return (
       <CirclePicker
-        color={ this.state.background } width = {200}
+        color={ this.state.background } 
+        width={230} 
+        circleSize={28}
+        colors={["#E62739", "#6ED3CF", "#9068BE", "#464646", "#181818"]}
         onChangeComplete={ this.handleChangeComplete }
       />
     );
   }
 }
+
 
 export default FillPicker

@@ -49,6 +49,8 @@ render() {
     return (
       <div>
         <h1><img className='logo' src={logo} />TWOODLE</h1>
+        <p>{this.state.items}</p>
+        <div className='toolbar'>
           <div className="tools" style={{marginBottom:20}}>
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
@@ -94,6 +96,7 @@ render() {
                   <FillPicker value={fill} newFill={this.changeFill.bind(this)}/>
                 </span> : ''}
             </div> : ''}
+          </div>
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
             width={2600}
