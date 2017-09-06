@@ -57,6 +57,7 @@ render() {
       <div>
         <h1><img className='logo' src={logo} />TWOODLE</h1>
         <p>{this.state.items}</p>
+        <div className='toolbar'>
           <div className="tools" style={{marginBottom:20}}>
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
@@ -95,13 +96,14 @@ render() {
           </div>
           {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
             <div className='fill'>
-              <label htmlFor="">FILL IN:</label>
+              <label htmlFor="">FILL?</label>
               <input className="checkbox" type="checkbox" value={fill} style={{margin:'0 8'}}
                      onChange={(e) => this.setState({fill: e.target.checked})} />
               {fill ? <span>
                   <FillPicker value={fill} newFill={this.changeFill.bind(this)}/>
                 </span> : ''}
             </div> : ''}
+          </div>
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
             width={2600}
