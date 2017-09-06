@@ -6,11 +6,12 @@ import Line, { TOOL_LINE } from './tools/Line';
 import Ellipse, { TOOL_ELLIPSE} from './tools/Ellipse';
 import Rectangle, { TOOL_RECTANGLE } from './tools/Rectangle';
 
+
 export const toolsMap = {
   [TOOL_PENCIL]: Pencil,
   [TOOL_LINE]: Line,
   [TOOL_RECTANGLE]: Rectangle,
-  [TOOL_ELLIPSE]: Ellipse
+  [TOOL_ELLIPSE]: Ellipse,
 };
 
 export default class SketchPad extends Component {
@@ -128,6 +129,8 @@ export default class SketchPad extends Component {
           width={width}
           height={height}
         />
+        <div className='textinput'> HELLO
+        </div>
         <toolsMap />
       </div>
     )
