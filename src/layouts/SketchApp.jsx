@@ -8,6 +8,11 @@ import SideBar from '../Sidebar';
 import ColorPicker from '../ColorPicker';
 import FillPicker from '../FillPicker';
 import  logo from '../icons/007-square.png';
+import pencil from '../icons/011-tool.png'
+import line from '../icons/008-two.png'
+import circle from '../icons/009-circle.png'
+import sqaure from '../icons/010-square.png'
+import textbox from '../icons/symbols.png'
 
 export default class SketchApp extends Component
 {
@@ -44,9 +49,54 @@ render() {
     return (
       <div>
         <h1><img className='logo' src={logo} />TWOODLE</h1>
+          <div className="tools" style={{marginBottom:20}}>
+            <button
+              style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
+              className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
+              onClick={() => this.setState({tool:TOOL_PENCIL})}
+            ><img className='icon' src={pencil} /></button>
+
+            <button
+              style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}
+              className={tool == TOOL_LINE  ? 'item-active' : 'item'}
+              onClick={() => this.setState({tool:TOOL_LINE})}
+            ><img className='icon' src={line} /></button>
+
+            <button
+              style={tool == TOOL_ELLIPSE ? {fontWeight:'bold'} : undefined}
+              className={tool == TOOL_ELLIPSE  ? 'item-active' : 'item'}
+              onClick={() => this.setState({tool:TOOL_ELLIPSE})}
+            ><img className='icon' src={circle} /></button>
+
+            <button
+              style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
+              className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
+              onClick={() => this.setState({tool:TOOL_RECTANGLE})}
+            ><img className='icon' src={sqaure} /></button>
+
+            <button
+              style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
+              className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
+              onClick={() => this.setState({tool:TOOL_RECTANGLE})}
+            ><img className='icon' src={textbox} /></button>
+          </div>
+          <div className="options" style={{marginBottom:20}}>
+            <label htmlFor="">SIZE: </label>
+            <input min="1" max="20" type="range" value={size} onChange={(e) => this.setState({size: parseInt(e.target.value)})} />
+            <ColorPicker value={color} newColor={this.changeColor.bind(this)}/>
+          </div>
+          {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
+            <div className='fill'>
+              <label htmlFor="">FILL IN:</label>
+              <input className="checkbox" type="checkbox" value={fill} style={{margin:'0 8'}}
+                     onChange={(e) => this.setState({fill: e.target.checked})} />
+              {fill ? <span>
+                  <FillPicker value={fill} newFill={this.changeFill.bind(this)}/>
+                </span> : ''}
+            </div> : ''}
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
-            width={1200}
+            width={2600}
             height={1200}
             animate={true}
             size={size}
@@ -56,55 +106,6 @@ render() {
             tool={tool}
             onCompleteItem={(item) => this.props.addNewItem(item, this.props.boardName)}
           />
-        </div>
-        <div className='toolbar' style={{float:'left'}}>
-          <div className="tools" style={{marginBottom:20}}>
-            <button
-              style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_PENCIL})}
-            >PENCIL</button>
-            <br />
-            <button
-              style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_LINE  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_LINE})}
-            >LINE</button>
-            <br />
-            <button
-              style={tool == TOOL_ELLIPSE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_ELLIPSE  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_ELLIPSE})}
-            >ELLIPSE</button>
-            <br />
-            <button
-              style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_RECTANGLE})}
-            >RECTANGLE</button>
-            <br />
-            <button
-              style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_RECTANGLE})}
-            >TEXT BOX</button>
-          </div>
-          <div className="options" style={{marginBottom:20}}>
-            <label htmlFor="">SIZE: </label>
-            <input min="1" max="20" type="range" value={size} onChange={(e) => this.setState({size: parseInt(e.target.value)})} />
-          </div>
-          <div className="options" style={{marginBottom:20}}>
-            <ColorPicker value={color} newColor={this.changeColor.bind(this)}/>
-          </div>
-          {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
-            <div>
-              <label htmlFor="">FILL IN:</label>
-              <input className="checkbox" type="checkbox" value={fill} style={{margin:'0 8'}}
-                     onChange={(e) => this.setState({fill: e.target.checked})} />
-              {fill ? <span>
-                  <FillPicker value={fill} newFill={this.changeFill.bind(this)}/>
-                </span> : ''}
-            </div> : ''}
         </div>
       </div>
     );

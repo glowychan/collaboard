@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import brand from '../icons/TWOODLE.png';
+import about from '../icons/about.png';
 
 export default class Homepage extends Component {
 
@@ -11,19 +13,6 @@ export default class Homepage extends Component {
 
     this.submitForm = this.submitForm.bind(this);
 
-  }
-
-  // NOTE: there should be a limited acceptable characters for the bordname
-  render() {
-     return (
-      <div>
-        <form onSubmit={this.submitForm}>
-          <input placeholder="Twoodle Name" name="boardName"/>
-          <button>submit</button>
-        </form>
-        <p>{this.state.error}</p>
-      </div>
-    );
   }
 
   submitForm = (event) => {
@@ -47,5 +36,21 @@ export default class Homepage extends Component {
      else {
        this.setState({error: 'Please use alphanumerical characters'});
      }
+  }
+
+  // NOTE: there should be a limited acceptable characters for the bordname
+  render() {
+     return (
+      <div className='jumbotron'>
+      <img className='home-logo' src={brand} />
+        <form className='new-twoodle'
+        onSubmit={this.submitForm}>
+          <input className='twoodle-name' name="boardName"/>
+          <button className='twoodle-submit'>submit</button>
+        </form>
+        <h2 className='slogan'>Welcome to your whiteboard <span className='purple'>on the web</span></h2>
+        <p>{this.state.error}</p>
+      </div>
+    );
   }
 }

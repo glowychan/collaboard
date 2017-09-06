@@ -78,11 +78,12 @@ class Twoodles extends React.Component {
 
 const Routes = () => (
   <Router>
-    <div>
+    <div className='outer-container'>
       <Sidebar />
-
+     <main id='page-wrap'>
       <Route exact path="/" component={Home}/>
       <Route path="/twoodles" component={Twoodles}/>
+      </main>
     </div>
   </Router>
 )

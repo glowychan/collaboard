@@ -10,7 +10,9 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
       if (parsedData.type === 'newConnection') {
         dataHelpers.getBoards(filter)
           .then((boards) => {
-            ws.send(JSON.stringify(boards[0]))
+            if (boards.length > 0) {
+              ws.send(JSON.stringify(boards[0]))
+            }
           })
           .catch((err) => {
             // fix this later
