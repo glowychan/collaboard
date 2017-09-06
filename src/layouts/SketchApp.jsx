@@ -96,7 +96,7 @@ render() {
           </div>
           {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
             <div className='fill'>
-              <label htmlFor="">FILL?</label>
+              <label htmlFor="">FILL IN:</label>
               <input className="checkbox" type="checkbox" value={fill} style={{margin:'0 8'}}
                      onChange={(e) => this.setState({fill: e.target.checked})} />
               {fill ? <span>

@@ -3,6 +3,9 @@ import { slide as Menu } from 'react-burger-menu'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import home from './icons/003-symbols.png'
 import twoodle from './icons/007-square.png'
+import save from './icons/001-symbols-1.png'
+
+import share from './icons/004-sign.png'
 
 class SideBar extends Component {
   render () {
@@ -13,6 +16,8 @@ class SideBar extends Component {
     width={ '5%' } >
         <Link className="bm-item-list" to="/"><img className='home' src={home} /></Link>
         <Link className="bm-item-list" to="/twoodles"><img className='twoodle' src={twoodle} /></Link>
+        <a><img className="bm-item-list" src={save} /> </a>
+        <a><img className="bm-item-list" src={share} /> </a>
     </Menu>
 
     );
