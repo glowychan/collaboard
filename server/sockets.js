@@ -13,6 +13,10 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
             if (boards.length > 0) {
               ws.send(JSON.stringify(boards[0]))
             }
+            else {
+              const error = {error: "No board found!"}
+              ws.send(JSON.stringify(error))
+            }
           })
           .catch((err) => {
             // fix this later
