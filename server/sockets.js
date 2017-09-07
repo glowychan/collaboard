@@ -45,8 +45,14 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
       } else if (parsedData.type === 'undo') {
         dataHelpers.updateItem(filter, {$pop: {items: 1}})
         .then(() => {
-          const data = {type: 'undo'};
-          socketHelpers.broadcastBackMessages(data);
+          const data = {
+            boardName: parsedData.boardName,
+            type: 'undo'
+          };
+          socketHelpers.broadcastBackMessages(JSON.stringify(data));
+        }).catch((err) => {
+          // fix later
+          console.log(':(')
         })
       }
     })

@@ -37,7 +37,17 @@ class Twoodle extends React.Component {
       if (data.error) {
         alert(data.error)
         window.location = '/';
+      } else if (data.type === 'undo' && data.boardName === this.state.boardName) {
+
+        console.log("state", this.state.items);
+        let index = this.state.items.pop();
+        console.log("index", index);
+        console.log(this.state.items);
+        //this.forceUpdate();
+        // this.setState({items: this.state.items.pop()});
+
       }
+
       else {
         if (data.boardName === this.state.boardName) {
           // this.setState({items: [...this.state.items, data.items]})

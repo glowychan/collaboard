@@ -23,12 +23,15 @@ module.exports = function makeDataHelpers(db) {
     // SAVE NEW ITEM TO AN EXISTING BOARD
     updateItem: function(filter, edit) {
       return new Promise((resolve, reject) => {
-        db.collection('boards').findOneAndUpdate(filter, edit, (err) => {
+        db.collection('boards').findOneAndUpdate(filter, edit, (err, board) => {
+          console.log("error", err);
+          console.log("board", board);
+
           if (err) {
             reject(err)
           }
           else {
-            resolve(null)
+            resolve(board)
           }
         })
       })
