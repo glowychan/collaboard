@@ -5,7 +5,7 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
     ws.on('message', (data) => {
 
       const parsedData = JSON.parse(data)
-      const filter = {boardName: parsedData.boardName}
+      const filter     = {boardName: parsedData.boardName}
 
       if (parsedData.type === 'newConnection') {
         dataHelpers.getBoards(filter)
