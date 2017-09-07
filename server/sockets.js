@@ -52,7 +52,7 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
           socketHelpers.broadcastBackMessages(JSON.stringify(data));
         }).catch((err) => {
           // fix later
-          console.log(':(')
+          console.log('error');
         })
       }
     })
@@ -63,10 +63,3 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
     })
   })
 }
-
-
-
-
-
-
-
