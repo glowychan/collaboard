@@ -14,7 +14,14 @@ module.exports = function(dataHelpers) {
     dataHelpers.getBoards(filter)
       .then((boards) => {
         if (!boards[0]) {
-          res.status(200).send()
+          let board = {
+            boardName: req.query.boardName,
+            items: []
+          }
+          dataHelpers.saveBoard(board)
+            .then( () => {
+              res.status(200).send()
+            })
         } else {
           res.status(400).send()
         }
