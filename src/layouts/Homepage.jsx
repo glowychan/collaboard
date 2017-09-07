@@ -11,18 +11,31 @@ export default class Homepage extends Component {
       error: ''
     }
 
+    this.validateForm = this.validateForm.bind(this);
     this.submitForm = this.submitForm.bind(this);
 
   }
 
-  submitForm = (event) => {
-    event.preventDefault();
+  validateForm = input => {
     event.persist();
     const regex = /^[a-z0-9]+$/;
-    let boardName = event.target.boardName.value;
-    boardName = boardName.toLowerCase().replace(' ','-');
 
-     if (regex.test(boardName)) {
+    if (regex.test(input)) {
+      return true;
+    } else {
+      this.setState({error: 'Please use alphanumerical characters with no spaces.'});
+      return false;
+    }
+
+  }
+
+  submitForm = event => {
+    event.preventDefault();
+    event.persist();
+    let boardName = event.target.boardName.value;
+    boardName = boardName.toLowerCase();
+
+    if (this.validateForm(boardName)) {
 
       axios.get(`http://localhost:3001/?boardName=${boardName}`)
         .then((response) => {
@@ -33,17 +46,37 @@ export default class Homepage extends Component {
         });
 
      }
-     else {
-       this.setState({error: 'Please use alphanumerical characters'});
-     }
   }
+
+  // submitForm = event => {
+  //   event.preventDefault();
+  //   event.persist();
+  //   const regex = /^[a-z0-9]+$/;
+  //   let boardName = event.target.boardName.value;
+  //   boardName = boardName.toLowerCase();
+
+  //    if (regex.test(boardName)) {
+
+  //     axios.get(`http://localhost:3001/?boardName=${boardName}`)
+  //       .then((response) => {
+  //         window.location = `/twoodles/${boardName}`;
+  //       })
+  //       .catch((error) => {
+  //         this.setState({error: 'Twoodle name is already taken.'});
+  //       });
+
+  //    }
+  //    else {
+  //      this.setState({error: 'Please use alphanumerical characters'});
+  //    }
+  // }
 
   // NOTE: there should be a limited acceptable characters for the bordname
   render() {
      return (
       <div className='jumbotron'>
       <img className='home-logo' src={brand} />
-        <form className='new-twoodle'
+        <form className='new-twoodle' onBlur={this.validateForm}
         onSubmit={this.submitForm}>
           <input className='twoodle-name' name="boardName"/>
           <button className='twoodle-submit'>submit</button>
