@@ -4,10 +4,10 @@ import { TOOL_PENCIL } from '../components/tools/Pencil';
 import { TOOL_LINE } from '../components/tools/Line';
 import { TOOL_ELLIPSE } from '../components/tools/Ellipse';
 import { TOOL_RECTANGLE } from '../components/tools/Rectangle';
-import SideBar from '../Sidebar';
-import ColorPicker from '../ColorPicker';
-import FillPicker from '../FillPicker';
-import  logo from '../icons/007-square.png';
+import SideBar from '../components/Sidebar';
+import ColorPicker from '../components/ColorPicker';
+import FillPicker from '../components/FillPicker';
+import logo from '../icons/007-square.png';
 import pencil from '../icons/011-tool.png'
 import line from '../icons/008-two.png'
 import circle from '../icons/009-circle.png'

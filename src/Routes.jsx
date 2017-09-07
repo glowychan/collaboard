@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import SketchApp from './layouts/SketchApp';
 import Homepage from './layouts/Homepage';
-import Sidebar from './Sidebar';
+import Sidebar from './components/Sidebar';
 import { push as Menu } from 'react-burger-menu'
 
 

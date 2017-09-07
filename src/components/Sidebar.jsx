@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { slide as Menu } from 'react-burger-menu'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import home from './icons/003-symbols.png'
-import twoodle from './icons/007-square.png'
-import save from './icons/001-symbols-1.png'
-import share from './icons/004-sign.png'
+import home from '../icons/003-symbols.png'
+import twoodle from '../icons/007-square.png'
+import save from '../icons/001-symbols-1.png'
+import share from '../icons/004-sign.png'
 
 
 class SideBar extends Component {

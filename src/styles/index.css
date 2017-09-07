@@ -222,7 +222,7 @@ bottom: 0;
 display: flex;
 flex-wrap: wrap;
 align-items: center;
-background-image: url('./icons/BACKGROUND.png');
+background-image: url('../icons/BACKGROUND.png');
 height: 100%;
 flex-shrink: 1;
 justify-content: center;
