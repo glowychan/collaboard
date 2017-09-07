@@ -28,6 +28,10 @@ body {
   transform: rotate(20deg)
 }
 
+.brandlink:link {
+  text-decoration: none;
+}
+
 .checkbox {
   margin: 16px 12px 0 12px;
   transform: scale(2.0);
@@ -73,12 +77,13 @@ width: 24px;
 /* Color/shape of close button cross */
 .bm-cross {
 background: black;
+margin-top: 30px;
 }
 
 /* General sidebar styles */
 .bm-menu {
 background: #E1E8F0;
-padding: 2.5em 1.5em 0;
+padding: 1.5em 1.5em 0;
 font-size: 1.15em;
 font-family: 'Patrick Hand SC', cursive;
 display: flex;
@@ -96,12 +101,17 @@ fill: #373a47;
 
 /* Wrapper for item list */
 .bm-item-list {
-padding: 0.1em;
+padding-top: 1.5em;
 font-size: 2rem;
 }
 
+.bm-item-list img {
+  width: 100%;
+}
+
+
+
 .side-item {
-  width: 80%;
   transition: 0.70s;
   -webkit-transition: 0.70s;
   -moz-transition: 0.70s;

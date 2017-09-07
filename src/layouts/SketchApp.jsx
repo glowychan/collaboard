@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import SketchPad from '../components/SketchPad';
 import { TOOL_PENCIL } from '../components/tools/Pencil';
 import { TOOL_LINE } from '../components/tools/Line';
@@ -67,7 +68,7 @@ render() {
     const { tool, size, color, fill, fillColor } = this.state;
     return (
       <div>
-        <h1><img className='logo' src={logo} />TWOODLE</h1>
+        <Link  style={{ textDecoration: 'none', color: 'black' }} to='/'><h1><img className='logo' src={logo} />TWOODLE</h1></Link>
         <p>{this.state.items}</p>
         <Sidebar onShare={this.handleShare} />
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closePopup} url={this.props.boardName}/>

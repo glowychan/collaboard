@@ -23,7 +23,7 @@ class SideBar extends Component {
     <Menu className="bm-menu"
     pageWrapId={ "page-wrap" }
     outerContainerId={ "outer-container" }
-    width={ '5%' } >
+    width={ '4%' } >
         <Link className="bm-item-list side-item" to="/"><img className='home' src={home} /></Link>
         <Link className="bm-item-list side-item" to="/twoodles"><img className='twoodle' src={twoodle} /></Link>
         <a href="#" className='bm-item-list side-item' onClick={this.popout}><img src={share} /> </a>

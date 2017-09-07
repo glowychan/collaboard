@@ -37,7 +37,6 @@ class PoppedOutShare extends React.Component {
       document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
-
   setWrapperRef(node) {
       this.wrapperRef = node;
     }
