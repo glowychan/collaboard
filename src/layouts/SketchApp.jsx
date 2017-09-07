@@ -45,8 +45,8 @@ export default class SketchApp extends Component
     })
   }
 
-  
-   
+
+
 
 render() {
     const { tool, size, color, fill, fillColor } = this.state;
@@ -56,8 +56,13 @@ render() {
         <p>{this.state.items}</p>
         <div className='toolbar'>
           <div className="tools" style={{marginBottom:20}}>
-           <a href='#' 
+           <a href='#'
            onClick={() => this.refs.sketch.handleSave()}><img className='save' src={save} /> </a>
+
+           <button
+             onClick={() => this.props.undoItem()}
+           >undo</button>
+
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}

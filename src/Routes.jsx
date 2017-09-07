@@ -56,17 +56,18 @@ class Twoodle extends React.Component {
   addNewItem = (item, boardName) => {
     const data = {
       boardName: boardName,
-      items:  item
-      type: "add"
+      items:  item,
+      type: 'add'
     }
     this.socket.send(JSON.stringify(data))
   }
 
   undoItem = (boardName) => {
     const data = {
-      boardName: boardName
-      type: "undo"
+      boardName: boardName,
+      type: 'undo'
     }
+    console.log("hiii");
     this.socket.send(JSON.stringify(data))
   }
 

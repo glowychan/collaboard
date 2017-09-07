@@ -28,7 +28,7 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
         dataHelpers.getBoards(filter)
           .then((boards) => {
             if (boards[0]) {
-              dataHelpers.saveItem(filter, {$push: {items: parsedData.items}})
+              dataHelpers.updateItem(filter, {$push: {items: parsedData.items}})
             }
             else {
               const board = {
@@ -43,7 +43,11 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
           })
         socketHelpers.broadcastBackMessages(data)
       } else if (parsedData.type === 'undo') {
-          console.log("yoo!");
+        dataHelpers.updateItem(filter, {$pop: {items: 1}})
+        .then(() => {
+          const data = {type: 'undo'};
+          socketHelpers.broadcastBackMessages(data);
+        })
       }
     })
 

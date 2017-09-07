@@ -21,7 +21,7 @@ module.exports = function makeDataHelpers(db) {
     },
 
     // SAVE NEW ITEM TO AN EXISTING BOARD
-    saveItem: function(filter, edit) {
+    updateItem: function(filter, edit) {
       return new Promise((resolve, reject) => {
         db.collection('boards').findOneAndUpdate(filter, edit, (err) => {
           if (err) {
@@ -33,6 +33,8 @@ module.exports = function makeDataHelpers(db) {
         })
       })
     },
+
+
 
     // SAVE NEW BOARD
     saveBoard: function(board) {
