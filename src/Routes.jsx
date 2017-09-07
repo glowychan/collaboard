@@ -34,9 +34,15 @@ class Twoodle extends React.Component {
 
     this.socket.onmessage = (receivedData) => {
       const data = JSON.parse(receivedData.data)
-      if (data.boardName === this.state.boardName) {
-        // this.setState({items: [...this.state.items, data.items]})
-        this.setState({items: this.state.items.concat(data.items)})
+      if (data.error) {
+        alert(data.error)
+        window.location = '/';
+      }
+      else {
+        if (data.boardName === this.state.boardName) {
+          // this.setState({items: [...this.state.items, data.items]})
+          this.setState({items: this.state.items.concat(data.items)})
+        }
       }
     }
   }
