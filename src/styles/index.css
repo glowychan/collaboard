@@ -28,6 +28,10 @@ body {
   transform: rotate(20deg)
 }
 
+.brandlink:link {
+  text-decoration: none;
+}
+
 .checkbox {
   margin: 16px 12px 0 12px;
   transform: scale(2.0);
@@ -43,7 +47,6 @@ a.active {
 
 canvas.canvas {
   background: url(https://www.clipartsgram.com/image/2046812482-checkerrealcanon18mmdotsm.png);
-  border-top: 4px dashed black;
 }
 
 nav {
@@ -74,12 +77,13 @@ width: 24px;
 /* Color/shape of close button cross */
 .bm-cross {
 background: black;
+margin-top: 30px;
 }
 
 /* General sidebar styles */
 .bm-menu {
 background: #E1E8F0;
-padding: 2.5em 1.5em 0;
+padding: 1.5em 1.5em 0;
 font-size: 1.15em;
 font-family: 'Patrick Hand SC', cursive;
 display: flex;
@@ -97,9 +101,15 @@ fill: #373a47;
 
 /* Wrapper for item list */
 .bm-item-list {
-padding: 0.1em;
+padding-top: 1.5em;
 font-size: 2rem;
 }
+
+.bm-item-list img {
+  width: 100%;
+}
+
+
 
 .side-item {
   transition: 0.70s;
@@ -115,11 +125,11 @@ font-size: 2rem;
   -moz-transition: 0.70s;
   -ms-transition: 0.70s;
   -o-transition: 0.70s;
-  -webkit-transform: rotate(40deg);
-  -moz-transform: rotate(40deg);
-  -o-transform: rotate(40deg);
-  -ms-transform: rotate(40deg);
-  transform: rotate(40deg);
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -o-transform: rotate(10deg);
+  -ms-transform: rotate(10deg);
+  transform: rotate(10deg);
 }
 
 .bm-menu-wrap {
@@ -151,6 +161,7 @@ font-size: 2rem;
 .options {
   display: flex;
   flex-direction: row;
+  align-content: center;
   margin: 0 0 20px 20px;
   top: 5%;
   left: 70%;
@@ -173,13 +184,17 @@ img.icon {
   margin-left: 10px;
   display: flex;
   flex-direction: row;
-  align-content: baseline;
+  align-content: center;
   font-size: 3.0em;
   flex-shrink: 2;
 }
 
+.fill span {
+  margin-top: 3px;
+}
+
 .circle-picker {
-  margin: 0 3% 0 3%;
+  margin: 3% 0 3% 3%;
   flex-shrink: 2;
 }
 
@@ -267,6 +282,47 @@ button.twoodle-submit:hover {
 
 span.purple {
   color: #9068BE;
+}
+
+.share-pop {
+ font-family: 'PT Sans Narrow', sans-serif;
+ width: 40%;
+ height: 30%;
+ background-color: #6ED3CF;
+ box-shadow: 10px 11px 0px 0px rgba(230,39,57,1);
+ position: absolute;
+ top: 50%;
+ left: 30%;
+ padding: 20px;
+ z-index: 9999;
+}
+
+.share-pop h2{
+  font-size: 30px;;
+}
+
+.social-share {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px;
+}
+
+.url-share {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.share-url {
+  background-color: rgba(32, 31, 31, 0.32);
+  border: none;
+  outline:none;
+  height:30px;
+  width: 60%;
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 2.5em;
+  padding: 10px 10px 10px 20px;
 }
 
 

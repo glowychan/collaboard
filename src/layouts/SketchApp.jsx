@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import SketchPad from '../components/SketchPad';
 import { TOOL_PENCIL } from '../components/tools/Pencil';
 import { TOOL_LINE } from '../components/tools/Line';
 import { TOOL_ELLIPSE } from '../components/tools/Ellipse';
 import { TOOL_RECTANGLE } from '../components/tools/Rectangle';
-import SideBar from '../components/Sidebar';
+import Sidebar from '../components/Sidebar';
+import PoppedOutShare from '../components/PoppedOutShare.jsx';
 import ColorPicker from '../components/ColorPicker';
 import FillPicker from '../components/FillPicker';
 import logo from '../icons/007-square.png';
@@ -28,8 +30,11 @@ export default class SketchApp extends Component
       color: '#000000',
       fill: false,
       fillColor: '#444444',
-      items: this.props.items
+      items: this.props.items,
+      poppedOpen: false
     }
+    this.handleShare = this.handleShare.bind(this);
+    this.closePopup = this.closePopup.bind(this);
   }
 
 
@@ -45,6 +50,17 @@ export default class SketchApp extends Component
     })
   }
 
+  handleShare = () => {
+    this.setState({
+      poppedOpen: true
+    })
+  }
+  
+  closePopup = () => {
+    this.setState({
+      poppedOpen: false
+    })
+  }
   
    
 
@@ -52,8 +68,10 @@ render() {
     const { tool, size, color, fill, fillColor } = this.state;
     return (
       <div>
-        <h1><img className='logo' src={logo} />TWOODLE</h1>
+        <Link  style={{ textDecoration: 'none', color: 'black' }} to='/'><h1><img className='logo' src={logo} />TWOODLE</h1></Link>
         <p>{this.state.items}</p>
+        <Sidebar onShare={this.handleShare} />
+        <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closePopup} url={this.props.boardName}/>
         <div className='toolbar'>
           <div className="tools" style={{marginBottom:20}}>
            <a href='#' 
