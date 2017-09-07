@@ -16,7 +16,6 @@ class SideBar extends Component {
     width={ '5%' } >
         <Link className="bm-item-list side-item" to="/"><img className='home' src={home} /></Link>
         <Link className="bm-item-list side-item" to="/twoodles"><img className='twoodle' src={twoodle} /></Link>
-        <a href='#'><img className="bm-item-list side-item" src={save} /> </a>
         <a href="#" className='bm-item-list side-item'><img src={share} /> </a>
     </Menu>
 
