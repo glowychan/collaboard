@@ -5,6 +5,7 @@ import Pencil, { TOOL_PENCIL } from './tools/Pencil';
 import Line, { TOOL_LINE } from './tools/Line';
 import Ellipse, { TOOL_ELLIPSE} from './tools/Ellipse';
 import Rectangle, { TOOL_RECTANGLE } from './tools/Rectangle';
+import FileSaver from 'file-saver';
 
 
 export const toolsMap = {
@@ -63,6 +64,15 @@ export default class SketchPad extends Component {
     this.canvas = findDOMNode(this.canvasRef);
     this.ctx = this.canvas.getContext('2d');
     this.initTool(this.props.tool);
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+  }
+
+handleSave = () => {
+     this.canvas.toBlob(function(blob) {
+    FileSaver.saveAs(blob, "mytwoodle.jpg");
+    });
+  
   }
 
   componentWillReceiveProps({ tool, items }) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import brand from '../icons/TWOODLE.png';
-import about from '../icons/about.png';
+
 
 export default class Homepage extends Component {
 

@@ -4,10 +4,13 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import home from './icons/003-symbols.png'
 import twoodle from './icons/007-square.png'
 import save from './icons/001-symbols-1.png'
-
 import share from './icons/004-sign.png'
 
+
 class SideBar extends Component {
+
+  
+
   render () {
     return (
     <Menu className="bm-menu"

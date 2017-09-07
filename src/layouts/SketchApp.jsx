@@ -13,6 +13,7 @@ import line from '../icons/008-two.png'
 import circle from '../icons/009-circle.png'
 import sqaure from '../icons/010-square.png'
 import textbox from '../icons/symbols.png'
+import save from '../icons/001-symbols-1.png'
 
 export default class SketchApp extends Component
 {
@@ -44,6 +45,9 @@ export default class SketchApp extends Component
     })
   }
 
+  
+   
+
 render() {
     const { tool, size, color, fill, fillColor } = this.state;
     return (
@@ -52,6 +56,8 @@ render() {
         <p>{this.state.items}</p>
         <div className='toolbar'>
           <div className="tools" style={{marginBottom:20}}>
+           <a href='#' 
+           onClick={() => this.refs.sketch.handleSave()}><img className='save' src={save} /> </a>
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
@@ -99,6 +105,7 @@ render() {
           </div>
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
+            ref='sketch'
             width={2600}
             height={1200}
             animate={true}
@@ -108,6 +115,7 @@ render() {
             items={this.props.items}
             tool={tool}
             onCompleteItem={(item) => this.props.addNewItem(item, this.props.boardName)}
+            onSave={this.handleSave}
           />
         </div>
       </div>
