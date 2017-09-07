@@ -151,6 +151,7 @@ font-size: 2rem;
 .options {
   display: flex;
   flex-direction: row;
+  align-content: center;
   margin: 0 0 20px 20px;
   top: 5%;
   left: 70%;
@@ -173,13 +174,17 @@ img.icon {
   margin-left: 10px;
   display: flex;
   flex-direction: row;
-  align-content: baseline;
+  align-content: center;
   font-size: 3.0em;
   flex-shrink: 2;
 }
 
+.fill span {
+  margin-top: 3px;
+}
+
 .circle-picker {
-  margin: 0 3% 0 3%;
+  margin: 3% 0 3% 3%;
   flex-shrink: 2;
 }
 
