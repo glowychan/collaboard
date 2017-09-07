@@ -135,10 +135,16 @@ font-size: 2rem;
   flex-direction: row;
   justify-content: center;
   width: 100%;
+  flex-shrink: 1;
+}
+.save {
+  width: 35px;
+  margin-right: 10px;
 }
 
 .tools {
   font-size: 3em;
+  flex-shrink: 2;
 }
 
 .options {
@@ -147,16 +153,19 @@ font-size: 2rem;
   margin: 0 0 20px 20px;
   top: 5%;
   left: 70%;
-  font-size: 3.0em
+  font-size: 3.0em;
+  flex-shrink: 2;
 }
 
 input[type='range'] {
   margin: 0 20px 0 20px;
+  flex-shrink: 2;
 }
 
 img.icon {
   width: 40px;
   height: 40px;
+  flex-shrink: 2;
 }
 
 .fill {
@@ -164,11 +173,13 @@ img.icon {
   display: flex;
   flex-direction: row;
   align-content: baseline;
-  font-size: 3.0em
+  font-size: 3.0em;
+  flex-shrink: 2;
 }
 
 .circle-picker {
   margin: 0 3% 0 3%;
+  flex-shrink: 2;
 }
 
 button {

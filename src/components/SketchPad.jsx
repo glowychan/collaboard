@@ -5,6 +5,8 @@ import Pencil, { TOOL_PENCIL } from './tools/Pencil';
 import Line, { TOOL_LINE } from './tools/Line';
 import Ellipse, { TOOL_ELLIPSE} from './tools/Ellipse';
 import Rectangle, { TOOL_RECTANGLE } from './tools/Rectangle';
+import FileSaver from 'file-saver';
+import dot from '../icons/dot.jpg';
 
 
 export const toolsMap = {
@@ -57,12 +59,28 @@ export default class SketchPad extends Component {
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onDebouncedMove = this.onDebouncedMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
+    this.handleLoad = this.handleLoad.bind(this);
   }
 
   componentDidMount() {
     this.canvas = findDOMNode(this.canvasRef);
+    this.canvas.addEventListener('load', this.handleLoad);
     this.ctx = this.canvas.getContext('2d');
     this.initTool(this.props.tool);
+    
+  }
+
+  handleLoad() {
+    const pat=this.ctx.createPattern(dot,"repeat");
+    this.ctx.fillStyle = pat;
+    this.ctx.fill()
+  }
+
+handleSave = () => {
+     this.canvas.toBlob(function(blob) {
+    FileSaver.saveAs(blob, "prettyimage.jpg");
+    });
+  
   }
 
   componentWillReceiveProps({ tool, items }) {
