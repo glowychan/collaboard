@@ -10,7 +10,7 @@ body {
 }
 
  h1 {
-  margin: 30px 97px;
+  margin: 33px 97px;
   font-family: 'Patrick Hand', cursive;
   font-size: 3rem;
   line-height: 30px;
@@ -43,6 +43,7 @@ a.active {
 
 canvas.canvas {
   background: url(https://www.clipartsgram.com/image/2046812482-checkerrealcanon18mmdotsm.png);
+  border-top: 4px dashed black;
 }
 
 nav {
@@ -191,6 +192,7 @@ button {
   outline:none;
   font-size: 1.0em;
   font-family: 'Patrick Hand SC', cursive;
+  flex-shrink: 2;
 }
 
 button:hover {
