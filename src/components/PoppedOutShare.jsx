@@ -56,14 +56,13 @@ class PoppedOutShare extends React.Component {
 
     return (
       <div ref={this.setWrapperRef} className='share-pop'>
-      //Unique url
-
+     
         <div className='url-share'>
           <h2>Share your Twoodle URL and draw with friends</h2>
           <input className='share-url' id='share' type='text' defaultValue={'https://twoodle-board.com/' + this.props.url} readOnly /> 
       </div>
       
-      // Social sharing buttons
+      
       <div className='social-share'>
       
         <FacebookShareButton title="Twoodle" quote="Check out my latest Twoodle" picture='https://static.tumblr.com/a084c14f08f0fa56a12f1c79fc90aa16/sl6w7fs/qQHockr0d/tumblr_static_tumblr_static_axzrmvvucm0c80wwwwc8g8kko_640.jpg' url={URL}>
