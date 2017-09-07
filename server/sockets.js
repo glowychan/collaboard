@@ -22,7 +22,7 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
             // fix this later
           })
       }
-      else {
+      else if (parsedData.type === 'add') {
 
         // Borad Name is unique, this function return zero/one board here
         dataHelpers.getBoards(filter)
@@ -42,6 +42,8 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
             // fix this later
           })
         socketHelpers.broadcastBackMessages(data)
+      } else if (parsedData.type === 'undo') {
+          console.log("yoo!");
       }
     })
 

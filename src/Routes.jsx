@@ -47,7 +47,8 @@ class Twoodle extends React.Component {
         <h3>Your twoodle bord name is: {this.state.boardName}</h3>
         <SketchApp items ={this.state.items}
                    boardName = {this.state.boardName}
-                   addNewItem = {this.addNewItem}/>
+                   addNewItem = {this.addNewItem}
+                   undoItem = {this.undoItem} />
       </div>
     )
   }
@@ -56,10 +57,22 @@ class Twoodle extends React.Component {
     const data = {
       boardName: boardName,
       items:  item
+      type: "add"
     }
     this.socket.send(JSON.stringify(data))
   }
+
+  undoItem = (boardName) => {
+    const data = {
+      boardName: boardName
+      type: "undo"
+    }
+    this.socket.send(JSON.stringify(data))
+  }
+
 }
+
+
 
 class Twoodles extends React.Component {
 
