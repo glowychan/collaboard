@@ -37,8 +37,6 @@ module.exports = function makeDataHelpers(db) {
       })
     },
 
-
-
     // SAVE NEW BOARD
     saveBoard: function(board) {
       return new Promise((resolve, reject) => {
@@ -58,13 +56,3 @@ module.exports = function makeDataHelpers(db) {
 
   }
 }
-
-
-
-
-
-
-
-
-
-

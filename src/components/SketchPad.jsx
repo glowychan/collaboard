@@ -53,6 +53,11 @@ export default class SketchPad extends Component {
 
   constructor(props) {
     super(props);
+
+    // this.state = {
+    //   image: ''
+    // };
+
     this.initTool = this.initTool.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -76,7 +81,6 @@ handleSave = () => {
   }
 
   componentWillReceiveProps({ tool, items }) {
-    console.log("items", items)
     items
       .filter(item => this.props.items.indexOf(item) === -1)
       .forEach(item => {
@@ -84,6 +88,20 @@ handleSave = () => {
         this.tool.draw(item, this.props.animate);
       });
     this.initTool(tool);
+  }
+
+  componentDidUpdate() {
+    var image = this.canvas.toDataURL("image/png");
+    console.log(image);
+    var img = React.createElement('img', {src: image}, "Save");
+    // var img2 = new Element('img', {src: image});
+    var img2 = new Image();
+    img2.src = image;
+    console.log(img2);
+
+    var fries = new Image();
+    fries.src = "http://img.taste.com.au/MudZOM3z/taste/2016/11/french-fries-87711-1.jpeg";
+    this.ctx.drawImage(fries, 0, 0, this.canvas.width, this.canvas.height);
   }
 
   initTool(tool) {
@@ -129,20 +147,23 @@ handleSave = () => {
   render() {
     const { width, height, canvasClassName } = this.props;
     return (
-      <div className="canvas-div">
-        <canvas
-          ref={(canvas) => { this.canvasRef = canvas; }}
-          className={canvasClassName}
-          onMouseDown={this.onMouseDown}
-          onMouseMove={this.onMouseMove}
-          onMouseOut={this.onMouseUp}
-          onMouseUp={this.onMouseUp}
-          width={width}
-          height={height}
-        />
-        <div className='textinput'> HELLO
+      <div>
+
+        <div className="canvas-div">
+          <canvas
+            ref={(canvas) => { this.canvasRef = canvas; }}
+            className={canvasClassName}
+            onMouseDown={this.onMouseDown}
+            onMouseMove={this.onMouseMove}
+            onMouseOut={this.onMouseUp}
+            onMouseUp={this.onMouseUp}
+            width={width}
+            height={height}
+          />
+          <div className='textinput'> HELLO
+          </div>
+          <toolsMap />
         </div>
-        <toolsMap />
       </div>
     )
   }
