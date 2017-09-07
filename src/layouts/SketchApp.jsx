@@ -27,8 +27,7 @@ export default class SketchApp extends Component
       size: 2,
       color: '#000000',
       fill: false,
-      fillColor: '#444444',
-      items: this.props.items
+      fillColor: '#444444'
     }
   }
 
@@ -58,6 +57,11 @@ render() {
           <div className="tools" style={{marginBottom:20}}>
            <a href='#'
            onClick={() => this.refs.sketch.handleSave()}><img className='save' src={save} /> </a>
+
+           <button
+             onClick={() => this.props.undoItem(this.props.boardName)}
+           >undo</button>
+
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}

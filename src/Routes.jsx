@@ -37,7 +37,17 @@ class Twoodle extends React.Component {
       if (data.error) {
         alert(data.error)
         window.location = '/';
+      } else if (data.type === 'undo' && data.boardName === this.state.boardName) {
+
+        console.log("state", this.state.items);
+        let index = this.state.items.pop();
+        console.log("index", index);
+        console.log(this.state.items);
+        //this.forceUpdate();
+        // this.setState({items: this.state.items.pop()});
+
       }
+
       else {
         if (data.boardName === this.state.boardName) {
           // this.setState({items: [...this.state.items, data.items]})
@@ -53,7 +63,8 @@ class Twoodle extends React.Component {
         <h3>Your twoodle bord name is: {this.state.boardName}</h3>
         <SketchApp items ={this.state.items}
                    boardName = {this.state.boardName}
-                   addNewItem = {this.addNewItem}/>
+                   addNewItem = {this.addNewItem}
+                   undoItem = {this.undoItem} />
       </div>
     )
   }
@@ -61,11 +72,24 @@ class Twoodle extends React.Component {
   addNewItem = (item, boardName) => {
     const data = {
       boardName: boardName,
-      items:  item
+      items:  item,
+      type: 'add'
     }
     this.socket.send(JSON.stringify(data))
   }
+
+  undoItem = (boardName) => {
+    const data = {
+      boardName: boardName,
+      type: 'undo'
+    }
+    console.log("hiii");
+    this.socket.send(JSON.stringify(data))
+  }
+
 }
+
+
 
 class Twoodles extends React.Component {
 

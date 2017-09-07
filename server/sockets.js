@@ -22,13 +22,13 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
             // fix this later
           })
       }
-      else {
+      else if (parsedData.type === 'add') {
 
         // Borad Name is unique, this function return zero/one board here
         dataHelpers.getBoards(filter)
           .then((boards) => {
             if (boards[0]) {
-              dataHelpers.saveItem(filter, {$push: {items: parsedData.items}})
+              dataHelpers.updateItem(filter, {$push: {items: parsedData.items}})
             }
             else {
               const board = {
@@ -42,6 +42,18 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
             // fix this later
           })
         socketHelpers.broadcastBackMessages(data)
+      } else if (parsedData.type === 'undo') {
+        dataHelpers.updateItem(filter, {$pop: {items: 1}})
+        .then(() => {
+          const data = {
+            boardName: parsedData.boardName,
+            type: 'undo'
+          };
+          socketHelpers.broadcastBackMessages(JSON.stringify(data));
+        }).catch((err) => {
+          // fix later
+          console.log(':(')
+        })
       }
     })
 

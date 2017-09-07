@@ -72,10 +72,11 @@ handleSave = () => {
      this.canvas.toBlob(function(blob) {
     FileSaver.saveAs(blob, "mytwoodle.jpg");
     });
-  
+
   }
 
   componentWillReceiveProps({ tool, items }) {
+    console.log("items", items)
     items
       .filter(item => this.props.items.indexOf(item) === -1)
       .forEach(item => {
