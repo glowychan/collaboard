@@ -39,7 +39,7 @@ class Twoodle extends React.Component {
    this.socket.onmessage = (receivedData) => {
       const data = JSON.parse(receivedData.data)
       if (data.error) {
-        alert(data.error)
+        //alert(data.error)
         //window.location = '/';
         this.props.history.push('/error')
       } else if (data.type === 'undo' && data.boardName === this.state.boardName) {
@@ -93,15 +93,11 @@ class Twoodle extends React.Component {
 //   }
 // }
 
-const Twoodles = ({ location, match }) => (
-  <div>
-    <Link to={`${location.pathname}`}><h3>New Twoodle</h3></Link>
-    <Switch>
-      <Route path={`${match.url}/:boardName`} component={Twoodle}/>
-      <Route exact path="/twoodles" Redirect to="/" />
-    </Switch>
-  </div>
-)
+// const Twoodles = ({ location, match }) => (
+//   <div>
+//     <Route path={`${match.url}/:boardName`} component={Twoodle}/>
+//   </div>
+// )
 
 // const Routes = () => (
 //   <Router>
@@ -120,7 +116,7 @@ const Twoodles = ({ location, match }) => (
      <main id='page-wrap'>
      <Switch>
         <Route exact path="/" component={Home}/>
-        <Route path="/twoodles" component={Twoodles}/>
+        <Route path="/twoodles/:boardName" component={Twoodle} />
         <Route path="*" component={ErrorComponent}/>
       </Switch>
       </main>
