@@ -6,6 +6,7 @@ import { TOOL_LINE } from '../components/tools/Line';
 import { TOOL_ELLIPSE } from '../components/tools/Ellipse';
 import { TOOL_RECTANGLE } from '../components/tools/Rectangle';
 import { TOOL_BRUSH } from '../components/tools/Brush';
+import { TOOL_ERASER } from '../components/tools/Eraser';
 import Sidebar from '../components/Sidebar';
 import PoppedOutShare from '../components/PoppedOutShare.jsx';
 import ColorPicker from '../components/ColorPicker';
@@ -19,6 +20,7 @@ import textbox from '../icons/symbols.png'
 import paint from '../icons/paint.png'
 import save from '../icons/001-symbols-1.png'
 import clear from '../icons/001-circle.png'
+import eraser from '../icons/eraser.png'
 
 export default class SketchApp extends Component
 {
@@ -114,10 +116,10 @@ render() {
             ><img className='icon' src={sqaure} /></button>
 
             <button
-              style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_RECTANGLE})}
-            ><img className='icon' src={textbox} /></button>
+              style={tool == TOOL_ERASER ? {fontWeight:'bold'} : undefined}
+              className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
+              onClick={() => this.setState({tool:TOOL_ERASER})}
+            ><img className='icon' src={eraser} /></button>
           </div>
           <div className="options" style={{marginBottom:20}}>
             <label htmlFor="">SIZE: </label>

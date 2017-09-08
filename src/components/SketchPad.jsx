@@ -6,6 +6,7 @@ import Line, { TOOL_LINE } from './tools/Line';
 import Ellipse, { TOOL_ELLIPSE} from './tools/Ellipse';
 import Rectangle, { TOOL_RECTANGLE } from './tools/Rectangle';
 import Brush, { TOOL_BRUSH } from './tools/Brush';
+import Eraser, { TOOL_ERASER } from './tools/Eraser';
 import FileSaver from 'file-saver';
 
 
@@ -14,7 +15,8 @@ export const toolsMap = {
   [TOOL_LINE]: Line,
   [TOOL_RECTANGLE]: Rectangle,
   [TOOL_ELLIPSE]: Ellipse,
-  [TOOL_BRUSH]: Brush
+  [TOOL_BRUSH]: Brush,
+  [TOOL_ERASER]: Eraser
 };
 
 export default class SketchPad extends Component {
@@ -71,7 +73,7 @@ export default class SketchPad extends Component {
   }
 
 handleSave = () => {
-     this.canvas.toBlob(function(blob) {
+   this.canvas.toBlob(function(blob) {
     FileSaver.saveAs(blob, "mytwoodle.jpg");
     });
   
