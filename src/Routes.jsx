@@ -1,10 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch, Link, withRouter } from 'react-router-dom';
 import SketchApp from './layouts/SketchApp';
 import Homepage from './layouts/Homepage';
 import Errorpage from './layouts/Errorpage';
-
-
 
 const Home = () => (
   <div>
@@ -12,7 +10,7 @@ const Home = () => (
   </div>
 )
 
-const Error = () => (
+const ErrorComponent = () => (
   <div>
     <Errorpage />
   </div>
@@ -42,7 +40,8 @@ class Twoodle extends React.Component {
       const data = JSON.parse(receivedData.data)
       if (data.error) {
         alert(data.error)
-        window.location = '/';
+        //window.location = '/';
+        this.props.history.push('/error')
       } else if (data.type === 'undo' && data.boardName === this.state.boardName) {
 
         let array = this.state.items;
@@ -65,7 +64,6 @@ class Twoodle extends React.Component {
   render() {
     return (
       <div>
-        <h3>Your twoodle bord name is: {this.state.boardName}</h3>
         <SketchApp items ={this.state.items}
                    boardName = {this.state.boardName}
                    addNewItem = {this.addNewItem}/>
@@ -82,32 +80,52 @@ class Twoodle extends React.Component {
   }
 }
 
-class Twoodles extends React.Component {
+// class Twoodles extends React.Component {
 
+//   //REDIRECT TWOODLES PAGE TO MAIN PAGE
+//   render() {
+//     return (
+//       <div>
+//         <Link to={`${this.props.location.pathname}`}><h3>New Twoodle</h3></Link>
+//         <Route path={`${this.props.match.url}/:boardName`} component={Twoodle}/>
+//       </div>
+//     )
+//   }
+// }
 
+const Twoodles = ({ location, match }) => (
+  <div>
+    <Link to={`${location.pathname}`}><h3>New Twoodle</h3></Link>
+    <Switch>
+      <Route path={`${match.url}/:boardName`} component={Twoodle}/>
+      <Route exact path="/twoodles" Redirect to="/" />
+    </Switch>
+  </div>
+)
 
-  //REDIRECT TWOODLES PAGE TO MAIN PAGE
-  render() {
-    return (
-      <div>
-        <Link to={`${this.props.location.pathname}`}><h3>New Twoodle</h3></Link>
-        <Route path={`${this.props.match.url}/:boardName`} component={Twoodle}/>
-      </div>
-    )
-  }
-}
+// const Routes = () => (
+//   <Router>
+//     <div className='outer-container'>
+//      <main id='page-wrap'>
+//       <Route exact path="/" component={Home}/>
+//       <Route path="/twoodles" component={Twoodles}/>
+//       <Route path="*" component={Error}/>
+//       </main>
+//     </div>
+//   </Router>
 
-const Routes = () => (
+  const Routes = () => (
   <Router>
     <div className='outer-container'>
      <main id='page-wrap'>
-      <Route exact path="/" component={Home}/>
-      <Route path="/twoodles" component={Twoodles}/>
-      <Route path="/error" component={Error}/>
+     <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route path="/twoodles" component={Twoodles}/>
+        <Route path="*" component={ErrorComponent}/>
+      </Switch>
       </main>
     </div>
   </Router>
 )
 
 export default Routes
-
