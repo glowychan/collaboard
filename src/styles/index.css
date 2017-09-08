@@ -278,6 +278,7 @@ button.twoodle-submit:hover {
   font-size: 6.0em;
   flex-shrink: 2;
   align-self: flex-start;
+  margin: 0;
 }
 
 span.purple {
@@ -291,14 +292,14 @@ span.purple {
  background-color: #6ED3CF;
  box-shadow: 10px 11px 0px 0px rgba(230,39,57,1);
  position: absolute;
- top: 50%;
+ top: 30%;
  left: 30%;
  padding: 20px;
  z-index: 9999;
 }
 
 .share-pop h2{
-  font-size: 30px;;
+  font-size: 30px;
 }
 
 .social-share {
@@ -357,5 +358,18 @@ span.purple {
   color: #E62739;
   flex-shrink: 2;
 }
+
+.main-container {
+  padding: 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.about {
+  align-self: flex-end;
+  flex-shrink: 3;
+}
+
 
 
