@@ -38,12 +38,21 @@ class Twoodle extends React.Component {
       this.socket.send(JSON.stringify(message))
     }
 
-    this.socket.onmessage = (receivedData) => {
-      const data = JSON.parse(receivedData.data) 
+   this.socket.onmessage = (receivedData) => {
+      const data = JSON.parse(receivedData.data)
       if (data.error) {
         alert(data.error)
         window.location = '/';
+      } else if (data.type === 'undo' && data.boardName === this.state.boardName) {
+
+        let array = this.state.items;
+        let index = array.pop();
+
+
+        this.setState({items: array});
+
       }
+
       else {
         if (data.boardName === this.state.boardName) {
           // this.setState({items: [...this.state.items, data.items]})
