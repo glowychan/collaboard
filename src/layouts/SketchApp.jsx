@@ -5,6 +5,7 @@ import { TOOL_PENCIL } from '../components/tools/Pencil';
 import { TOOL_LINE } from '../components/tools/Line';
 import { TOOL_ELLIPSE } from '../components/tools/Ellipse';
 import { TOOL_RECTANGLE } from '../components/tools/Rectangle';
+import { TOOL_BRUSH } from '../components/tools/Brush';
 import Sidebar from '../components/Sidebar';
 import PoppedOutShare from '../components/PoppedOutShare.jsx';
 import ColorPicker from '../components/ColorPicker';
@@ -15,6 +16,7 @@ import line from '../icons/008-two.png'
 import circle from '../icons/009-circle.png'
 import sqaure from '../icons/010-square.png'
 import textbox from '../icons/symbols.png'
+import paint from '../icons/paint.png'
 import save from '../icons/001-symbols-1.png'
 
 export default class SketchApp extends Component
@@ -81,6 +83,12 @@ render() {
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_PENCIL})}
             ><img className='icon' src={pencil} /></button>
+
+            <button
+              style={tool == TOOL_BRUSH ? {fontWeight:'bold'} : undefined}
+              className={tool == TOOL_BRUSH  ? 'item-active' : 'item'}
+              onClick={() => this.setState({tool:TOOL_BRUSH})}
+            ><img className='icon' src={paint} /></button>
 
             <button
               style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}

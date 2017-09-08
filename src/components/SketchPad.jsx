@@ -5,6 +5,7 @@ import Pencil, { TOOL_PENCIL } from './tools/Pencil';
 import Line, { TOOL_LINE } from './tools/Line';
 import Ellipse, { TOOL_ELLIPSE} from './tools/Ellipse';
 import Rectangle, { TOOL_RECTANGLE } from './tools/Rectangle';
+import Brush, { TOOL_BRUSH } from './tools/Brush';
 import FileSaver from 'file-saver';
 
 
@@ -13,6 +14,7 @@ export const toolsMap = {
   [TOOL_LINE]: Line,
   [TOOL_RECTANGLE]: Rectangle,
   [TOOL_ELLIPSE]: Ellipse,
+  [TOOL_BRUSH]: Brush
 };
 
 export default class SketchPad extends Component {
