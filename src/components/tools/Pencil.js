@@ -26,13 +26,19 @@ export default (context) => {
     context.lineJoin = 'round';
     context.lineCap = 'round';
     context.beginPath();
-    context.lineWidth = getRandomInt(3,5);
+    context.lineWidth = item.size;
     context.strokeStyle = item.color;
     context.globalCompositeOperation = 'source-over';
-    context.moveTo(start.x, start.y);
-    context.lineTo(x, y);
-    context.closePath();
+    context.moveTo(start.x - getRandomInt(0,4), start.y - getRandomInt(0,4));
+    context.lineTo(x - getRandomInt(0,3), y - getRandomInt(0,3));
     context.stroke();
+
+    context.moveTo(start.x, start.y);
+    context.lineTo(x,y);
+    context.stroke();
+
+    context.closePath();
+    
     context.restore();
   };
 

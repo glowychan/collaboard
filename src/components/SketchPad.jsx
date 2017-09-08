@@ -77,6 +77,10 @@ handleSave = () => {
   
   }
 
+  handleClear = () => {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+  }
+
   componentWillReceiveProps({ tool, items }) {
     items
       .filter(item => this.props.items.indexOf(item) === -1)

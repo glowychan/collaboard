@@ -18,6 +18,7 @@ import sqaure from '../icons/010-square.png'
 import textbox from '../icons/symbols.png'
 import paint from '../icons/paint.png'
 import save from '../icons/001-symbols-1.png'
+import clear from '../icons/001-circle.png'
 
 export default class SketchApp extends Component
 {
@@ -76,8 +77,12 @@ render() {
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closePopup} url={this.props.boardName}/>
         <div className='toolbar'>
           <div className="tools" style={{marginBottom:20}}>
-           <a href='#' 
-           onClick={() => this.refs.sketch.handleSave()}><img className='save' src={save} /> </a>
+          <button 
+           onClick={() => this.refs.sketch.handleClear()}><img className='icon' src={clear} /> </button>
+          
+          <button 
+           onClick={() => this.refs.sketch.handleSave()}><img className='icon' src={save} /> </button>
+           
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
