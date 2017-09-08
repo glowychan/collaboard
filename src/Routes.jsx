@@ -39,22 +39,14 @@ class Twoodle extends React.Component {
    this.socket.onmessage = (receivedData) => {
       const data = JSON.parse(receivedData.data)
       if (data.error) {
-        //alert(data.error)
-        //window.location = '/';
         this.props.history.push('/error')
       } else if (data.type === 'undo' && data.boardName === this.state.boardName) {
-
         let array = this.state.items;
         let index = array.pop();
-
-
         this.setState({items: array});
-
       }
-
       else {
         if (data.boardName === this.state.boardName) {
-          // this.setState({items: [...this.state.items, data.items]})
           this.setState({items: this.state.items.concat(data.items)})
         }
       }
@@ -79,36 +71,6 @@ class Twoodle extends React.Component {
     this.socket.send(JSON.stringify(data))
   }
 }
-
-// class Twoodles extends React.Component {
-
-//   //REDIRECT TWOODLES PAGE TO MAIN PAGE
-//   render() {
-//     return (
-//       <div>
-//         <Link to={`${this.props.location.pathname}`}><h3>New Twoodle</h3></Link>
-//         <Route path={`${this.props.match.url}/:boardName`} component={Twoodle}/>
-//       </div>
-//     )
-//   }
-// }
-
-// const Twoodles = ({ location, match }) => (
-//   <div>
-//     <Route path={`${match.url}/:boardName`} component={Twoodle}/>
-//   </div>
-// )
-
-// const Routes = () => (
-//   <Router>
-//     <div className='outer-container'>
-//      <main id='page-wrap'>
-//       <Route exact path="/" component={Home}/>
-//       <Route path="/twoodles" component={Twoodles}/>
-//       <Route path="*" component={Error}/>
-//       </main>
-//     </div>
-//   </Router>
 
   const Routes = () => (
   <Router>
