@@ -67,7 +67,7 @@ export default class SketchApp extends Component
     })
   }
   
-   
+
 
 render() {
     const { tool, size, color, fill, fillColor } = this.state;
@@ -141,7 +141,7 @@ render() {
             ref='sketch'
             width={2000}
             height={1200}
-            animate={true}
+            animate={false}
             size={size}
             color={color}
             fillColor={fill ? fillColor : ''}

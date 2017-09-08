@@ -50,7 +50,7 @@ export default class SketchPad extends Component {
     fillColor: '',
     canvasClassName: 'canvas',
     debounceTime: 1000,
-    animate: true,
+    animate: false,
     tool: TOOL_PENCIL,
     toolsMap
   };
@@ -68,13 +68,16 @@ export default class SketchPad extends Component {
     this.canvas = findDOMNode(this.canvasRef);
     this.ctx = this.canvas.getContext('2d');
     this.initTool(this.props.tool);
-    this.ctx.fillStyle = 'white';
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    // this.ctx.fillStyle = 'white';
+    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
 handleSave = () => {
+  const userinput = prompt("Please enter a filename");
+  const filename = userinput.concat('');
+
    this.canvas.toBlob(function(blob) {
-    FileSaver.saveAs(blob, "mytwoodle.jpg");
+    FileSaver.saveAs(blob, `${filename}.jpg`);
     });
   
   }

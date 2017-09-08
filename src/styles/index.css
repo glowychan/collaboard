@@ -5,7 +5,6 @@ body {
   padding: 0;
   font-family: 'Patrick Hand', cursive;
   font-size: 62.5%;
-  width: 100%;
   color: black;
 }
 
@@ -45,9 +44,13 @@ a.active {
   color: orange;
 }
 
-/* canvas.canvas {
+canvas.canvas {
   background: url(https://www.clipartsgram.com/image/2046812482-checkerrealcanon18mmdotsm.png);
-}  */
+} 
+
+.canvas-div {
+  padding-left: 200px;
+}
 
 nav {
   padding-top: 20px;
@@ -139,7 +142,7 @@ font-size: 2rem;
 .toolbar{
   position: absolute;
   top: 5%;
-  left: 25%;
+  left: 18%;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
@@ -162,15 +165,13 @@ font-size: 2rem;
   display: flex;
   flex-direction: row;
   align-content: center;
-  margin: 0 0 20px 20px;
-  top: 5%;
-  left: 70%;
   font-size: 3.0em;
   flex-shrink: 2;
+  width: 13%;
 }
 
 input[type='range'] {
-  margin: 0 20px 0 20px;
+  margin: 0 10px 0 10px;
   flex-shrink: 3;
   width: 25%;
 }
@@ -294,11 +295,11 @@ span.purple {
  font-family: 'PT Sans Narrow', sans-serif;
  border-radius: 15px;
  width: 40%;
- height: 30%;
+ height: 250px;
  background-color: rgba(110,211,207, 0.9);
  box-shadow: 10px 11px 0px 0px rgba(230,39,57,0.9);
  position: absolute;
- top: 30%;
+ top: 35%;
  left: 30%;
  padding: 20px;
  z-index: 9999;

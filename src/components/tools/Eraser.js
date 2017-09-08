@@ -23,7 +23,7 @@ export default (context) => {
     context.lineJoin = 'round';
     context.lineCap = 'round';
     context.beginPath();
-    context.lineWidth = item.size;
+    context.lineWidth = 40;
     context.strokeStyle = 'rgba(0,0,0,1)';
     context.globalCompositeOperation = 'destination-out';
     context.moveTo(start.x, start.y);
