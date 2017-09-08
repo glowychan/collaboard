@@ -124,7 +124,7 @@ render() {
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
             ref='sketch'
-            width={2600}
+            width={1000}
             height={1200}
             animate={true}
             size={size}
