@@ -2,13 +2,19 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import SketchApp from './layouts/SketchApp';
 import Homepage from './layouts/Homepage';
-import Sidebar from './components/Sidebar';
-import { push as Menu } from 'react-burger-menu'
+import Errorpage from './layouts/Errorpage';
+
 
 
 const Home = () => (
   <div>
     <Homepage />
+  </div>
+)
+
+const Error = () => (
+  <div>
+    <Errorpage />
   </div>
 )
 
@@ -33,7 +39,7 @@ class Twoodle extends React.Component {
     }
 
     this.socket.onmessage = (receivedData) => {
-      const data = JSON.parse(receivedData.data)
+      const data = JSON.parse(receivedData.data) 
       if (data.error) {
         alert(data.error)
         window.location = '/';
@@ -85,10 +91,10 @@ class Twoodles extends React.Component {
 const Routes = () => (
   <Router>
     <div className='outer-container'>
-      <Sidebar />
      <main id='page-wrap'>
       <Route exact path="/" component={Home}/>
       <Route path="/twoodles" component={Twoodles}/>
+      <Route path="/error" component={Error}/>
       </main>
     </div>
   </Router>

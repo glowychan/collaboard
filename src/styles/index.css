@@ -325,4 +325,37 @@ span.purple {
   padding: 10px 10px 10px 20px;
 }
 
+.error-container {
+  width: 60%;
+  margin: 4% auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 1;
+}
+
+
+
+.gif {
+  flex-shrink: 2;
+  flex-basis: auto;
+  margin-top: 5%;
+}
+
+.error-msg {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 5.0em;
+  flex-shrink: 2;
+  font-weight: 700;
+}
+
+.four {
+  font-size: 10rem;
+}
+
+.oh {
+  color: #E62739;
+  flex-shrink: 2;
+}
+
 
