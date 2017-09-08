@@ -54,9 +54,9 @@ export default class SketchPad extends Component {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   image: ''
-    // };
+    this.state = {
+      undoImage: ''
+    };
 
     this.initTool = this.initTool.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
@@ -91,17 +91,16 @@ handleSave = () => {
   }
 
   componentDidUpdate() {
-    var image = this.canvas.toDataURL("image/png");
-    console.log(image);
-    var img = React.createElement('img', {src: image}, "Save");
-    // var img2 = new Element('img', {src: image});
-    var img2 = new Image();
-    img2.src = image;
-    console.log(img2);
 
-    var fries = new Image();
-    fries.src = "http://img.taste.com.au/MudZOM3z/taste/2016/11/french-fries-87711-1.jpeg";
-    this.ctx.drawImage(fries, 0, 0, this.canvas.width, this.canvas.height);
+    if (this.props.onUndo) {
+      this.ctx.drawImage(this.state.undoImage, 0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    const imageSrc = this.canvas.toDataURL("image/png");
+    // var img2 = new Element('img', {src: image});
+    const newImage = new Image();
+    newImage.src = imageSrc;
+
   }
 
   initTool(tool) {

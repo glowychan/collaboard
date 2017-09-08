@@ -83,7 +83,7 @@ class Twoodle extends React.Component {
       boardName: boardName,
       type: 'undo'
     }
-    console.log("hiii");
+    console.log("trying to undo");
     this.socket.send(JSON.stringify(data))
   }
 
@@ -92,8 +92,6 @@ class Twoodle extends React.Component {
 
 
 class Twoodles extends React.Component {
-
-
 
   //REDIRECT TWOODLES PAGE TO MAIN PAGE
   render() {

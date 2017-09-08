@@ -27,7 +27,8 @@ export default class SketchApp extends Component
       size: 2,
       color: '#000000',
       fill: false,
-      fillColor: '#444444'
+      fillColor: '#444444',
+      undoFlag: false
     }
   }
 
@@ -59,7 +60,11 @@ render() {
            onClick={() => this.refs.sketch.handleSave()}><img className='save' src={save} /> </a>
 
            <button
-             onClick={() => this.props.undoItem(this.props.boardName)}
+             onClick={() => {
+                  this.props.undoItem(this.props.boardName);
+                  this.setState({ undoFlag: true});
+                }
+             }
            >undo</button>
 
             <button
@@ -120,6 +125,7 @@ render() {
             tool={tool}
             onCompleteItem={(item) => this.props.addNewItem(item, this.props.boardName)}
             onSave={this.handleSave}
+            onUndo={this.state.undoFlag}
           />
         </div>
       </div>
