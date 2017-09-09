@@ -40,17 +40,12 @@ body {
   box-shadow: none;
 }
 
-a.active {
-  color: orange;
-}
 
 canvas.canvas {
   background: url(https://www.clipartsgram.com/image/2046812482-checkerrealcanon18mmdotsm.png);
 } 
 
-.canvas-div {
-  padding-left: 200px;
-}
+
 
 nav {
   padding-top: 20px;
