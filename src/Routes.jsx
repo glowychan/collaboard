@@ -1,14 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch, Link, withRouter } from 'react-router-dom';
 import SketchApp from './layouts/SketchApp';
 import Homepage from './layouts/Homepage';
-import Sidebar from './components/Sidebar';
-import { push as Menu } from 'react-burger-menu'
-
+import Errorpage from './layouts/Errorpage';
 
 const Home = () => (
   <div>
     <Homepage />
+  </div>
+)
+
+const ErrorComponent = () => (
+  <div>
+    <Errorpage />
   </div>
 )
 
@@ -32,25 +36,18 @@ class Twoodle extends React.Component {
       this.socket.send(JSON.stringify(message))
     }
 
-    this.socket.onmessage = (receivedData) => {
+   this.socket.onmessage = (receivedData) => {
       const data = JSON.parse(receivedData.data)
       if (data.error) {
-        alert(data.error)
-        window.location = '/';
+        this.props.history.push('/error')
       } else if (data.type === 'undo' && data.boardName === this.state.boardName) {
-
         let array = this.state.items;
         let index = array.pop();
-
-
-        //this.forceUpdate();
         this.setState({items: array});
-
       }
 
       else {
         if (data.boardName === this.state.boardName) {
-          // this.setState({items: [...this.state.items, data.items]})
           this.setState({items: this.state.items.concat(data.items)})
         }
       }
@@ -60,7 +57,6 @@ class Twoodle extends React.Component {
   render() {
     return (
       <div>
-        <h3>Your twoodle bord name is: {this.state.boardName}</h3>
         <SketchApp items ={this.state.items}
                    boardName = {this.state.boardName}
                    addNewItem = {this.addNewItem}
@@ -90,33 +86,18 @@ class Twoodle extends React.Component {
 }
 
 
-
-class Twoodles extends React.Component {
-
-
-
-  //REDIRECT TWOODLES PAGE TO MAIN PAGE
-  render() {
-    return (
-      <div>
-        <Link to={`${this.props.location.pathname}`}><h3>New Twoodle</h3></Link>
-        <Route path={`${this.props.match.url}/:boardName`} component={Twoodle}/>
-      </div>
-    )
-  }
-}
-
 const Routes = () => (
   <Router>
     <div className='outer-container'>
-      <Sidebar />
      <main id='page-wrap'>
-      <Route exact path="/" component={Home}/>
-      <Route path="/twoodles" component={Twoodles}/>
+     <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route path="/twoodles/:boardName" component={Twoodle} />
+        <Route path="*" component={ErrorComponent}/>
+      </Switch>
       </main>
     </div>
   </Router>
 )
 
 export default Routes
-
