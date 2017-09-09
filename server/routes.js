@@ -4,6 +4,9 @@ const express = require('express')
 const routes  = express.Router()
 const Mongo   = require('mongodb')
 
+// need method override to make delete requests?
+const methodOverride = require('method-override');
+routes.use(methodOverride('_method'));
 
 module.exports = function(dataHelpers) {
 
@@ -28,6 +31,20 @@ module.exports = function(dataHelpers) {
       })
       .catch((err) => {
         return res.status(500).send()
+      })
+
+  });
+
+  routes.delete('/twoodles/:boardName', (req, res) => {
+    const filter = {boardName: req.query.boardName};
+    //this won't work because I'm getting the whole url on front end and not the boardName
+
+    dataHelpers.deleteBoard(filter)
+      .then(() => {
+        res.status(200).send("ok");
+      })
+      .catch(err => {
+        res.status(500).send("error");
       })
 
   })
