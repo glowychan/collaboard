@@ -54,9 +54,7 @@ export default class SketchPad extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      undoImage: ''
-    }
+    this.undoImage = ''
 
     this.initTool = this.initTool.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
@@ -73,7 +71,7 @@ export default class SketchPad extends Component {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
-handleSave = () => {
+  handleSave = () => {
      this.canvas.toBlob(function(blob) {
     FileSaver.saveAs(blob, "mytwoodle.jpg");
     });
@@ -88,6 +86,18 @@ handleSave = () => {
         this.tool.draw(item, this.props.animate);
       });
     this.initTool(tool);
+
+    if (items.length === this.props.items.length) {
+      if (this.undoImage) {
+        const image = new Image()
+        image.src = this.undoImage
+        alert("Wait 1 second for undo")
+        setTimeout(()=>{
+          this.ctx.drawImage(image,0,0, this.canvas.width, this.canvas.height ,0, 0, this.canvas.width, this.canvas.height)
+        }
+         , 500);
+      }
+    }
   }
 
 
@@ -96,8 +106,9 @@ handleSave = () => {
   }
 
   onMouseDown(e) {
+    this.undoImage = this.canvas.toDataURL('image/jpeg')
     const data = this.tool.onMouseDown(...this.getCursorPosition(e), this.props.color, this.props.size, this.props.fillColor);
-    data && data[0] && this.props.onItemStart && this.props.onItemStart.apply(null, data);
+    data && data[0] && this.props.onItemStart && this.props.onItemStart.apply(null, [data, this.undoImage]);
     if (this.props.onDebouncedItemChange) {
       this.interval = setInterval(this.onDebouncedMove, this.props.debounceTime);
     }

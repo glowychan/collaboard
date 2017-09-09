@@ -118,7 +118,7 @@ render() {
             fillColor={fill ? fillColor : ''}
             items={this.props.items}
             tool={tool}
-            onCompleteItem={(item) => this.props.addNewItem(item, this.props.boardName)}
+            onCompleteItem={(item, undoImage) => this.props.addNewItem(item, this.props.boardName)}
             onSave={this.handleSave}
           />
         </div>
