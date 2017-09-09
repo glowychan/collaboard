@@ -15,8 +15,8 @@ class ColorPicker extends React.Component {
     return (
       <CirclePicker
         color={ this.state.background } 
-        width={200} 
-        circleSize={20}
+        width={155} 
+        circleSize={13}
         colors={["#E62739", "#6ED3CF", "#9068BE", "#464646", "#181818"]}
         onChangeComplete={ this.handleChangeComplete }
       />

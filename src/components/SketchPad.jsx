@@ -5,6 +5,8 @@ import Pencil, { TOOL_PENCIL } from './tools/Pencil';
 import Line, { TOOL_LINE } from './tools/Line';
 import Ellipse, { TOOL_ELLIPSE} from './tools/Ellipse';
 import Rectangle, { TOOL_RECTANGLE } from './tools/Rectangle';
+import Brush, { TOOL_BRUSH } from './tools/Brush';
+import Eraser, { TOOL_ERASER } from './tools/Eraser';
 import FileSaver from 'file-saver';
 
 
@@ -13,6 +15,8 @@ export const toolsMap = {
   [TOOL_LINE]: Line,
   [TOOL_RECTANGLE]: Rectangle,
   [TOOL_ELLIPSE]: Ellipse,
+  [TOOL_BRUSH]: Brush,
+  [TOOL_ERASER]: Eraser
 };
 
 export default class SketchPad extends Component {
@@ -46,7 +50,7 @@ export default class SketchPad extends Component {
     fillColor: '',
     canvasClassName: 'canvas',
     debounceTime: 1000,
-    animate: true,
+    animate: false,
     tool: TOOL_PENCIL,
     toolsMap
   };
@@ -64,15 +68,22 @@ export default class SketchPad extends Component {
     this.canvas = findDOMNode(this.canvasRef);
     this.ctx = this.canvas.getContext('2d');
     this.initTool(this.props.tool);
-    this.ctx.fillStyle = 'white';
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    // this.ctx.fillStyle = 'white';
+    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
 handleSave = () => {
-     this.canvas.toBlob(function(blob) {
-    FileSaver.saveAs(blob, "mytwoodle.jpg");
+  const userinput = prompt("Please enter a filename");
+  const filename = userinput.concat('');
+
+   this.canvas.toBlob(function(blob) {
+    FileSaver.saveAs(blob, `${filename}.jpg`);
     });
   
+  }
+
+  handleClear = () => {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
   componentWillReceiveProps({ tool, items }) {

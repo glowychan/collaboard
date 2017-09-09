@@ -1,19 +1,16 @@
 import { v4 } from 'uuid';
 
-export const TOOL_PENCIL = 'pencil';
+export const TOOL_ERASER = 'eraser';
 
 export default (context) => {
   let stroke = null;
   let points = [];
 
- const getRandomInt = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
 
   const onMouseDown = (x, y, color, size) => {
     stroke = {
       id: v4(),
-      tool: TOOL_PENCIL,
+      tool: TOOL_ERASER,
       color,
       size,
       points: [{ x, y}]
@@ -26,19 +23,13 @@ export default (context) => {
     context.lineJoin = 'round';
     context.lineCap = 'round';
     context.beginPath();
-    context.lineWidth = item.size;
-    context.strokeStyle = item.color;
-    context.globalCompositeOperation = 'source-over';
-    context.moveTo(start.x - getRandomInt(0,4), start.y - getRandomInt(0,4));
-    context.lineTo(x - getRandomInt(0,3), y - getRandomInt(0,3));
-    context.stroke();
-
+    context.lineWidth = 40;
+    context.strokeStyle = 'rgba(0,0,0,1)';
+    context.globalCompositeOperation = 'destination-out';
     context.moveTo(start.x, start.y);
-    context.lineTo(x,y);
-    context.stroke();
-
+    context.lineTo(x, y);
     context.closePath();
-    
+    context.stroke();
     context.restore();
   };
 
