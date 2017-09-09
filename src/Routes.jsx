@@ -21,7 +21,8 @@ class Twoodle extends React.Component {
     super(props)
     this.state = {
       boardName: props.match.params.boardName,
-      items: []
+      items: [],
+      undob: false
     }
   }
 
@@ -40,13 +41,18 @@ class Twoodle extends React.Component {
       const data = JSON.parse(receivedData.data)
       if (data.error) {
         this.props.history.push('/error')
-      } else if (data.type === 'undo' && data.boardName === this.state.boardName) {
-        let array = this.state.items;
-        let index = array.pop();
-        this.setState({items: array});
       }
-
+      else if (data.type === 'undo' && data.boardName === this.state.boardName) {
+        // let array = this.state.items;
+        // let index = array.pop();
+        // this.setState({items: array});
+        // console.log(data.items)
+        this.setState({undob: true})
+        this.setState({items: data.items})
+        this.setState({undob: false})
+      }
       else {
+        // console.log(receivedData.data)
         if (data.boardName === this.state.boardName) {
           this.setState({items: this.state.items.concat(data.items)})
         }
@@ -60,7 +66,8 @@ class Twoodle extends React.Component {
         <SketchApp items ={this.state.items}
                    boardName = {this.state.boardName}
                    addNewItem = {this.addNewItem}
-                   undoItem = {this.undoItem} />
+                   undoItem = {this.undoItem}
+                   undob = {this.state.undob}/>
       </div>
     )
   }
@@ -74,12 +81,14 @@ class Twoodle extends React.Component {
     this.socket.send(JSON.stringify(data))
   }
 
-  undoItem = (boardName) => {
+  undoItem = (item, boardName) => {
+    item.color = 'rgba(255,255,255,1)'
+    // console.log(item)
     const data = {
       boardName: boardName,
+      // items: item,
       type: 'undo'
     }
-    console.log("hiii");
     this.socket.send(JSON.stringify(data))
   }
 

@@ -45,15 +45,26 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
       } else if (parsedData.type === 'undo') {
         dataHelpers.updateItem(filter, {$pop: {items: 1}})
         .then(() => {
-          const data = {
-            boardName: parsedData.boardName,
-            type: 'undo'
-          };
-          socketHelpers.broadcastBackMessages(JSON.stringify(data));
+          dataHelpers.getBoards(filter)
+            .then((boards) => {
+              const message = boards[0]
+              message.type = 'undo'
+              socketHelpers.broadcastBackMessages(JSON.stringify(message))
+            })
+
+          // dataHelpers.getBoards(filter)
+          // .then((boards) => {
+          //     socketHelpers.broadcastBackMessages((JSON.stringify(boards[0]))
+          //   }
+          // const data = {
+          //   boardName: parsedData.boardName,
+          //   type: 'undo'
+          // };
         }).catch((err) => {
           // fix later
           console.log('error');
         })
+        // socketHelpers.broadcastBackMessages(data);
       }
     })
 
