@@ -56,7 +56,8 @@ class PoppedOutShare extends React.Component {
     return (
       <div ref={this.setWrapperRef} className='share-pop'>
         <div className='url-share'>
-          <h2>Share your Twoodle URL and draw with friends</h2>
+          <h2>Share your Twoodle URL 
+          and draw with friends</h2>
           <input className='share-url' id='share' type='text' defaultValue={'https://twoodle-board.com/' + this.props.url} readOnly /> 
         </div>
       
