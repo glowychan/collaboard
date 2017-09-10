@@ -11,6 +11,7 @@ import Sidebar from '../components/Sidebar';
 import PoppedOutShare from '../components/PoppedOutShare.jsx';
 import ColorPicker from '../components/ColorPicker';
 import FillPicker from '../components/FillPicker';
+import UserNamePopout from '../components/UserNamePopout';
 import logo from '../icons/007-square.png';
 import pencil from '../icons/011-tool.png'
 import line from '../icons/008-two.png'
@@ -36,12 +37,14 @@ export default class SketchApp extends Component
       fill: false,
       fillColor: '#444444',
       items: this.props.items,
-      poppedOpen: false
+      poppedOpen: false,
+      nameOpen: true
     }
     this.handleShare = this.handleShare.bind(this);
     this.closePopup = this.closePopup.bind(this);
   }
 
+  
   componentWillReceiveProps ({undo}) {
     if (undo) {
       this.refs.sketch.handleClear()
@@ -68,7 +71,8 @@ export default class SketchApp extends Component
 
   closePopup = () => {
     this.setState({
-      poppedOpen: false
+      poppedOpen: false,
+      nameOpen: false
     })
   }
 
@@ -80,6 +84,7 @@ render() {
         <Link  style={{ textDecoration: 'none', color: 'black' }} to='/'><h1><img className='logo' src={logo} />TWOODLE</h1></Link>
         <p>{this.state.items}</p>
         <Sidebar onShare={this.handleShare} />
+        <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closePopup} url={this.props.boardName}/>
         <div className='toolbar'>
           <div className="tools" style={{marginBottom:20}}>
