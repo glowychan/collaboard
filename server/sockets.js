@@ -64,25 +64,21 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
       else if (parsedData.type === 'undo an item') {
         dataHelpers.getBoards(filter)
           .then((boards) => {
-            const board = boards[0]
-            // Get items on the board in reverse order
-            const items = board.items.reverse()
-            // Get the last item on the board drawn by the client who issued an undo request
-            const item = items.find(item => item.connection_id === ws.id)
-            // Update the board
-            dataHelpers.updateItem(filter, {$pull: {items: item}})
-            .then(() => {
-              // Broadcast the new list of items on that board
-              dataHelpers.getBoards(filter)
-                .then((boards) => {
-                  const message = boards[0]
-                  message.type = 'undo an item'
-                  socketHelpers.broadcastBackMessages(JSON.stringify(message))
-                })
+            if (boards[0]) {
+              dataHelpers.updateItem(filter, {$pop: {items: 1}})
+            }
+            else {
+              const board = {
+                boardName: parsedData.boardName,
+                items: [parsedData.items],
+              }
+              dataHelpers.saveBoard(board)
+            }
           })
-        }).catch((err) => {
-          // fix later
-        })
+          .catch((err) => {
+            // fix this later
+          })
+          socketHelpers.broadcastBackMessages(data)
       }
     })
     // A callback for when a client closes the socket

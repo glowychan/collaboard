@@ -6,17 +6,13 @@ export default (context) => {
   let stroke = null;
   let points = [];
 
- const getRandomInt = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
   const onMouseDown = (x, y, color, size) => {
     stroke = {
       id: v4(),
       tool: TOOL_PENCIL,
       color,
       size,
-      points: [{ x, y}]
+      points: [{ x, y }]
     };
     return [stroke];
   };
@@ -29,22 +25,16 @@ export default (context) => {
     context.lineWidth = item.size;
     context.strokeStyle = item.color;
     context.globalCompositeOperation = 'source-over';
-    context.moveTo(start.x - getRandomInt(0,4), start.y - getRandomInt(0,4));
-    context.lineTo(x - getRandomInt(0,3), y - getRandomInt(0,3));
-    context.stroke();
-
     context.moveTo(start.x, start.y);
-    context.lineTo(x,y);
-    context.stroke();
-
+    context.lineTo(x, y);
     context.closePath();
-    
+    context.stroke();
     context.restore();
   };
 
   const onMouseMove = (x, y) => {
     if (!stroke) return [];
-    const newPoint = { x, y};
+    const newPoint = { x, y };
     const start = stroke.points.slice(-1)[0];
     drawLine(stroke, start, newPoint);
     stroke.points.push(newPoint);

@@ -84,7 +84,7 @@ render() {
         <div className='toolbar'>
           <div className="tools" style={{marginBottom:20}}>
            <button
-             onClick={() => this.props.undoAnItem(this.props.boardName)}
+             onClick={() => this.props.undoAnItem(this.props.items[this.props.items.length - 1], this.props.boardName)}
            >undo</button>
 
           <button

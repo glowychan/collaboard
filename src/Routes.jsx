@@ -42,12 +42,7 @@ class Twoodle extends React.Component {
       if (data.error) {
         this.props.history.push('/error')
       }
-      else if (data.type === 'undo an item' && data.boardName === this.state.boardName) {
-        this.setState({undo: true})
-        this.setState({items: data.items})
-        this.setState({undo: false})
-      }
-      else if (data.type === 'add new item'){
+      else {
         if (data.boardName === this.state.boardName) {
           this.setState({items: this.state.items.concat(data.items)})
         }
@@ -76,9 +71,11 @@ class Twoodle extends React.Component {
     this.socket.send(JSON.stringify(data))
   }
 
-  undoAnItem = (boardName) => {
+  undoAnItem = (item, boardName) => {
+    item.tool = 'eraser'
     const data = {
       boardName: boardName,
+      items: item,
       type: 'undo an item'
     }
     this.socket.send(JSON.stringify(data))
