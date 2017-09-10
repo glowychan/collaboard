@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Redirect, Switch, Link, withRouter } fr
 import SketchApp from './layouts/SketchApp';
 import Homepage from './layouts/Homepage';
 import Errorpage from './layouts/Errorpage';
+import io from 'socket.io-client'
+
 
 const Home = () => (
   <div>
@@ -27,32 +29,44 @@ class Twoodle extends React.Component {
   }
 
   componentDidMount() {
-    this.socket = new WebSocket("ws://localhost:3001" + window.location.pathname)
+    // this.socket = new WebSocket("ws://localhost:3001" + window.location.pathname)
 
-    this.socket.onopen = () => {
-      const message = {
-        type: 'newConnection',
-        boardName: this.state.boardName
-      }
-      this.socket.send(JSON.stringify(message))
-    }
+    this.socket = io('http://localhost:3001')
 
-   this.socket.onmessage = (receivedData) => {
-      const data = JSON.parse(receivedData.data)
-      if (data.error) {
-        this.props.history.push('/error')
-      }
-      else if (data.type === 'undo an item' && data.boardName === this.state.boardName) {
-        this.setState({undo: true})
-        this.setState({items: data.items})
-        this.setState({undo: false})
-      }
-      else if (data.type === 'add new item'){
-        if (data.boardName === this.state.boardName) {
-          this.setState({items: this.state.items.concat(data.items)})
-        }
-      }
-    }
+    this.socket.emit('new connection', this.state.boardName)
+
+    this.socket.on('new connection', function (data) {
+      console.log('all board data is: ', data);
+    })
+
+    this.socket.on('add new item', function (item) {
+      console.log('new item is: ', item);
+    })
+
+   //  this.socket.onopen = () => {
+   //    const message = {
+   //      type: 'newConnection',
+   //      boardName: this.state.boardName
+   //    }
+   //    this.socket.send(JSON.stringify(message))
+   //  }
+
+   // this.socket.onmessage = (receivedData) => {
+   //    const data = JSON.parse(receivedData.data)
+   //    if (data.error) {
+   //      this.props.history.push('/error')
+   //    }
+   //    else if (data.type === 'undo an item' && data.boardName === this.state.boardName) {
+   //      this.setState({undo: true})
+   //      this.setState({items: data.items})
+   //      this.setState({undo: false})
+   //    }
+   //    else if (data.type === 'add new item'){
+   //      if (data.boardName === this.state.boardName) {
+   //        this.setState({items: this.state.items.concat(data.items)})
+   //      }
+   //    }
+   //  }
   }
 
   render() {
@@ -73,7 +87,9 @@ class Twoodle extends React.Component {
       items:  item,
       type: 'add new item'
     }
-    this.socket.send(JSON.stringify(data))
+    // this.socket.send(JSON.stringify(data))
+    this.socket.emit('add new item', this.state.boardName)
+
   }
 
   undoAnItem = (boardName) => {
@@ -81,7 +97,7 @@ class Twoodle extends React.Component {
       boardName: boardName,
       type: 'undo an item'
     }
-    this.socket.send(JSON.stringify(data))
+    // this.socket.send(JSON.stringify(data))
   }
 
 }
