@@ -41,11 +41,6 @@ body {
 }
 
 
-canvas.canvas {
-  background: url(https://www.clipartsgram.com/image/2046812482-checkerrealcanon18mmdotsm.png);
-} 
-
-
 
 nav {
   padding-top: 20px;
@@ -387,12 +382,13 @@ span.purple {
 
 .about-pop {
   font-size: 20px;
-  width: 751px;
-  height: 900px;
+  width: 626px;
+  height: 750px;
   position: absolute;
   top: 15%;
-  left: 35%;
+  left: 33%;
   z-index: 9999;
+  flex-shrink: 2;
  }
 
  .about-text h2 {
@@ -406,5 +402,39 @@ span.purple {
  .instructions {
    font-family: 'Patrick Hand SC', cursive;
    font-size: 2em;
+ }
+
+ .name-pop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'PT Sans Narrow', sans-serif;
+  width: 500px;
+  height: 210px;
+  background-image: url('../icons/Name.png');
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  z-index: 9999;
+ }
+
+ .user-name {
+  background-color: rgba(32, 31, 31, 0.32);
+  border-radius: 5px;
+  border: none;
+  outline:none;
+  height:25px;
+  width: 40%;
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 2.0em;
+  padding: 1%;
+  text-align: center;
+ }
+
+ .name-label {
+   margin: 12px;
+   font-size: 2.0em
  }
 
