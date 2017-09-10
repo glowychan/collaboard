@@ -60,7 +60,7 @@ export default class SketchApp extends Component
     })
   }
 
-  handleShare = () => {
+  handleShare (popup) {
     this.setState({
       poppedOpen: true
     })
