@@ -12,6 +12,7 @@ import PoppedOutShare from '../components/PoppedOutShare.jsx';
 import ColorPicker from '../components/ColorPicker';
 import FillPicker from '../components/FillPicker';
 import UserNamePopout from '../components/UserNamePopout';
+import UsersOnline from '../components/UsersOnline'
 import logo from '../icons/007-square.png';
 import pencil from '../icons/011-tool.png'
 import line from '../icons/008-two.png'
@@ -88,7 +89,6 @@ render() {
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closePopup} url={this.props.boardName}/>
         <div className='toolbar'>
-          <div className="tools" style={{marginBottom:20}}>
            <button
              onClick={() => this.props.undoAnItem(this.props.boardName)}
            ><img className='icon' src={undo} title='Undo' alt='Undo'/></button>
@@ -134,12 +134,9 @@ render() {
               className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_ERASER})}
             ><img className='icon' src={eraser} title='Eraser' alt='Eraser'/></button>
-          </div>
-          <div className="options" style={{marginBottom:20}}>
             <label htmlFor="">SIZE: </label>
             <input min="1" max="20" type="range" value={size} onChange={(e) => this.setState({size: parseInt(e.target.value)})} />
             <ColorPicker value={color} newColor={this.changeColor.bind(this)}/>
-          </div>
           {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
             <div className='fill'>
               <label htmlFor="">FILL IN:</label>
@@ -149,7 +146,7 @@ render() {
                   <FillPicker value={fill} newFill={this.changeFill.bind(this)}/>
                 </span> : ''}
             </div> : ''}
-          </div>
+        </div>
         <div style={{float:'left', marginRight:20}}>
           <SketchPad
             ref='sketch'
@@ -165,6 +162,7 @@ render() {
             onSave={this.handleSave}
           />
         </div>
+        <UsersOnline />
       </div>
     );
   }
