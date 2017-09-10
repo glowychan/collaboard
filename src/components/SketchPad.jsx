@@ -58,9 +58,6 @@ export default class SketchPad extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      undoImage: ''
-    }
 
     this.initTool = this.initTool.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
