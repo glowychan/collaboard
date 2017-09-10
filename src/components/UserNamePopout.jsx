@@ -6,8 +6,8 @@ class UserNamePopout extends React.Component {
     super(props);
 
   }
-  
-  
+ 
+ 
    
   render() {
     
