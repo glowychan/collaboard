@@ -42,13 +42,11 @@ export default class SketchApp extends Component
     this.closePopup = this.closePopup.bind(this);
   }
 
-  componentWillReceiveProps ({undob}) {
-    if (undob) {
+  componentWillReceiveProps ({undo}) {
+    if (undo) {
       this.refs.sketch.handleClear()
     }
-    console.log('will recieve undo b', undob)
   }
-
 
   changeColor(color) {
     this.setState({
@@ -86,11 +84,7 @@ render() {
         <div className='toolbar'>
           <div className="tools" style={{marginBottom:20}}>
            <button
-             onClick={() =>{
-              this.props.undoItem(this.props.items.pop(), this.props.boardName)
-              this.refs.sketch.handleClear()
-             }
-            }
+             onClick={() => this.props.undoAnItem(this.props.boardName)}
            >undo</button>
 
           <button

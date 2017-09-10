@@ -22,7 +22,7 @@ class Twoodle extends React.Component {
     this.state = {
       boardName: props.match.params.boardName,
       items: [],
-      undob: false
+      undo: false
     }
   }
 
@@ -42,17 +42,12 @@ class Twoodle extends React.Component {
       if (data.error) {
         this.props.history.push('/error')
       }
-      else if (data.type === 'undo' && data.boardName === this.state.boardName) {
-        // let array = this.state.items;
-        // let index = array.pop();
-        // this.setState({items: array});
-        // console.log(data.items)
-        this.setState({undob: true})
+      else if (data.type === 'undo an item' && data.boardName === this.state.boardName) {
+        this.setState({undo: true})
         this.setState({items: data.items})
-        this.setState({undob: false})
+        this.setState({undo: false})
       }
-      else {
-        // console.log(receivedData.data)
+      else if (data.type === 'add new item'){
         if (data.boardName === this.state.boardName) {
           this.setState({items: this.state.items.concat(data.items)})
         }
@@ -66,8 +61,8 @@ class Twoodle extends React.Component {
         <SketchApp items ={this.state.items}
                    boardName = {this.state.boardName}
                    addNewItem = {this.addNewItem}
-                   undoItem = {this.undoItem}
-                   undob = {this.state.undob}/>
+                   undoAnItem = {this.undoAnItem}
+                   undo = {this.state.undo}/>
       </div>
     )
   }
@@ -76,18 +71,15 @@ class Twoodle extends React.Component {
     const data = {
       boardName: boardName,
       items:  item,
-      type: 'add'
+      type: 'add new item'
     }
     this.socket.send(JSON.stringify(data))
   }
 
-  undoItem = (item, boardName) => {
-    item.color = 'rgba(255,255,255,1)'
-    // console.log(item)
+  undoAnItem = (boardName) => {
     const data = {
       boardName: boardName,
-      // items: item,
-      type: 'undo'
+      type: 'undo an item'
     }
     this.socket.send(JSON.stringify(data))
   }
