@@ -14,8 +14,7 @@
           {"x": 213, "y": 125.85415649414062}
         ],
         "tool": "pencil",
-        "connection_id": "fefb0d04-105b-4bbd-9891-339c30e1eb5b",
-        "timestamp": 1504992988957
+        "client_id": "fefb0d04-105b-4bbd-9891-339c30e1eb5b"
       },
       {
         "color": "#000000",
@@ -29,7 +28,7 @@
           {"x": 213, "y": 133.85415649414062}
         ],
         "tool": "pencil",
-        "connection_id": "fefb0d04-105b-4bbd-9891-339c30e1eb5b",
+        "connection_id": "fefb0d04-105b-4bbd-9891-339c30e1eb5b"
       }
     ]
   },
@@ -48,7 +47,7 @@
           {"x": 213, "y": 171.85415649414062}
         ],
         "tool": "pencil",
-        "connection_id": "cfb518ab-33c0-4364-99b3-adcfeea7cd03",
+        "client_id": "cfb518ab-33c0-4364-99b3-adcfeea7cd03"
       }
     ]
   }
