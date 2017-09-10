@@ -1,5 +1,10 @@
+const uuid = require('uuid/v4');
+
 module.exports = (wss, socketHelpers, dataHelpers) => {
   wss.on('connection', (ws) => {
+    // Give every user a client id so that it can be attached to the items
+    ws.id = uuid()
+    console.log(`Client "${ws.id}" connected.`)
 
     // Broadcast back the recieved messages to all clients
     ws.on('message', (data) => {
@@ -7,14 +12,20 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
       const parsedData = JSON.parse(data)
       const filter     = {boardName: parsedData.boardName}
 
+      // On new connection:
       if (parsedData.type === 'newConnection') {
+        // Check if the board exists (Borad Name is unique, getBoards returns zero/one board here)
         dataHelpers.getBoards(filter)
           .then((boards) => {
+            // If yes, send all the board items to the client
             if (boards.length > 0) {
-              ws.send(JSON.stringify(boards[0]))
+              const message = boards[0]
+              message.type = 'add new item'
+              ws.send(JSON.stringify(message))
             }
+            // If not send a message back to the client
             else {
-              const error = {error: "No board found!"}
+              const error = {error: 'No board found!'}
               ws.send(JSON.stringify(error))
             }
           })
@@ -22,18 +33,22 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
             // fix this later
           })
       }
-      else if (parsedData.type === 'add') {
-
-        // Borad Name is unique, this function return zero/one board here
+      // On receiving new item
+      else if (parsedData.type === 'add new item') {
+        // Find the board (Borad Name is unique, getBoards returns zero/one board here)
         dataHelpers.getBoards(filter)
           .then((boards) => {
+            // Give the id of the client who draw that item
+            parsedData.items.connection_id = ws.id
+            // If the board is in database, update it
             if (boards[0]) {
               dataHelpers.updateItem(filter, {$push: {items: parsedData.items}})
             }
+            // If not, create a new board
             else {
               const board = {
                 boardName: parsedData.boardName,
-                items: [parsedData.items]
+                items: [parsedData.items],
               }
               dataHelpers.saveBoard(board)
             }
@@ -41,36 +56,40 @@ module.exports = (wss, socketHelpers, dataHelpers) => {
           .catch((err) => {
             // fix this later
           })
-        socketHelpers.broadcastBackMessages(data)
-      } else if (parsedData.type === 'undo') {
-        dataHelpers.updateItem(filter, {$pop: {items: 1}})
-        .then(() => {
-          dataHelpers.getBoards(filter)
-            .then((boards) => {
-              const message = boards[0]
-              message.type = 'undo'
-              socketHelpers.broadcastBackMessages(JSON.stringify(message))
-            })
+          // Broadcast the new item to all clients
+          socketHelpers.broadcastBackMessages(data)
 
-          // dataHelpers.getBoards(filter)
-          // .then((boards) => {
-          //     socketHelpers.broadcastBackMessages((JSON.stringify(boards[0]))
-          //   }
-          // const data = {
-          //   boardName: parsedData.boardName,
-          //   type: 'undo'
-          // };
+      }
+      // On receiving an undo request:
+      else if (parsedData.type === 'undo an item') {
+        dataHelpers.getBoards(filter)
+          .then((boards) => {
+            const board = boards[0]
+            // Get items on the board in reverse order
+            const items = board.items.reverse()
+            // Get the last item on the board drawn by the client who issued an undo request
+            const item = items.find(item => item.connection_id === ws.id)
+            // Update the board
+            dataHelpers.updateItem(filter, {$pull: {items: item}})
+            .then(() => {
+              // Broadcast the new list of items on that board
+              dataHelpers.getBoards(filter)
+                .then((boards) => {
+                  const message = boards[0]
+                  message.type = 'undo an item'
+                  socketHelpers.broadcastBackMessages(JSON.stringify(message))
+                })
+          })
         }).catch((err) => {
           // fix later
-          console.log('error');
         })
-        // socketHelpers.broadcastBackMessages(data);
       }
     })
-
-    // Set up a callback for when a client closes the socket.
+    // A callback for when a client closes the socket
     ws.on('close', () => {
-      console.log(`Client ${ws.id} disconnected`)
+      console.log(`Client ${ws.id} disconnected.`)
     })
   })
 }
+
+
