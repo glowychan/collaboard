@@ -22,6 +22,7 @@ import paint from '../icons/paint.png'
 import save from '../icons/001-symbols-1.png'
 import clear from '../icons/001-circle.png'
 import eraser from '../icons/eraser.png'
+import undo from '../icons/undo.png'
 
 export default class SketchApp extends Component
 {
@@ -90,49 +91,49 @@ render() {
           <div className="tools" style={{marginBottom:20}}>
            <button
              onClick={() => this.props.undoAnItem(this.props.boardName)}
-           >undo</button>
+           ><img className='icon' src={undo} title='Undo' alt='Undo'/></button>
 
           <button
-           onClick={() => this.refs.sketch.handleClear()}><img className='icon' src={clear} /> </button>
+           onClick={() => this.refs.sketch.handleClear()}><img className='icon' src={clear} title='Clear board' alt='Clear board'/> </button>
 
           <button
-           onClick={() => this.refs.sketch.handleSave()}><img className='icon' src={save} /> </button>
+           onClick={() => this.refs.sketch.handleSave()}><img className='icon' src={save} title='Save board' alt='Save'/> </button>
 
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_PENCIL})}
-            ><img className='icon' src={pencil} /></button>
+            ><img className='icon' src={pencil} title='Pencil' alt='Pencil'/></button>
 
             <button
               style={tool == TOOL_BRUSH ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_BRUSH  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_BRUSH})}
-            ><img className='icon' src={paint} /></button>
+            ><img className='icon' src={paint} title='Paint brush' alt='Paint brush' /></button>
 
             <button
               style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_LINE  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_LINE})}
-            ><img className='icon' src={line} /></button>
+            ><img className='icon' src={line} title='Line' alt='Line' /></button>
 
             <button
               style={tool == TOOL_ELLIPSE ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_ELLIPSE  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_ELLIPSE})}
-            ><img className='icon' src={circle} /></button>
+            ><img className='icon' src={circle} title='Circle' alt='Circle' /></button>
 
             <button
               style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_RECTANGLE})}
-            ><img className='icon' src={sqaure} /></button>
+            ><img className='icon' src={sqaure} title='Rectangle' alt='Rectangle'/></button>
 
             <button
               style={tool == TOOL_ERASER ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_ERASER})}
-            ><img className='icon' src={eraser} /></button>
+            ><img className='icon' src={eraser} title='Eraser' alt='Eraser'/></button>
           </div>
           <div className="options" style={{marginBottom:20}}>
             <label htmlFor="">SIZE: </label>

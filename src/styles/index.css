@@ -41,11 +41,6 @@ body {
 }
 
 
-canvas.canvas {
-  background: url(https://www.clipartsgram.com/image/2046812482-checkerrealcanon18mmdotsm.png);
-} 
-
-
 
 nav {
   padding-top: 20px;
@@ -387,12 +382,13 @@ span.purple {
 
 .about-pop {
   font-size: 20px;
-  width: 751px;
-  height: 900px;
+  width: 626px;
+  height: 750px;
   position: absolute;
   top: 15%;
-  left: 35%;
+  left: 33%;
   z-index: 9999;
+  flex-shrink: 2;
  }
 
  .about-text h2 {
