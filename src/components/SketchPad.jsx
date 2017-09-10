@@ -91,11 +91,11 @@ export default class SketchPad extends Component {
       if (this.undoImage) {
         const image = new Image()
         image.src = this.undoImage
-        alert("Wait 1 second for undo")
+        // it takes a while for data to take to this point so set a time out!
         setTimeout(()=>{
           this.ctx.drawImage(image,0,0, this.canvas.width, this.canvas.height ,0, 0, this.canvas.width, this.canvas.height)
         }
-         , 500);
+         , 100);
       }
     }
   }
