@@ -29,27 +29,35 @@ class Twoodle extends React.Component {
   }
 
   componentDidMount() {
-    // this.socket = new WebSocket("ws://localhost:3001" + window.location.pathname)
-
+    // Set up websocket connection
     this.socket = io('http://localhost:3001')
 
+    // Send a new connection message to the websocket server
     this.socket.emit('new connection', this.state.boardName)
 
-    this.socket.on('new connection', function (data) {
+    // Show all items of the board on first connection
+    this.socket.on('new connection', (data) => {
       console.log('all board data is: ', data);
+      if (data.error) {
+        this.props.history.push('/error')
+      }
+      else {
+        this.setState({items: data.items})
+      }
     })
 
-    this.socket.on('add new item', function (item) {
-      console.log('new item is: ', item);
+    this.socket.on('add new items', (data) => {
+      const newItems = this.state.items.concat(data.items)
+      this.setState({items: newItems})
     })
 
-   //  this.socket.onopen = () => {
-   //    const message = {
-   //      type: 'newConnection',
-   //      boardName: this.state.boardName
-   //    }
-   //    this.socket.send(JSON.stringify(message))
-   //  }
+    this.socket.on('undo an item', (data) => {
+      this.setState({undo: true})
+      this.setState({items: data.items})
+      this.setState({undo: false})
+    })
+
+
 
    // this.socket.onmessage = (receivedData) => {
    //    const data = JSON.parse(receivedData.data)
@@ -85,19 +93,13 @@ class Twoodle extends React.Component {
     const data = {
       boardName: boardName,
       items:  item,
-      type: 'add new item'
     }
-    // this.socket.send(JSON.stringify(data))
-    this.socket.emit('add new item', this.state.boardName)
+    this.socket.emit('add new items', data)
 
   }
 
   undoAnItem = (boardName) => {
-    const data = {
-      boardName: boardName,
-      type: 'undo an item'
-    }
-    // this.socket.send(JSON.stringify(data))
+    this.socket.emit('undo an item', this.state.boardName)
   }
 
 }

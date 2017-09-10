@@ -43,29 +43,7 @@ MongoClient.connect(MONGODB_URI)
     app.use('/', routes)
 
 
-    io.on('connection', function (socket) {
-
-      console.log('new connection')
-
-      socket.on('new connection', function(boardName){
-        console.log('Joining board ', boardName)
-        socket.join(boardName)
-        socket.emit('new connection', 'all board data')
-      })
-
-      socket.on('add new item', function(boardName){
-        console.log('add new item to ', boardName)
-        io.in(boardName).emit('add new item', 'new item')
-      })
-
-      // socket.emit('new connection', 'all board data')
-
-        // socket.on('/', function(boardName){
-        //   // socket.broadcast.to(id).emit('my message', msg);
-        //   console.log(boardName)
-        //   socket.join(boardName)
-        // });
-    })
+    require('./socket-io',)(io, dataHelpers)
 
 
 
