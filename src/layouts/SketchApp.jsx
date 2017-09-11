@@ -150,7 +150,7 @@ render() {
                 </span> : ''}
             </div> : ''}
           </div>
-        <div style={{float:'left', marginRight:20}}>
+        <div>
           <SketchPad
             ref='sketch'
             width={2000}

@@ -67,12 +67,31 @@ export default class SketchPad extends Component {
   }
 
   componentDidMount() {
+    // window.addEventListener("resize");
     this.canvas = findDOMNode(this.canvasRef);
     this.ctx = this.canvas.getContext('2d');
     this.initTool(this.props.tool);
     // this.ctx.fillStyle = 'white';
     // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
   }
+
+  //  componentWillUnmount() {
+  //       window.removeEventListener("resize");
+  //   }
+
+
+       
+
+
+
+
+
+
+
+
+
+
+
 
 handleSave = () => {
   const userinput = prompt("Please enter a filename");
