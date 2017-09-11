@@ -87,7 +87,11 @@ render() {
         <p>{this.state.items}</p>
         <Sidebar onShare={this.handleShare} />
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
+        {this.state.poppedOpen ? 
+        <div className='popout-container'>
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closePopup} url={this.props.boardName}/>
+        </div>
+        : ''}
         <div className='toolbar'>
            <button
              onClick={() => this.props.undoAnItem(this.props.boardName)}
@@ -139,7 +143,7 @@ render() {
             <ColorPicker value={color} newColor={this.changeColor.bind(this)}/>
           {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
             <div className='fill'>
-              <label htmlFor="">FILL IN:</label>
+              <label htmlFor="">FILL:</label>
               <input className="checkbox" type="checkbox" value={fill} style={{margin:'0 8'}}
                      onChange={(e) => this.setState({fill: e.target.checked})} />
               {fill ? <span>
