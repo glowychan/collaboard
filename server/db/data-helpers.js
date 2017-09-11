@@ -45,6 +45,19 @@ module.exports = function makeDataHelpers(db) {
           }
         })
       })
+    },
+
+    deleteBoard: function(filter) {
+      console.log(filter)
+      return new Promise((resolve, reject) => {
+        db.collection('boards').deleteOne(filter, (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(null);
+          }
+        })
+      })
     }
 
 
