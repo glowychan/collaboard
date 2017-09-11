@@ -36,15 +36,15 @@ module.exports = function(dataHelpers) {
   });
 
   routes.delete('/twoodles/:boardName', (req, res) => {
-    const filter = {boardName: req.query.boardName};
-    //this won't work because I'm getting the whole url on front end and not the boardName
+    const filter = {boardName: req.params.boardName};
 
     dataHelpers.deleteBoard(filter)
-      .then(() => {
-        res.status(200).send("ok");
+      .then((board) => {
+        console.log(board)
+        res.status(200);
       })
       .catch(err => {
-        res.status(500).send("error");
+        res.status(500).send();
       })
 
   })
