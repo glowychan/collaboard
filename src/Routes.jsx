@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Redirect, Switch, Link, withRouter } fr
 import SketchApp from './layouts/SketchApp';
 import Homepage from './layouts/Homepage';
 import Errorpage from './layouts/Errorpage';
+import io from 'socket.io-client'
+
 
 const Home = () => (
   <div>
@@ -27,32 +29,35 @@ class Twoodle extends React.Component {
   }
 
   componentDidMount() {
-    this.socket = new WebSocket("ws://localhost:3001" + window.location.pathname)
+    // Set up websocket connection
+    this.socket = io('http://localhost:3001')
 
-    this.socket.onopen = () => {
-      const message = {
-        type: 'newConnection',
-        boardName: this.state.boardName
-      }
-      this.socket.send(JSON.stringify(message))
-    }
+    // Send a new connection message to the websocket server
+    this.socket.emit('new connection', this.state.boardName)
 
-   this.socket.onmessage = (receivedData) => {
-      const data = JSON.parse(receivedData.data)
+    // Receive all items of a board on first connection
+    this.socket.on('new connection', (data) => {
+      console.log('all board data is: ', data);
       if (data.error) {
         this.props.history.push('/error')
       }
-      else if (data.type === 'undo an item' && data.boardName === this.state.boardName) {
-        this.setState({undo: true})
+      else {
         this.setState({items: data.items})
-        this.setState({undo: false})
       }
-      else if (data.type === 'add new item'){
-        if (data.boardName === this.state.boardName) {
-          this.setState({items: this.state.items.concat(data.items)})
-        }
-      }
-    }
+    })
+
+    // Recieve new items and add them to state
+    this.socket.on('add new items', (data) => {
+      const newItems = this.state.items.concat(data.items)
+      this.setState({items: newItems})
+    })
+
+    // Receive all items of a board after an item is removed (after undo request)
+    this.socket.on('undo an item', (data) => {
+      this.setState({undo: true})
+      this.setState({items: data.items})
+      this.setState({undo: false})
+    })
   }
 
   render() {
@@ -67,21 +72,19 @@ class Twoodle extends React.Component {
     )
   }
 
+  // Send new items through the websockets to be braodcasted
   addNewItem = (item, boardName) => {
     const data = {
       boardName: boardName,
       items:  item,
-      type: 'add new item'
     }
-    this.socket.send(JSON.stringify(data))
+    this.socket.emit('add new items', data)
+
   }
 
+  // Send an undo request through websockets
   undoAnItem = (boardName) => {
-    const data = {
-      boardName: boardName,
-      type: 'undo an item'
-    }
-    this.socket.send(JSON.stringify(data))
+    this.socket.emit('undo an item', this.state.boardName)
   }
 
 }
