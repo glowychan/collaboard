@@ -98,10 +98,10 @@ render() {
            ><img className='icon' src={undo} title='Undo' alt='Undo'/></button>
 
           <button
-           onClick={() => this.refs.sketch.handleClear()}><img className='icon' src={clear} title='Clear board' alt='Clear board'/> </button>
+           onClick={() => this.refs.sketch.handleClear()}><img className='icon clear' src={clear} title='Clear board' alt='Clear board'/> </button>
 
           <button
-           onClick={() => this.refs.sketch.handleSave()}><img className='icon' src={save} title='Save board' alt='Save'/> </button>
+           onClick={() => this.refs.sketch.handleSave()}><img className='icon save' src={save} title='Save board' alt='Save'/> </button>
 
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
@@ -117,7 +117,7 @@ render() {
 
             <button
               style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_LINE  ? 'item-active' : 'item'}
+              className={tool == TOOL_LINE  ? 'item-active line' : 'item line'}
               onClick={() => this.setState({tool:TOOL_LINE})}
             ><img className='icon' src={line} title='Line' alt='Line' /></button>
 
@@ -138,8 +138,8 @@ render() {
               className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_ERASER})}
             ><img className='icon' src={eraser} title='Eraser' alt='Eraser'/></button>
-            <label htmlFor="">SIZE: </label>
-            <input min="1" max="20" type="range" value={size} onChange={(e) => this.setState({size: parseInt(e.target.value)})} />
+            <label htmlFor="" className='size'>SIZE: </label>
+            <input min="1" max="20" className='size'type="range" value={size} onChange={(e) => this.setState({size: parseInt(e.target.value)})} />
             <ColorPicker value={color} newColor={this.changeColor.bind(this)}/>
           {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
             <div className='fill'>

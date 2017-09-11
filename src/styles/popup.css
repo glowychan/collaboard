@@ -90,6 +90,33 @@
   z-index: 9999;
  }
 
+ @media only screen and (min-width : 320px) and (max-width : 480px) {
+   .name-pop {
+     background-color: #6ED3CF;
+     background-image: none;
+     width: 300px;
+     height: 100px;
+     padding: 1%;
+     top: 20%;
+     left: 10%;
+   }
+ }
+
+ @media only screen and (min-device-width: 480px) 
+                    and (max-device-width: 640px) 
+                    and (orientation: landscape) {
+
+    .name-pop {
+        background-color: #6ED3CF;
+        background-image: none;
+        width: 300px;
+        height: 100px;
+        padding: 1%;
+        top: 20%;
+        left: 20%;
+      }
+}
+
 
 
  .user-name {

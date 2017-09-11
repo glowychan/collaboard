@@ -76,6 +76,7 @@ export default class SketchPad extends Component {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
+
 handleSave = () => {
   const userinput = prompt("Please enter a filename");
   const filename = userinput.concat('');
