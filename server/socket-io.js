@@ -80,7 +80,6 @@ module.exports = (io, dataHelpers) => {
 
     socket.on('delete a board', function(boardName) {
       io.in(boardName).emit('delete a board')
-      console.log("socketssss")
     })
 
 

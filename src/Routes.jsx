@@ -61,7 +61,6 @@ class Twoodle extends React.Component {
 
     // Receive delete request and send to websockets
     this.socket.on('delete a board', () => {
-      console.log("I'm hereee")
       window.location = `/`
     })
   }
