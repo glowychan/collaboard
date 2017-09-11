@@ -67,7 +67,7 @@ export default class SketchPad extends Component {
     this._onTouchStart = this._onTouchStart.bind(this);
     this._onTouchMove = this._onTouchMove.bind(this);
     this._onTouchEnd = this._onTouchEnd.bind(this);
-    this.updateDimensions = this.updateDimensions.bind(this)
+    // this.updateDimensions = this.updateDimensions.bind(this)
 
   
   }
@@ -89,7 +89,7 @@ export default class SketchPad extends Component {
   updateDimensions = () => {
     this.canvas.width = this.canvas.offsetWidth;
     this.canvas.height = this.canvas.offsetHeight
-  
+    this.props.onResize()
   }
   
  
@@ -177,12 +177,13 @@ handleSave = () => {
 
   getCursorPosition(e) {
     const { top, left } = this.canvas.getBoundingClientRect();
-    const ratioH = this.initialHeight/this.canvas.height
-    const ratioW = this.initialWidth/this.canvas.width
+   
+    // const ratioH = this.initialHeight/this.canvas.height
+    // const ratioW = this.initialWidth/this.canvas.width
 
     return [
-      (e.clientX - left)/ratioW,
-      (e.clientY - top)/ratioH
+      e.clientX - left,
+      e.clientY - top
     ];
   }
 
