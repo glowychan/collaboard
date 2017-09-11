@@ -11,6 +11,9 @@ export default (context) => {
   }
 
   const onMouseDown = (x, y, color, size) => {
+    console.log(x)
+    console.log(y)
+    
     stroke = {
       id: v4(),
       tool: TOOL_PENCIL,
@@ -42,13 +45,9 @@ export default (context) => {
     if (!stroke) return [];
     const newPoint = { x, y};
     const start = stroke.points.slice(-1)[0];
-    console.log('stroke ' + stroke)
-    console.log('start ' + start)
-    console.log('newPoint ' + newPoint.x)
     drawLine(stroke, start, newPoint);
     stroke.points.push(newPoint);
     points.push(newPoint);
-
     return [stroke];
   };
 
