@@ -46,7 +46,7 @@ export default class SketchApp extends Component
     this.closePopup = this.closePopup.bind(this);
   }
 
-  
+
   componentWillReceiveProps ({undo}) {
     if (undo) {
       this.refs.sketch.handleClear()
@@ -71,11 +71,14 @@ export default class SketchApp extends Component
     })
   }
 
-  closePopup = () => {
+  closePopup = (event) => {
+    event.preventDefault()
     this.setState({
       poppedOpen: false,
       nameOpen: false
     })
+    let userName = event.target.userName.value
+    this.props.newUserName(userName)
   }
 
 
@@ -85,7 +88,7 @@ render() {
       <div>
         <Link  style={{ textDecoration: 'none', color: 'black' }} to='/'><h1><img className='logo' src={logo} />TWOODLE</h1></Link>
         <p>{this.state.items}</p>
-        <Sidebar onShare={this.handleShare} />
+        <Sidebar onShare={this.handleShare} boardName={this.props.boardName} deleteBoard={this.props.deleteBoard} />
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
         {this.state.poppedOpen ? 
         <div className='popout-container'>

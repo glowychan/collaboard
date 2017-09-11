@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { slide as Menu } from 'react-burger-menu'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import axios from 'axios';
 import home from '../icons/003-symbols.png';
 import newtwoodle from '../icons/002-symbol-2.png';
 import save from '../icons/001-symbols-1.png';
@@ -11,14 +12,27 @@ import PoppedOutShare from './PoppedOutShare';
 
 class SideBar extends Component {
   constructor(props) {
-      super(props)
-      this.popout = this.popout.bind(this)
-    }
+    super(props)
+    this.popout = this.popout.bind(this);
+    this.onDeleteClick = this.onDeleteClick.bind(this);
+  }
 
    popout() {
-      this.props.onShare()
+    this.props.onShare();
+  }
+
+  onDeleteClick = (event) => {
+    const url = `http://localhost:3001/twoodles/${this.props.boardName}`
+    axios.delete(url)
+      .then((response) => {
+        this.props.deleteBoard(this.props.boardName)
+        window.location = `/`;
+      })
+      .catch((error) => {
+        console.log("error");
+      });
     }
-    
+
   render () {
     return (
     <Menu className="bm-menu"
@@ -28,7 +42,7 @@ class SideBar extends Component {
         <Link className="bm-item-list side-item" to="/"><img className='home' src={home} /></Link>
         <Link className="bm-item-list side-item" to="/"><img className='twoodle' src={newtwoodle} /></Link>
         <a href="#" className='bm-item-list side-item' onClick={this.popout}><img src={share} /> </a>
-        <a href="#" className='bm-item-list side-item'><img src={trashcan} /> </a>
+        <a className='bm-item-list side-item' onClick={this.onDeleteClick}><img src={trashcan} /> </a>
     </Menu>
 
     );

@@ -30,6 +30,19 @@ module.exports = function(dataHelpers) {
         return res.status(500).send()
       })
 
+  });
+
+  routes.delete('/twoodles/:boardName', (req, res) => {
+    const filter = {boardName: req.params.boardName};
+
+    dataHelpers.deleteBoard(filter)
+      .then((board) => {
+        res.status(200).send();
+      })
+      .catch(err => {
+        res.status(500).send();
+      })
+
   })
 
   return routes
