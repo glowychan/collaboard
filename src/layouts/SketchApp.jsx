@@ -40,7 +40,7 @@ export default class SketchApp extends Component
       fillColor: '#444444',
       items: this.props.items,
       poppedOpen: false,
-      nameOpen: true
+      nameOpen: true,
     }
     this.handleShare = this.handleShare.bind(this);
     this.closePopup = this.closePopup.bind(this);
@@ -162,7 +162,7 @@ render() {
             onSave={this.handleSave}
           />
         </div>
-        <UsersOnline />
+        <UsersOnline users={this.props.users} />
       </div>
     );
   }
