@@ -25,7 +25,7 @@ class Twoodle extends React.Component {
       boardName: props.match.params.boardName,
       items: [],
       undo: false,
-      onlineUsers: ['Amy', 'Gloria', 'Rayhaneh']
+      onlineUsers: []
     }
   }
 
@@ -35,10 +35,10 @@ class Twoodle extends React.Component {
 
     // Send a new connection message to the websocket server
     this.socket.emit('new connection', this.state.boardName)
+    this.socket.emit('online users', this.state.boardName)
 
     // Receive all items of a board on first connection
     this.socket.on('new connection', (data) => {
-      console.log('all board data is: ', data);
       if (data.error) {
         this.props.history.push('/error')
       }
@@ -60,10 +60,11 @@ class Twoodle extends React.Component {
       this.setState({undo: false})
     })
 
-
-    this.socket.on('online users', (data) => {
-      this.setState({onlineUsers: data })
+    // Recives online users when users join/leave
+    this.socket.on('online users', (onlineUsers) => {
+      this.setState({onlineUsers: onlineUsers})
     })
+
   }
 
   render() {
@@ -74,6 +75,7 @@ class Twoodle extends React.Component {
                    addNewItem = {this.addNewItem}
                    undoAnItem = {this.undoAnItem}
                    undo = {this.state.undo}
+                   newUserName = {this.newUserName}
                    users = {this.state.onlineUsers}/>
       </div>
     )
@@ -86,12 +88,17 @@ class Twoodle extends React.Component {
       items:  item,
     }
     this.socket.emit('add new items', data)
-
   }
 
   // Send an undo request through websockets
   undoAnItem = (boardName) => {
     this.socket.emit('undo an item', this.state.boardName)
+  }
+
+  // Send user's name upon change
+  newUserName = (userName) => {
+    this.socket.emit('new user name', userName)
+    this.socket.emit('online users', this.state.boardName)
   }
 
 }
