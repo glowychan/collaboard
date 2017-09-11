@@ -24,7 +24,8 @@ class Twoodle extends React.Component {
     this.state = {
       boardName: props.match.params.boardName,
       items: [],
-      undo: false
+      undo: false,
+      clear: false
     }
   }
 
@@ -98,6 +99,7 @@ class Twoodle extends React.Component {
   deleteBoard = (boardName) => {
     this.socket.emit('delete a board', this.state.boardName)
   }
+
 
 }
 

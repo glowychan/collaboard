@@ -46,11 +46,9 @@ export default class SketchApp extends Component
   }
 
 
-  componentWillReceiveProps ({undo, deleteState}) {
-    if (undo) {
+  componentWillReceiveProps ({undo, clear}) {
+    if (undo || clear) {
       this.refs.sketch.handleClear()
-    } if (deleteState) {
-      console.log('DELETE');
     }
   }
 
