@@ -5,28 +5,26 @@ import React from 'react'
 class UsersOnline extends React.Component {
   constructor(props) { 
     super(props);
-    console.log(this.props)
-    this.randomColor = this.randomColor.bind(this)
   }
  
-  randomColor = () => {
-   return '#' + (0x1000000 + Math.random() * 0xFFFFFF).toString(16).substr(1,6);
-  }
-  
+  // randomColor = () => {
+  //  return '#' + (0x1000000 + Math.random() * 0xFFFFFF).toString(16).substr(1,6);
+  // }
   
 
+
   render() {
-    const color = this.randomColor()
+    const users = this.props.users
+
     return (
     <div className='user-container'>
-      {this.props.users.map((name) => {
-        return 
-        <div className='online-user' style={{background: color}}>
+      {users.map((name) => {
+        return <div className='online-user' style={{background: '#6ED3CF'}}>
           <p> {name} </p>
         </div>
       })}
     </div>
-    )
+    );
   }
 }
 
