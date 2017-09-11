@@ -31,7 +31,7 @@ MongoClient.connect(MONGODB_URI)
 
 
     // An interface to websockets
-    require('./socket-io',)(io, dataHelpers)
+    require('./socket-io')(io, dataHelpers)
 
   })
   .catch((err) => {
