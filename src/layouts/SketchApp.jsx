@@ -94,7 +94,7 @@ render() {
            ><img className='icon' src={undo} title='Undo' alt='Undo'/></button>
 
           <button
-           onClick={() => this.refs.sketch.handleClear()}><img className='icon' src={clear} title='Clear board' alt='Clear board'/> </button>
+           onClick={() => this.props.deleteAllItems(this.props.boardName)}><img className='icon' src={clear} title='Clear board' alt='Clear board'/> </button>
 
           <button
            onClick={() => this.refs.sketch.handleSave()}><img className='icon' src={save} title='Save board' alt='Save'/> </button>

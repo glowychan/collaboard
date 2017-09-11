@@ -79,7 +79,8 @@ class Twoodle extends React.Component {
                    addNewItem = {this.addNewItem}
                    undoAnItem = {this.undoAnItem}
                    undo = {this.state.undo}
-                   deleteAllItems = {this.state.deleteAllItems}
+                   clear = {this.state.clear}
+                   deleteAllItems = {this.deleteAllItems}
                    deleteBoard = {this.deleteBoard} />
       </div>
     )
