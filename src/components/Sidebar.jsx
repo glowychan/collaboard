@@ -21,10 +21,11 @@ class SideBar extends Component {
     this.props.onShare();
   }
 
-    onDeleteClick = (event) => {
+  onDeleteClick = (event) => {
     const url = `http://localhost:3001/twoodles/${this.props.boardName}`
     axios.delete(url)
       .then((response) => {
+        this.props.deleteBoard(this.props.boardName)
         window.location = `/`;
       })
       .catch((error) => {

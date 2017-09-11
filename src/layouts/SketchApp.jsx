@@ -46,9 +46,11 @@ export default class SketchApp extends Component
   }
 
 
-  componentWillReceiveProps ({undo}) {
+  componentWillReceiveProps ({undo, deleteState}) {
     if (undo) {
       this.refs.sketch.handleClear()
+    } if (deleteState) {
+      console.log('DELETE');
     }
   }
 
@@ -84,7 +86,7 @@ render() {
       <div>
         <Link  style={{ textDecoration: 'none', color: 'black' }} to='/'><h1><img className='logo' src={logo} />TWOODLE</h1></Link>
         <p>{this.state.items}</p>
-        <Sidebar onShare={this.handleShare} boardName={this.props.boardName} />
+        <Sidebar onShare={this.handleShare} boardName={this.props.boardName} deleteBoard={this.props.deleteBoard} />
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closePopup} url={this.props.boardName}/>
         <div className='toolbar'>
