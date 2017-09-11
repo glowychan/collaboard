@@ -41,7 +41,7 @@ module.exports = function(dataHelpers) {
     dataHelpers.deleteBoard(filter)
       .then((board) => {
         console.log(board)
-        res.status(200);
+        res.status(200).send();
       })
       .catch(err => {
         res.status(500).send();
