@@ -17,9 +17,10 @@ class UserNamePopout extends React.Component {
     return (
       <div ref={this.setWrapperRef} className='name-pop'>
           <h2 className='name-label'>Enter your name:</h2>
-          <form className='new-user'/>
+          <form className='new-user'onSubmit={this.props.onClose}>
           <input className='user-name' id='user' name="userName"/>
-          <button type='submit' className='user-submit' onClick={this.props.onClose}>submit</button>
+          <button type='submit' className='user-submit'></button>
+          </form>
      </div>
     )
   }

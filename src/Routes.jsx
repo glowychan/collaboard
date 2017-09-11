@@ -24,7 +24,8 @@ class Twoodle extends React.Component {
     this.state = {
       boardName: props.match.params.boardName,
       items: [],
-      undo: false
+      undo: false,
+      onlineUsers: ['Amy', 'Gloria', 'Rayhaneh']
     }
   }
 
@@ -72,7 +73,8 @@ class Twoodle extends React.Component {
                    boardName = {this.state.boardName}
                    addNewItem = {this.addNewItem}
                    undoAnItem = {this.undoAnItem}
-                   undo = {this.state.undo}/>
+                   undo = {this.state.undo}
+                   users = {this.state.onlineUsers}/>
       </div>
     )
   }
