@@ -79,6 +79,8 @@ module.exports = (io, dataHelpers) => {
     })
 
     socket.on('delete all items', function(boardName) {
+      const filter = {boardName: boardName}
+      dataHelpers.deleteAllItems(filter, {$set: {items: []}})
       io.in(boardName).emit('delete all items')
     })
 
