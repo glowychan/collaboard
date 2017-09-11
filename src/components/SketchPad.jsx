@@ -57,6 +57,8 @@ export default class SketchPad extends Component {
 
   constructor(props) {
     super(props);
+
+
     this.initTool = this.initTool.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -79,7 +81,7 @@ handleSave = () => {
    this.canvas.toBlob(function(blob) {
     FileSaver.saveAs(blob, `${filename}.jpg`);
     });
-  
+
   }
 
   handleClear = () => {
@@ -95,6 +97,7 @@ handleSave = () => {
       });
     this.initTool(tool);
   }
+
 
   initTool(tool) {
     this.tool = this.props.toolsMap[tool](this.ctx);
@@ -139,20 +142,23 @@ handleSave = () => {
   render() {
     const { width, height, canvasClassName } = this.props;
     return (
-      <div className="canvas-div">
-        <canvas
-          ref={(canvas) => { this.canvasRef = canvas; }}
-          className={canvasClassName}
-          onMouseDown={this.onMouseDown}
-          onMouseMove={this.onMouseMove}
-          onMouseOut={this.onMouseUp}
-          onMouseUp={this.onMouseUp}
-          width={width}
-          height={height}
-        />
-        <div className='textinput'> HELLO
+      <div>
+
+        <div className="canvas-div">
+          <canvas
+            ref={(canvas) => { this.canvasRef = canvas; }}
+            className={canvasClassName}
+            onMouseDown={this.onMouseDown}
+            onMouseMove={this.onMouseMove}
+            onMouseOut={this.onMouseUp}
+            onMouseUp={this.onMouseUp}
+            width={width}
+            height={height}
+          />
+          <div className='textinput'> HELLO
+          </div>
+          <toolsMap />
         </div>
-        <toolsMap />
       </div>
     )
   }

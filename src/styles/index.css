@@ -40,17 +40,7 @@ body {
   box-shadow: none;
 }
 
-a.active {
-  color: orange;
-}
 
-canvas.canvas {
-  background: url(https://www.clipartsgram.com/image/2046812482-checkerrealcanon18mmdotsm.png);
-} 
-
-.canvas-div {
-  padding-left: 200px;
-}
 
 nav {
   padding-top: 20px;
@@ -285,6 +275,7 @@ button.twoodle-submit:hover {
   font-size: 6.0em;
   flex-shrink: 2;
   align-self: flex-start;
+  margin: 0;
 }
 
 span.purple {
@@ -293,21 +284,23 @@ span.purple {
 
 .share-pop {
  font-family: 'PT Sans Narrow', sans-serif;
- border-radius: 15px;
- width: 40%;
- height: 250px;
- background-color: rgba(110,211,207, 0.9);
- box-shadow: 10px 11px 0px 0px rgba(230,39,57,0.9);
+ border-radius: 50%;
+ width: 500px;
+ height: 500px;
+ background-image: url('../icons/Share.png');
+ background-repeat: no-repeat;
  position: absolute;
- top: 35%;
- left: 30%;
- padding: 20px;
+ top: 20%;
+ left: 40%;
  z-index: 9999;
 }
 
-.share-pop h2{
-  font-size: 30px;;
+.share-pop h2 {
+  font-size: 2.5em;
+  margin-top: 35%;
 }
+
+
 
 .social-share {
   display: flex;
@@ -324,12 +317,13 @@ span.purple {
 
 .share-url {
   background-color: rgba(32, 31, 31, 0.32);
+  border-radius: 10px;
   border: none;
   outline:none;
   height:30px;
   width: 60%;
   font-family: 'Patrick Hand SC', cursive;
-  font-size: 2.5em;
+  font-size: 2.0em;
   padding: 10px 10px 10px 20px;
 }
 
@@ -366,4 +360,81 @@ span.purple {
   flex-shrink: 2;
 }
 
+.main-container {
+  padding: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.about {
+  width: 300px;
+  position: absolute;
+  top: 5%;
+  left: 80%;
+}
+
+.about:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.about-pop {
+  font-size: 20px;
+  width: 626px;
+  height: 750px;
+  position: absolute;
+  top: 15%;
+  left: 33%;
+  z-index: 9999;
+  flex-shrink: 2;
+ }
+
+ .about-text h2 {
+   margin-top: 130px;
+   font-size: 2em;
+   color: white;
+   display: flex;
+   justify-content: center;
+ }
+
+ .instructions {
+   font-family: 'Patrick Hand SC', cursive;
+   font-size: 2em;
+ }
+
+ .name-pop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'PT Sans Narrow', sans-serif;
+  width: 500px;
+  height: 210px;
+  background-image: url('../icons/Name.png');
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  z-index: 9999;
+ }
+
+ .user-name {
+  background-color: rgba(32, 31, 31, 0.32);
+  border-radius: 5px;
+  border: none;
+  outline:none;
+  height:25px;
+  width: 40%;
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 2.0em;
+  padding: 1%;
+  text-align: center;
+ }
+
+ .name-label {
+   margin: 12px;
+   font-size: 2.0em
+ }
 
