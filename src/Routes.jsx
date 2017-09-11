@@ -25,7 +25,8 @@ class Twoodle extends React.Component {
       boardName: props.match.params.boardName,
       items: [],
       undo: false,
-      clear: false
+      clear: false,
+      onlineUsers: []
     }
   }
 
@@ -35,10 +36,10 @@ class Twoodle extends React.Component {
 
     // Send a new connection message to the websocket server
     this.socket.emit('new connection', this.state.boardName)
+    this.socket.emit('online users', this.state.boardName)
 
     // Receive all items of a board on first connection
     this.socket.on('new connection', (data) => {
-      console.log('all board data is: ', data);
       if (data.error) {
         this.props.history.push('/error')
       }
@@ -60,9 +61,15 @@ class Twoodle extends React.Component {
       this.setState({undo: false})
     })
 
+
     // Clear canvas for all users when clear function has been clicked
     this.socket.on('delete all items', () => {
       this.setState({clear: true})
+    })
+
+    // Recives online users when users join/leave
+    this.socket.on('online users', (onlineUsers) => {
+      this.setState({onlineUsers: onlineUsers})
     })
 
     // Redirect all users when a board has been deleted
@@ -81,6 +88,8 @@ class Twoodle extends React.Component {
                    undo = {this.state.undo}
                    clear = {this.state.clear}
                    deleteAllItems = {this.deleteAllItems}
+                   newUserName = {this.newUserName}
+                   users = {this.state.onlineUsers}
                    deleteBoard = {this.deleteBoard} />
       </div>
     )
@@ -93,7 +102,6 @@ class Twoodle extends React.Component {
       items:  item,
     }
     this.socket.emit('add new items', data)
-
   }
 
   // Send an undo request through websockets
@@ -103,6 +111,12 @@ class Twoodle extends React.Component {
 
   deleteAllItems = (boardName) => {
     this.socket.emit('delete all items', this.state.boardName)
+  }
+
+  // Send user's name upon change
+  newUserName = (userName) => {
+    this.socket.emit('new user name', userName)
+    this.socket.emit('online users', this.state.boardName)
   }
 
   // Send a delete board request through websockets

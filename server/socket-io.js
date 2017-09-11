@@ -1,13 +1,24 @@
-module.exports = (io, dataHelpers) => {
+const clients = {}
 
+module.exports = (io, dataHelpers) => {
   io.on('connection', function (socket) {
+
+    // Add new users to clients object
+    console.log('New connection:', socket.id)
+    clients[socket.id] = {
+      name: 'Anonymous',
+      boardName: ''
+    }
+
 
 
     // NEW CONNECTION
-    console.log('New connection:', socket.id)
     socket.on('new connection', function(boardName){
+      // Join the board
       socket.join(boardName)
-
+      // Add board info to the clienst object
+      clients[socket.id].boardName = boardName
+      // Find the board
       const filter = {boardName: boardName}
       dataHelpers.getBoards(filter)
       .then((boards) => {
@@ -23,6 +34,20 @@ module.exports = (io, dataHelpers) => {
       .catch((err) => {
         // fix this later
       })
+    })
+
+
+
+    // Update client's username
+    socket.on('new user name', function(userName) {
+      clients[socket.id].name = userName
+    })
+
+
+
+    // Broadcast online users when a new user joins a board
+    socket.on('online users', function(boardName) {
+      io.in(boardName).emit('online users', getOnlineUsers(boardName))
     })
 
 
@@ -89,9 +114,33 @@ module.exports = (io, dataHelpers) => {
     })
 
 
+
+    // DISCONNECT
+    socket.on('disconnect', function () {
+      console.log('Client disconnected: ', socket.id)
+      const boardName = clients[socket.id].boardName
+      delete clients[socket.id]
+      io.in(boardName).emit('online users', getOnlineUsers(boardName))
+    })
+
+
+
   })
 }
 
 
 
+
+getOnlineUsers = (boardName) => {
+  const onlineUsers = []
+  for (let id in clients) {
+    if (clients[id].boardName === boardName) {
+      onlineUsers.push({
+        id: id,
+        name: clients[id].name
+      })
+    }
+  }
+  return onlineUsers
+}
 

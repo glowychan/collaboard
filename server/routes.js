@@ -4,9 +4,6 @@ const express = require('express')
 const routes  = express.Router()
 const Mongo   = require('mongodb')
 
-// need method override to make delete requests?
-const methodOverride = require('method-override');
-routes.use(methodOverride('_method'));
 
 module.exports = function(dataHelpers) {
 
@@ -40,7 +37,6 @@ module.exports = function(dataHelpers) {
 
     dataHelpers.deleteBoard(filter)
       .then((board) => {
-        console.log(board)
         res.status(200).send();
       })
       .catch(err => {
