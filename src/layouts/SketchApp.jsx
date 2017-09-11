@@ -46,7 +46,7 @@ export default class SketchApp extends Component
     this.closePopup = this.closePopup.bind(this);
   }
 
-  
+
   componentWillReceiveProps ({undo}) {
     if (undo) {
       this.refs.sketch.handleClear()

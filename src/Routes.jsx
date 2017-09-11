@@ -58,6 +58,11 @@ class Twoodle extends React.Component {
       this.setState({items: data.items})
       this.setState({undo: false})
     })
+
+
+    this.socket.on('online users', (data) => {
+      this.setState({onlineUsers: data })
+    })
   }
 
   render() {
