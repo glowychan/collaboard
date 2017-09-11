@@ -18,6 +18,7 @@ export default (context) => {
       size,
       points: [{ x, y}]
     };
+
     return [stroke];
   };
 
@@ -29,14 +30,9 @@ export default (context) => {
     context.lineWidth = item.size;
     context.strokeStyle = item.color;
     context.globalCompositeOperation = 'source-over';
-    context.moveTo(start.x - getRandomInt(0,4), start.y - getRandomInt(0,4));
-    context.lineTo(x - getRandomInt(0,3), y - getRandomInt(0,3));
-    context.stroke();
-
     context.moveTo(start.x, start.y);
-    context.lineTo(x,y);
+    context.lineTo(x , y);
     context.stroke();
-
     context.closePath();
     
     context.restore();
@@ -46,6 +42,9 @@ export default (context) => {
     if (!stroke) return [];
     const newPoint = { x, y};
     const start = stroke.points.slice(-1)[0];
+    console.log('stroke ' + stroke)
+    console.log('start ' + start)
+    console.log('newPoint ' + newPoint.x)
     drawLine(stroke, start, newPoint);
     stroke.points.push(newPoint);
     points.push(newPoint);

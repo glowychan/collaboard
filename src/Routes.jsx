@@ -28,8 +28,11 @@ class Twoodle extends React.Component {
       onlineUsers: ['Amy', 'Gloria', 'Rayhaneh']
     }
   }
+  
+ 
 
   componentDidMount() {
+  
     // Set up websocket connection
     this.socket = io('http://localhost:3001')
 

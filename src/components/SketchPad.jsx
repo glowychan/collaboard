@@ -46,7 +46,7 @@ export default class SketchPad extends Component {
     width: 500,
     height: 500,
     color: '#000',
-    size: 5,
+    size: 1,
     fillColor: '',
     canvasClassName: 'canvas',
     debounceTime: 1000,
@@ -64,6 +64,9 @@ export default class SketchPad extends Component {
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onDebouncedMove = this.onDebouncedMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
+    this._onTouchStart = this._onTouchStart.bind(this);
+    this._onTouchMove = this._onTouchMove.bind(this);
+    this._onTouchEnd = this._onTouchEnd.bind(this);
   }
 
   componentDidMount() {
@@ -75,6 +78,30 @@ export default class SketchPad extends Component {
     this.ctx.fillStyle = 'white';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
   }
+
+  _onTouchStart(e) {
+    const data = this.tool.onMouseDown(...this.getCursorPosition(e), this.props.color, this.props.size, this.props.fillColor);
+    data && data[0] && this.props.onItemStart && this.props.onItemStart.apply(null, data);
+    if (this.props.onDebouncedItemChange) {
+      this.interval = setInterval(this.onDebouncedMove, this.props.debounceTime);
+    }
+  }
+
+  _onTouchMove(e) {
+    console.log(e.touches)
+    const data = this.tool.onMouseMove(...this.getCursorPosition(e.touches[0]));
+    data && data[0] && this.props.onEveryItemChange && this.props.onEveryItemChange.apply(null, data);
+  }
+
+  _onTouchEnd(e) {
+    const data = this.tool.onMouseUp(...this.getCursorPosition(e));
+    data && data[0] && this.props.onCompleteItem && this.props.onCompleteItem.apply(null, data);
+    if (this.props.onDebouncedItemChange) {
+      clearInterval(this.interval);
+      this.interval = null;
+    }
+  }
+
 
 
 handleSave = () => {
@@ -142,6 +169,10 @@ handleSave = () => {
     ];
   }
 
+  _handleTouchStart =() => {
+    console.log('handleTouchStart');
+  }
+
   render() {
     const { width, height, canvasClassName } = this.props;
     return (
@@ -155,11 +186,12 @@ handleSave = () => {
             onMouseMove={this.onMouseMove}
             onMouseOut={this.onMouseUp}
             onMouseUp={this.onMouseUp}
+            onTouchStart={this._onTouchStart}
+            onTouchMove={this._onTouchMove}
+            onTouchEnd={this._onTouchEnd}
             width={width}
             height={height}
           />
-          <div className='textinput'> HELLO
-          </div>
           <toolsMap />
         </div>
       </div>
