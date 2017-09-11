@@ -43,8 +43,8 @@ export default class SketchPad extends Component {
   };
 
   static defaultProps = {
-    width: 500,
-    height: 500,
+    // width: 500,
+    // height: 500,
     color: '#000',
     size: 1,
     fillColor: '',
@@ -58,7 +58,7 @@ export default class SketchPad extends Component {
   constructor(props) {
     super(props);
 
-
+    
     this.initTool = this.initTool.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -67,6 +67,9 @@ export default class SketchPad extends Component {
     this._onTouchStart = this._onTouchStart.bind(this);
     this._onTouchMove = this._onTouchMove.bind(this);
     this._onTouchEnd = this._onTouchEnd.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this)
+
+  
   }
 
   componentDidMount() {
@@ -74,10 +77,22 @@ export default class SketchPad extends Component {
     this.ctx = this.canvas.getContext('2d');
     this.canvas.width = this.canvas.offsetWidth;
     this.canvas.height = this.canvas.offsetHeight
+    this.initialHeight = this.canvas.height
+    this.initialWidth = this.canvas.width
     this.initTool(this.props.tool);
     this.ctx.fillStyle = 'white';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+  
+    window.addEventListener('resize', this.updateDimensions)
   }
+
+  updateDimensions = () => {
+    this.canvas.width = this.canvas.offsetWidth;
+    this.canvas.height = this.canvas.offsetHeight
+  
+  }
+  
+ 
 
   _onTouchStart(e) {
     const data = this.tool.onMouseDown(...this.getCursorPosition(e.touches[0]), this.props.color, this.props.size, this.props.fillColor);
@@ -124,7 +139,7 @@ handleSave = () => {
         this.initTool(item.tool);
         this.tool.draw(item, this.props.animate);
       });
-    this.initTool(tool);
+    this.initTool(this.props.tool);
   }
 
 
@@ -162,9 +177,12 @@ handleSave = () => {
 
   getCursorPosition(e) {
     const { top, left } = this.canvas.getBoundingClientRect();
+    const ratioH = this.initialHeight/this.canvas.height
+    const ratioW = this.initialWidth/this.canvas.width
+
     return [
-      e.clientX - left,
-      e.clientY - top
+      (e.clientX - left)/ratioW,
+      (e.clientY - top)/ratioH
     ];
   }
 

@@ -142,7 +142,7 @@ img.save:hover {
   }
 }
 
-@media only screen and (min-width : 320px) and (max-width : 480px) {
+@media only screen and (min-width : 100px) and (max-width : 480px) {
   .toolbar {
     flex-flow: column nowrap;
     -webkit-flex-direction: column;
