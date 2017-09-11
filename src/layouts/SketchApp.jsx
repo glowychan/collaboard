@@ -71,11 +71,14 @@ export default class SketchApp extends Component
     })
   }
 
-  closePopup = () => {
+  closePopup = (event) => {
+    event.preventDefault()
     this.setState({
       poppedOpen: false,
       nameOpen: false
     })
+    let userName = event.target.userName.value
+    this.props.newUserName(userName)
   }
 
 
