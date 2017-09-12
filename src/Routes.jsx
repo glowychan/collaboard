@@ -81,7 +81,8 @@ class Twoodle extends React.Component {
                    undo = {this.state.undo}
                    newUserName = {this.newUserName}
                    users = {this.state.onlineUsers}
-                   deleteBoard = {this.deleteBoard} />
+                   deleteBoard = {this.deleteBoard}
+                   getText = {this.getText}/>
       </div>
     )
   }
@@ -109,6 +110,11 @@ class Twoodle extends React.Component {
   // Send a delete board request through websockets
   deleteBoard = (boardName) => {
     this.socket.emit('delete a board', this.state.boardName)
+  }
+
+  getText = (event) => {
+    event.preventDefault()
+    alert(event.target.text.value)
   }
 
 }

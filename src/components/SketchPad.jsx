@@ -5,6 +5,7 @@ import Pencil, { TOOL_PENCIL } from './tools/Pencil';
 import Line, { TOOL_LINE } from './tools/Line';
 import Ellipse, { TOOL_ELLIPSE} from './tools/Ellipse';
 import Rectangle, { TOOL_RECTANGLE } from './tools/Rectangle';
+import Textbox, { TOOL_TEXTBOX } from './tools/Textbox';
 import Brush, { TOOL_BRUSH } from './tools/Brush';
 import Eraser, { TOOL_ERASER } from './tools/Eraser';
 import FileSaver from 'file-saver';
@@ -14,6 +15,7 @@ export const toolsMap = {
   [TOOL_PENCIL]: Pencil,
   [TOOL_LINE]: Line,
   [TOOL_RECTANGLE]: Rectangle,
+  [TOOL_TEXTBOX]: Textbox,
   [TOOL_ELLIPSE]: Ellipse,
   [TOOL_BRUSH]: Brush,
   [TOOL_ERASER]: Eraser
@@ -145,6 +147,9 @@ handleSave = () => {
       <div>
 
         <div className="canvas-div">
+          <form onSubmit={this.props.getText}>
+            <input name="text" />
+          </form>
           <canvas
             ref={(canvas) => { this.canvasRef = canvas; }}
             className={canvasClassName}
@@ -155,8 +160,6 @@ handleSave = () => {
             width={width}
             height={height}
           />
-          <div className='textinput'> HELLO
-          </div>
           <toolsMap />
         </div>
       </div>

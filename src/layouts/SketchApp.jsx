@@ -5,6 +5,7 @@ import { TOOL_PENCIL } from '../components/tools/Pencil';
 import { TOOL_LINE } from '../components/tools/Line';
 import { TOOL_ELLIPSE } from '../components/tools/Ellipse';
 import { TOOL_RECTANGLE } from '../components/tools/Rectangle';
+import { TOOL_TEXTBOX} from '../components/tools/Textbox';
 import { TOOL_BRUSH } from '../components/tools/Brush';
 import { TOOL_ERASER } from '../components/tools/Eraser';
 import Sidebar from '../components/Sidebar';
@@ -133,6 +134,12 @@ render() {
             ><img className='icon' src={sqaure} title='Rectangle' alt='Rectangle'/></button>
 
             <button
+              style={tool == TOOL_TEXTBOX ? {fontWeight:'bold'} : undefined}
+              className={tool == TOOL_TEXTBOX  ? 'item-active' : 'item'}
+              onClick={() => this.setState({tool:TOOL_TEXTBOX})}
+            >textbox</button>
+
+            <button
               style={tool == TOOL_ERASER ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_ERASER})}
@@ -163,6 +170,7 @@ render() {
             tool={tool}
             onCompleteItem={(item) => this.props.addNewItem(item, this.props.boardName)}
             onSave={this.handleSave}
+            getText={this.props.getText}
           />
         </div>
         <UsersOnline users={this.props.users} />
