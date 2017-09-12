@@ -67,7 +67,8 @@ export default class SketchPad extends Component {
     this._onTouchStart = this._onTouchStart.bind(this);
     this._onTouchMove = this._onTouchMove.bind(this);
     this._onTouchEnd = this._onTouchEnd.bind(this);
-    // this.updateDimensions = this.updateDimensions.bind(this)
+    this.updateDimensions = this.updateDimensions.bind(this)
+    this.redraw = this.redraw.bind(this)
 
   
   }
@@ -86,11 +87,20 @@ export default class SketchPad extends Component {
     window.addEventListener('resize', this.updateDimensions)
   }
 
-  updateDimensions = () => {
+  updateDimensions () {
     this.canvas.width = this.canvas.offsetWidth;
     this.canvas.height = this.canvas.offsetHeight
-    this.props.onResize()
+    this.redraw()
   }
+
+  redraw() {
+    this.props.items
+      .forEach(item => {
+        this.initTool(item.tool);
+        this.tool.draw(item, this.props.animate);
+      });
+    this.initTool(this.props.tool);
+   }
   
  
 
