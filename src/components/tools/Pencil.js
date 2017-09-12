@@ -11,6 +11,9 @@ export default (context) => {
   }
 
   const onMouseDown = (x, y, color, size) => {
+    console.log(x)
+    console.log(y)
+    
     stroke = {
       id: v4(),
       tool: TOOL_PENCIL,
@@ -18,6 +21,7 @@ export default (context) => {
       size,
       points: [{ x, y}]
     };
+
     return [stroke];
   };
 
@@ -29,14 +33,9 @@ export default (context) => {
     context.lineWidth = item.size;
     context.strokeStyle = item.color;
     context.globalCompositeOperation = 'source-over';
-    context.moveTo(start.x - getRandomInt(0,4), start.y - getRandomInt(0,4));
-    context.lineTo(x - getRandomInt(0,3), y - getRandomInt(0,3));
-    context.stroke();
-
     context.moveTo(start.x, start.y);
-    context.lineTo(x,y);
+    context.lineTo(x , y);
     context.stroke();
-
     context.closePath();
     
     context.restore();
@@ -49,7 +48,6 @@ export default (context) => {
     drawLine(stroke, start, newPoint);
     stroke.points.push(newPoint);
     points.push(newPoint);
-
     return [stroke];
   };
 

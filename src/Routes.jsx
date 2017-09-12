@@ -28,9 +28,24 @@ class Twoodle extends React.Component {
       clear: false,
       onlineUsers: []
     }
+    this.onResize = this.onResize.bind(this)
   }
+  
+ 
+ onResize() {
+  alert('resize')
+  const items = this.state.items
+  this.setState({
+    items: []
+  })
+
+  this.setState({
+    items: items
+  })
+}
 
   componentDidMount() {
+  
     // Set up websocket connection
     this.socket = io('http://localhost:3001')
 
@@ -91,7 +106,8 @@ class Twoodle extends React.Component {
                    deleteAllItems = {this.deleteAllItems}
                    newUserName = {this.newUserName}
                    users = {this.state.onlineUsers}
-                   deleteBoard = {this.deleteBoard} />
+                   deleteBoard = {this.deleteBoard} 
+                   onResize={this.onResize}/>
       </div>
     )
   }
@@ -127,6 +143,8 @@ class Twoodle extends React.Component {
 
 
 }
+
+
 
 
 const Routes = () => (

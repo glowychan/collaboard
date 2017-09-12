@@ -15,7 +15,6 @@ class UsersOnline extends React.Component {
 
   render() {
     const users = this.props.users
-
     return (
     <div className='user-container'>
       {users.map((user) => {
