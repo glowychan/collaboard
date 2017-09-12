@@ -67,8 +67,6 @@ export default class SketchPad extends Component {
     this._onTouchStart = this._onTouchStart.bind(this);
     this._onTouchMove = this._onTouchMove.bind(this);
     this._onTouchEnd = this._onTouchEnd.bind(this);
-    this.resizeCanvas = this.resizeCanvas.bind(this)
-    // this.reDraw = this.reDraw.bind(this)
 
   
   }
@@ -77,27 +75,13 @@ export default class SketchPad extends Component {
     this.canvas = findDOMNode(this.canvasRef);
     this.ctx = this.canvas.getContext('2d');
     this.initTool(this.props.tool);
-    this.canvas.width = this.canvas.offsetWidth;
-    this.canvas.height = this.canvas.offsetHeight;
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
     this.ctx.fillStyle = 'white';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-    window.addEventListener('resize', this.resizeCanvas, false);
-   
-    // window.addEventListener('orientationchange', this.resizeCanvas, false);
   }
 
-  resizeCanvas () {
-    this.tempCanvas = document.createElement('canvas');
-    this.tempCanvas.width = this.canvas.width;
-    this.tempCanvas.height = this.canvas.height;
-    this.tmpCtx = this.tempCanvas.getContext('2d');
-    this.tmpCtx.drawImage(this.canvas, 0, 0);
-   
-    this.canvas.width = this.canvas.offsetWidth;
-    this.canvas.height = this.canvas.offsetHeight;
- 
-    this.ctx.drawImage(this.tempCanvas, 0, 0, this.tempCanvas.width, this.tempCanvas.height, 0, 0, this.canvas.width, this.canvas.height);
-  }
+  
   
  
 

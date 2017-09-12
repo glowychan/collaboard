@@ -36,6 +36,9 @@ canvas.canvas {
   position: fixed;
   top: 0;
   bottom: 0;
+  image-rendering: -moz-crisp-edges;    /* Firefox */
+  image-rendering: -webkit-crisp-edges; /* Webkit (Safari) */
+  image-rendering: crisp-edges;           /* Chrome */
 }
 
 div.canvas-div {
