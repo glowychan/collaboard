@@ -16,9 +16,8 @@ body {
 
 
 canvas.canvas {
-  width: 100%;
-  height: auto;
-  position: fixed;
+  /* width: 100%;
+  height: auto; */
   top: 0;
   bottom: 0;
 }
@@ -119,10 +118,14 @@ div.canvas-div {
   }
 }
 
-@media only screen and (min-device-width: 480px) 
+@media only screen and (min-device-width: 300px) 
 and (max-device-width: 640px) 
 and (orientation: landscape) {
   h1 {
     display: none;
+  }
+
+  div.canvas-div {
+   width: 360px;
   }
 }
