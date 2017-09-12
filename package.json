@@ -16,6 +16,7 @@
     "react-share": "^1.16.0",
     "reactcss": "^1.2.2",
     "socket.io-client": "^2.0.3",
+    "sweetalert-react": "^0.4.10",
     "uuid": "^3.1.0",
     "webpack": "^3.5.5"
   },

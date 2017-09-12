@@ -13,21 +13,6 @@ body {
   line-height: 30px;
  }
  
- @media only screen and (min-width : 320px) and (max-width : 480px) {
-    h1 {
-    display: none;
-    }
-  }
-
-  @media only screen and (min-device-width: 480px) 
-  and (max-device-width: 640px) 
-  and (orientation: landscape) {
-    h1 {
-      display: none;
-    }
-  }
-
- 
 
 
 canvas.canvas {
@@ -53,6 +38,7 @@ div.canvas-div {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   flex-shrink: 1;
 }
 
@@ -71,7 +57,7 @@ div.canvas-div {
 }
 
 .four {
-  font-size: 10rem;
+  font-size: 8em;
 }
 
 .oh {
@@ -100,4 +86,43 @@ div.canvas-div {
  font-family: 'PT Sans Narrow', sans-serif;
  font-size: 15px;
  margin: 0 2px
+}
+
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+  h1 {
+  display: none;
+  }
+
+  .error-container {
+    width: 100%;
+    padding: 2%;
+  }
+
+  .four {
+    font-size: 5em;
+  }
+  
+  .oh {
+    color: #E62739;
+    flex-shrink: 2;
+  }
+
+  .error-msg {
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 2em;
+    flex-shrink: 2;
+    font-weight: 700;
+  }
+
+  .gif {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-device-width: 480px) 
+and (max-device-width: 640px) 
+and (orientation: landscape) {
+  h1 {
+    display: none;
+  }
 }
