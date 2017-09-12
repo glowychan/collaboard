@@ -67,8 +67,8 @@ export default class SketchPad extends Component {
     this._onTouchStart = this._onTouchStart.bind(this);
     this._onTouchMove = this._onTouchMove.bind(this);
     this._onTouchEnd = this._onTouchEnd.bind(this);
-    this.updateDimensions = this.updateDimensions.bind(this)
-    this.redraw = this.redraw.bind(this)
+    this.resizeCanvas = this.resizeCanvas.bind(this)
+    // this.reDraw = this.reDraw.bind(this)
 
   
   }
@@ -76,31 +76,28 @@ export default class SketchPad extends Component {
   componentDidMount() {
     this.canvas = findDOMNode(this.canvasRef);
     this.ctx = this.canvas.getContext('2d');
-    this.canvas.width = this.canvas.offsetWidth;
-    this.canvas.height = this.canvas.offsetHeight
-    this.initialHeight = this.canvas.height
-    this.initialWidth = this.canvas.width
     this.initTool(this.props.tool);
+    this.canvas.width = this.canvas.offsetWidth;
+    this.canvas.height = this.canvas.offsetHeight;
     this.ctx.fillStyle = 'white';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-  
-    window.addEventListener('resize', this.updateDimensions)
+    window.addEventListener('resize', this.resizeCanvas, false);
+   
+    // window.addEventListener('orientationchange', this.resizeCanvas, false);
   }
 
-  updateDimensions () {
+  resizeCanvas () {
+    this.tempCanvas = document.createElement('canvas');
+    this.tempCanvas.width = this.canvas.width;
+    this.tempCanvas.height = this.canvas.height;
+    this.tmpCtx = this.tempCanvas.getContext('2d');
+    this.tmpCtx.drawImage(this.canvas, 0, 0);
+   
     this.canvas.width = this.canvas.offsetWidth;
-    this.canvas.height = this.canvas.offsetHeight
-    this.redraw()
+    this.canvas.height = this.canvas.offsetHeight;
+ 
+    this.ctx.drawImage(this.tempCanvas, 0, 0, this.tempCanvas.width, this.tempCanvas.height, 0, 0, this.canvas.width, this.canvas.height);
   }
-
-  redraw() {
-    this.props.items
-      .forEach(item => {
-        this.initTool(item.tool);
-        this.tool.draw(item, this.props.animate);
-      });
-    this.initTool(this.props.tool);
-   }
   
  
 
