@@ -7,7 +7,6 @@ class UserNamePopout extends React.Component {
 
   }
  
- 
    
   render() {
     

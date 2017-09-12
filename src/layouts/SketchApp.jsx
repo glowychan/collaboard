@@ -48,8 +48,8 @@ export default class SketchApp extends Component
   }
 
 
-  componentWillReceiveProps ({undo}) {
-    if (undo) {
+  componentWillReceiveProps ({undo, clear}) {
+    if (undo || clear) {
       this.refs.sketch.handleClear()
     }
   }
@@ -91,17 +91,21 @@ render() {
         <p>{this.state.items}</p>
         <Sidebar onShare={this.handleShare} boardName={this.props.boardName} deleteBoard={this.props.deleteBoard} />
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
+        {this.state.poppedOpen ? 
+        <div className='popout-container'>
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closePopup} url={this.props.boardName}/>
+        </div>
+        : ''}
         <div className='toolbar'>
            <button
              onClick={() => this.props.undoAnItem(this.props.boardName)}
            ><img className='icon' src={undo} title='Undo' alt='Undo'/></button>
 
           <button
-           onClick={() => this.refs.sketch.handleClear()}><img className='icon' src={clear} title='Clear board' alt='Clear board'/> </button>
+           onClick={() => this.props.deleteAllItems(this.props.boardName)}><img className='icon' src={clear} title='Clear board' alt='Clear board'/> </button>
 
           <button
-           onClick={() => this.refs.sketch.handleSave()}><img className='icon' src={save} title='Save board' alt='Save'/> </button>
+           onClick={() => this.refs.sketch.handleSave()}><img className='icon save' src={save} title='Save board' alt='Save'/> </button>
 
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
@@ -117,7 +121,7 @@ render() {
 
             <button
               style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_LINE  ? 'item-active' : 'item'}
+              className={tool == TOOL_LINE  ? 'item-active line' : 'item line'}
               onClick={() => this.setState({tool:TOOL_LINE})}
             ><img className='icon' src={line} title='Line' alt='Line' /></button>
 
@@ -144,20 +148,20 @@ render() {
               className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_ERASER})}
             ><img className='icon' src={eraser} title='Eraser' alt='Eraser'/></button>
-            <label htmlFor="">SIZE: </label>
-            <input min="1" max="20" type="range" value={size} onChange={(e) => this.setState({size: parseInt(e.target.value)})} />
+            <label htmlFor="" className='size'>SIZE: </label>
+            <input min="1" max="20" className='size'type="range" value={size} onChange={(e) => this.setState({size: parseInt(e.target.value)})} />
             <ColorPicker value={color} newColor={this.changeColor.bind(this)}/>
           {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
             <div className='fill'>
-              <label htmlFor="">FILL IN:</label>
+              <label htmlFor="">FILL:</label>
               <input className="checkbox" type="checkbox" value={fill} style={{margin:'0 8'}}
                      onChange={(e) => this.setState({fill: e.target.checked})} />
               {fill ? <span>
                   <FillPicker value={fill} newFill={this.changeFill.bind(this)}/>
                 </span> : ''}
             </div> : ''}
-        </div>
-        <div style={{float:'left', marginRight:20}}>
+          </div>
+        <div>
           <SketchPad
             ref='sketch'
             width={2000}

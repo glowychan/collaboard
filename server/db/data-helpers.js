@@ -33,6 +33,19 @@ module.exports = function makeDataHelpers(db) {
       })
     },
 
+    // DELETE ALL ITEMS FROM AN EXISTING BOARD
+    deleteAllItems: function(filter, edit) {
+      return new Promise((resolve, reject) => {
+        db.collection('boards').update(filter, edit, (err, board) => {
+          if (err) {
+            reject(err)
+          } else {
+            resolve(board)
+          }
+        })
+      })
+    },
+
     // SAVE NEW BOARD
     saveBoard: function(board) {
       return new Promise((resolve, reject) => {
@@ -48,7 +61,6 @@ module.exports = function makeDataHelpers(db) {
     },
 
     deleteBoard: function(filter) {
-      console.log(filter)
       return new Promise((resolve, reject) => {
         db.collection('boards').deleteOne(filter, (err) => {
           if (err) {

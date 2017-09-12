@@ -45,10 +45,10 @@ export default class SketchPad extends Component {
   };
 
   static defaultProps = {
-    width: 500,
-    height: 500,
+    // width: 500,
+    // height: 500,
     color: '#000',
-    size: 5,
+    size: 1,
     fillColor: '',
     canvasClassName: 'canvas',
     debounceTime: 1000,
@@ -73,15 +73,69 @@ export default class SketchPad extends Component {
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onDebouncedMove = this.onDebouncedMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
+    this._onTouchStart = this._onTouchStart.bind(this);
+    this._onTouchMove = this._onTouchMove.bind(this);
+    this._onTouchEnd = this._onTouchEnd.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this)
+    this.redraw = this.redraw.bind(this)
+
+
   }
 
   componentDidMount() {
     this.canvas = findDOMNode(this.canvasRef);
     this.ctx = this.canvas.getContext('2d');
+    this.canvas.width = this.canvas.offsetWidth;
+    this.canvas.height = this.canvas.offsetHeight
+    this.initialHeight = this.canvas.height
+    this.initialWidth = this.canvas.width
     this.initTool(this.props.tool);
-    // this.ctx.fillStyle = 'white';
-    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+
+    window.addEventListener('resize', this.updateDimensions)
   }
+
+  updateDimensions () {
+    this.canvas.width = this.canvas.offsetWidth;
+    this.canvas.height = this.canvas.offsetHeight
+    this.redraw()
+  }
+
+  redraw() {
+    this.props.items
+      .forEach(item => {
+        this.initTool(item.tool);
+        this.tool.draw(item, this.props.animate);
+      });
+    this.initTool(this.props.tool);
+   }
+
+
+
+  _onTouchStart(e) {
+    const data = this.tool.onMouseDown(...this.getCursorPosition(e.touches[0]), this.props.color, this.props.size, this.props.fillColor);
+    data && data[0] && this.props.onItemStart && this.props.onItemStart.apply(null, data);
+    if (this.props.onDebouncedItemChange) {
+      this.interval = setInterval(this.onDebouncedMove, this.props.debounceTime);
+    }
+  }
+
+  _onTouchMove(e) {
+    const data = this.tool.onMouseMove(...this.getCursorPosition(e.touches[0]));
+    data && data[0] && this.props.onEveryItemChange && this.props.onEveryItemChange.apply(null, data);
+  }
+
+  _onTouchEnd(e) {
+    const data = this.tool.onMouseUp(...this.getCursorPosition(e.changedTouches[0]));
+    data && data[0] && this.props.onCompleteItem && this.props.onCompleteItem.apply(null, data);
+    if (this.props.onDebouncedItemChange) {
+      clearInterval(this.interval);
+      this.interval = null;
+    }
+  }
+
+
 
 handleSave = () => {
   const userinput = prompt("Please enter a filename");
@@ -104,7 +158,7 @@ handleSave = () => {
         this.initTool(item.tool);
         this.tool.draw(item, this.props.animate);
       });
-    this.initTool(tool);
+    this.initTool(this.props.tool);
   }
 
 
@@ -158,10 +212,18 @@ handleSave = () => {
 
   getCursorPosition(e) {
     const { top, left } = this.canvas.getBoundingClientRect();
+
+    // const ratioH = this.initialHeight/this.canvas.height
+    // const ratioW = this.initialWidth/this.canvas.width
+
     return [
       e.clientX - left,
       e.clientY - top
     ];
+  }
+
+  _handleTouchStart =() => {
+    console.log('handleTouchStart');
   }
 
   render() {
@@ -187,6 +249,9 @@ handleSave = () => {
             onMouseMove={this.onMouseMove}
             onMouseOut={this.onMouseUp}
             onMouseUp={this.onMouseUp}
+            onTouchStart={this._onTouchStart}
+            onTouchMove={this._onTouchMove}
+            onTouchEnd={this._onTouchEnd}
             width={width}
             height={height}
           />

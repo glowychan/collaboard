@@ -1,0 +1,146 @@
+.popout-container {
+  position: absolute;
+  top: 15%;
+  left: 35%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  z-index: 9999;
+  padding: 10%
+}
+
+.share-pop {
+  font-family: 'PT Sans Narrow', sans-serif;
+  background-image: url('../icons/Share.png');
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+ 
+ .share-pop h2 {
+   font-size: 2.5em;
+   margin-top: 35%;
+ }
+ 
+ 
+ 
+ .social-share {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   margin: 20px;
+ }
+ 
+ .url-share {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ }
+ 
+ .share-url {
+   background-color: rgba(32, 31, 31, 0.32);
+   border-radius: 10px;
+   border: none;
+   outline:none;
+   height:30px;
+   width: 60%;
+   font-family: 'Patrick Hand SC', cursive;
+   font-size: 2.0em;
+   padding: 10px 10px 10px 20px;
+ }
+
+ .about-pop {
+  font-size: 20px;
+  width: 626px;
+  height: 750px;
+  position: absolute;
+  top: 15%;
+  left: 33%;
+  z-index: 9999;
+  flex-shrink: 2;
+ }
+
+ .about-text h2 {
+   margin-top: 130px;
+   font-size: 2em;
+   color: white;
+   display: flex;
+   justify-content: center;
+ }
+
+ .instructions {
+   font-family: 'Patrick Hand SC', cursive;
+   font-size: 2em;
+ }
+
+ .name-pop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'PT Sans Narrow', sans-serif;
+  width: 500px;
+  height: 210px;
+  background-image: url('../icons/Name.png');
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  z-index: 9999;
+ }
+
+ @media only screen and (min-width : 100px) and (max-width : 480px) {
+   .name-pop {
+     background-color: #6ED3CF;
+     background-image: none;
+     width: 300px;
+     height: 100px;
+     padding: 1%;
+     top: 20%;
+     left: 10%;
+   }
+   .about-pop {
+     width: 100%;
+     left: 1%;
+   }
+   .about-pop img {
+     width: 100%;
+   }
+ }
+
+ @media only screen and (min-device-width: 480px) 
+                    and (max-device-width: 640px) 
+                    and (orientation: landscape) {
+
+    .name-pop {
+        background-color: #6ED3CF;
+        background-image: none;
+        width: 300px;
+        height: 100px;
+        padding: 1%;
+        top: 20%;
+        left: 20%;
+      }
+}
+
+
+
+ .user-name {
+  background-color: rgba(32, 31, 31, 0.32);
+  border-radius: 5px;
+  border: none;
+  outline:none;
+  height:25px;
+  width: 100%;
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 2.0em;
+  padding: 1%;
+  text-align: center;
+  z-index: 9987;
+ }
+
+ .name-label {
+   margin: 12px;
+   font-size: 2.0em
+ }

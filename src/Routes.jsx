@@ -25,11 +25,27 @@ class Twoodle extends React.Component {
       boardName: props.match.params.boardName,
       items: [],
       undo: false,
+      clear: false,
       onlineUsers: []
     }
+    this.onResize = this.onResize.bind(this)
   }
 
+
+ onResize() {
+  alert('resize')
+  const items = this.state.items
+  this.setState({
+    items: []
+  })
+
+  this.setState({
+    items: items
+  })
+}
+
   componentDidMount() {
+
     // Set up websocket connection
     this.socket = io('http://localhost:3001')
 
@@ -60,12 +76,18 @@ class Twoodle extends React.Component {
       this.setState({undo: false})
     })
 
+
+    // Clear canvas for all users when clear function has been clicked
+    this.socket.on('delete all items', () => {
+      this.setState({clear: true})
+    })
+
     // Recives online users when users join/leave
     this.socket.on('online users', (onlineUsers) => {
       this.setState({onlineUsers: onlineUsers})
     })
 
-    // Receive delete request and send to websockets
+    // Redirect all users when a board has been deleted
     this.socket.on('delete a board', () => {
       window.location = `/`
     })
@@ -79,10 +101,13 @@ class Twoodle extends React.Component {
                    addNewItem = {this.addNewItem}
                    undoAnItem = {this.undoAnItem}
                    undo = {this.state.undo}
+                   clear = {this.state.clear}
+                   deleteAllItems = {this.deleteAllItems}
                    newUserName = {this.newUserName}
                    users = {this.state.onlineUsers}
                    deleteBoard = {this.deleteBoard}
                    getText = {this.getText}/>
+                  />
       </div>
     )
   }
@@ -101,12 +126,16 @@ class Twoodle extends React.Component {
     this.socket.emit('undo an item', this.state.boardName)
   }
 
+  deleteAllItems = (boardName) => {
+    this.socket.emit('delete all items', this.state.boardName)
+  }
 
   // Send user's name upon change
   newUserName = (userName) => {
     this.socket.emit('new user name', userName)
     this.socket.emit('online users', this.state.boardName)
   }
+
   // Send a delete board request through websockets
   deleteBoard = (boardName) => {
     this.socket.emit('delete a board', this.state.boardName)
@@ -118,6 +147,8 @@ class Twoodle extends React.Component {
   }
 
 }
+
+
 
 
 const Routes = () => (
