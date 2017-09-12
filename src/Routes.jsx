@@ -63,6 +63,7 @@ class Twoodle extends React.Component {
     // Clear canvas for all users when clear function has been clicked
     this.socket.on('delete all items', () => {
       this.setState({clear: true})
+      this.setState({clear: false})
     })
 
     // Redirect all users when a board has been deleted
