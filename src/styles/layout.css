@@ -33,6 +33,9 @@ body {
 canvas.canvas {
   width: 100%;
   height: auto;
+  position: fixed;
+  top: 0;
+  bottom: 0;
 }
 
 div.canvas-div {
@@ -76,12 +79,7 @@ div.canvas-div {
   flex-shrink: 2;
 }
 
-.main-container {
-  padding: 2%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
+
 
 .user-container {
   height: 40px;
