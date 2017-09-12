@@ -60,6 +60,13 @@ export default class SketchPad extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      tx_top: 0,
+      tx_left: 0,
+      tx_width: 0,
+      tx_height: 0,
+      tx_display: 'none'
+    }
 
     this.initTool = this.initTool.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
@@ -111,6 +118,22 @@ handleSave = () => {
     if (this.props.onDebouncedItemChange) {
       this.interval = setInterval(this.onDebouncedMove, this.props.debounceTime);
     }
+
+    setTimeout( () => {
+      if (data[0].tool === 'textbox') {
+        this.setState({tx_left: data[0].start.x})
+        this.setState({tx_top: data[0].start.y})
+        console.log(data[0].start, data[0].end)
+        this.setState({tx_height: data[0].end.y - data[0].start.y})
+        this.setState({tx_width: data[0].end.x - data[0].start.x})
+        this.setState({tx_display: ''})
+      }
+
+    }, 1000);
+    // if (this.tool)
+
+    // console.log(data[0].start)
+    // console.log(data[0])
   }
 
   onDebouncedMove() {
@@ -148,7 +171,14 @@ handleSave = () => {
 
         <div className="canvas-div">
           <form onSubmit={this.props.getText}>
-            <input name="text" />
+            <input style={{
+              position: 'relative',
+              top: this.state.tx_top,
+              left: this.state.tx_left,
+              width: this.state.tx_width,
+              height: this.state.tx_height,
+              display: this.state.tx_display
+          }} name="text" />
           </form>
           <canvas
             ref={(canvas) => { this.canvasRef = canvas; }}

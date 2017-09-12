@@ -1,6 +1,6 @@
 import { v4 } from 'uuid';
 
-export const TOOL_TEXTBOX = 'rectangle';
+export const TOOL_TEXTBOX = 'textbox';
 
 export default (context) => {
   let rectangle = null;
