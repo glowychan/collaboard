@@ -90,7 +90,7 @@
   z-index: 9999;
  }
 
- @media only screen and (min-width : 320px) and (max-width : 480px) {
+ @media only screen and (min-width : 100px) and (max-width : 480px) {
    .name-pop {
      background-color: #6ED3CF;
      background-image: none;
@@ -99,6 +99,13 @@
      padding: 1%;
      top: 20%;
      left: 10%;
+   }
+   .about-pop {
+     width: 100%;
+     left: 1%;
+   }
+   .about-pop img {
+     width: 100%;
    }
  }
 
