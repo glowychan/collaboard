@@ -44,6 +44,7 @@ export default class SketchApp extends Component
     }
     this.handleShare = this.handleShare.bind(this);
     this.closePopup = this.closePopup.bind(this);
+    this.closeOtherPops = this.closeOtherPops.bind(this);
   }
 
 
@@ -71,14 +72,19 @@ export default class SketchApp extends Component
     })
   }
 
-  closePopup = (event) => {
-    event.preventDefault()
+  closeOtherPops() {
     this.setState({
       poppedOpen: false,
-      nameOpen: false
     })
+  }
+
+  closePopup = (event) => {
+    event.preventDefault()
     let userName = event.target.userName.value
     this.props.newUserName(userName)
+    this.setState({
+      nameOpen: false
+    })
   }
 
 
@@ -92,7 +98,7 @@ render() {
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
         {this.state.poppedOpen ? 
         <div className='popout-container'>
-        <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closePopup} url={this.props.boardName}/>
+        <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closeOtherPops} url={this.props.boardName}/>
         </div>
         : ''}
         <div className='toolbar'>
