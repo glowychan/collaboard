@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { CirclePicker } from 'react-color'
 
-class ColorPicker extends React.Component {
+class ColorPicker extends Component {
   state = {
     background: '#fff',
   };
 
-  handleChangeComplete = (color) => {
+  handleChangeComplete = color => {
     this.setState({ background: color.hex });
     this.props.newColor(this.state.background)
   };
@@ -14,11 +14,11 @@ class ColorPicker extends React.Component {
   render() {
     return (
       <CirclePicker
-        color={ this.state.background } 
-        width={155} 
+        color={this.state.background}
+        width={155}
         circleSize={13}
         colors={["#E62739", "#6ED3CF", "#9068BE", "#464646", "#181818"]}
-        onChangeComplete={ this.handleChangeComplete }
+        onChangeComplete={this.handleChangeComplete}
       />
     );
   }
