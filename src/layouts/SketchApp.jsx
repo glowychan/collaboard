@@ -92,8 +92,7 @@ render() {
     const { tool, size, color, fill, fillColor } = this.state;
     return (
       <div>
-        <Link  style={{ textDecoration: 'none', color: 'black' }} to='/'><h1><img className='logo' src={logo} />TWOODLE</h1></Link>
-        <p>{this.state.items}</p>
+        <h1><img className='logo' src={logo} />TWOODLE</h1>
         <Sidebar onShare={this.handleShare} boardName={this.props.boardName} deleteBoard={this.props.deleteBoard} />
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
         {this.state.poppedOpen ? 

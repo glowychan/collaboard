@@ -16,10 +16,11 @@ body {
 
 
 canvas.canvas {
-  /* width: 100%;
-  height: auto; */
+  margin-left: 48px;
+  background: url('http://www.powerpointhintergrund.com/uploads/presentation-background-grids-25.gif');
   top: 0;
   bottom: 0;
+  padding: 10px;
 }
 
 div.canvas-div {
@@ -69,7 +70,7 @@ div.canvas-div {
 .user-container {
   height: 40px;
   width: 100%;
-  bottom: 0;
+  bottom: 4%;
   display: -ms-flexbox;
   flex-direction: row;
   justify-content: flex-end;
@@ -80,11 +81,17 @@ div.canvas-div {
 
 .online-user {
  height: 100%;
+ box-shadow: 8px 8px 3px #848586;
+ border-radius: 8px;
  text-align: center;
- padding: 0 8px;
- font-family: 'PT Sans Narrow', sans-serif;
- font-size: 15px;
- margin: 0 2px
+ padding: 4px;
+ font-family: 'Patrick Hand SC', cursive;
+ font-size: 28px;
+ margin: 0 4px
+}
+
+.online-user p {
+ margin: 2px;
 }
 
 @media only screen and (min-width : 320px) and (max-width : 480px) {
