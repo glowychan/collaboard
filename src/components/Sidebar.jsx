@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import { slide as Menu } from 'react-burger-menu'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import home from '../icons/003-symbols.png'
 import newtwoodle from '../icons/002-symbol-2.png'
-import save from '../icons/001-symbols-1.png'
 import share from '../icons/004-sign.png'
 import trashcan from '../icons/006-symbol-1.png'
-import PoppedOutShare from './PoppedOutShare'
-
 
 class SideBar extends Component {
   constructor(props) {
