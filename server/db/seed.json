@@ -1,6 +1,6 @@
 [
   {
-    "boardName": "conference-call",
+    "boardName": "conferencecall",
     "items":  [
       {
         "color": "#000000",
@@ -33,7 +33,7 @@
     ]
   },
   {
-    "boardName": "chem-class",
+    "boardName": "chemclass",
     "items":  [
       {
         "color": "#000000",
@@ -52,5 +52,3 @@
     ]
   }
 ]
-
-
