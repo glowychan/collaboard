@@ -5,7 +5,7 @@ module.exports = function makeDataHelpers(db) {
   return {
 
     // GET BOARDS BASED ON THE FILTER
-    getBoards: function(filter) {
+    getBoards: (filter) => {
       return new Promise((resolve, reject) => {
         db.collection('boards').find(filter).toArray((err, boards) => {
           if (err) {
@@ -18,7 +18,7 @@ module.exports = function makeDataHelpers(db) {
     },
 
     // SAVE A NEW ITEM TO AN EXISTING BOARD
-    updateItem: function(filter, edit) {
+    updateItem: (filter, edit) => {
       return new Promise((resolve, reject) => {
         db.collection('boards').findOneAndUpdate(filter, edit, (err, board) => {
           if (err) {
@@ -31,7 +31,7 @@ module.exports = function makeDataHelpers(db) {
     },
 
     // DELETE ALL ITEMS FROM AN EXISTING BOARD
-    deleteAllItems: function(filter, edit) {
+    deleteAllItems: (filter, edit) => {
       return new Promise((resolve, reject) => {
         db.collection('boards').update(filter, edit, (err, board) => {
           if (err) {
@@ -44,7 +44,7 @@ module.exports = function makeDataHelpers(db) {
     },
 
     // SAVE NEW BOARD
-    saveBoard: function(board) {
+    saveBoard: (board) => {
       return new Promise((resolve, reject) => {
         db.collection('boards').insert(board, (err) => {
           if (err) {
@@ -56,7 +56,7 @@ module.exports = function makeDataHelpers(db) {
       })
     },
 
-    deleteBoard: function(filter) {
+    deleteBoard: (filter) => {
       return new Promise((resolve, reject) => {
         db.collection('boards').deleteOne(filter, (err) => {
           if (err) {
