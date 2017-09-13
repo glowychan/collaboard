@@ -16,10 +16,11 @@ body {
 
 
 canvas.canvas {
-  /* width: 100%;
-  height: auto; */
+  margin-left: 48px;
+  background: url('http://www.powerpointhintergrund.com/uploads/presentation-background-grids-25.gif');
   top: 0;
   bottom: 0;
+  padding: 10px;
 }
 
 div.canvas-div {

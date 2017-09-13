@@ -76,10 +76,8 @@ export default class SketchPad extends Component {
     this.initialHeight = this.canvas.height
     this.initialWidth = this.canvas.width
     this.initTool(this.props.tool);
-    this.ctx.fillStyle = 'white';
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-    console.log(this.canvas.width)
-  
+    // this.ctx.fillStyle = 'white';
+    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
  
