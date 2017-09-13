@@ -1,7 +1,9 @@
+'use strict'
+
 const clients = {}
 
 module.exports = (io, dataHelpers) => {
-  io.on('connection', function (socket) {
+  io.on('connection', function(socket) {
 
     // Add new users to clients object
     console.log('New connection:', socket.id)
@@ -10,80 +12,68 @@ module.exports = (io, dataHelpers) => {
       boardName: ''
     }
 
-
-
     // NEW CONNECTION
-    socket.on('new connection', function(boardName){
+    socket.on('new connection', (boardName) => {
       // Join the board
       socket.join(boardName)
-      // Add board info to the clienst object
+      // Add board info to the clients object
       clients[socket.id].boardName = boardName
       // Find the board
       const filter = {boardName: boardName}
       dataHelpers.getBoards(filter)
-      .then((boards) => {
+      .then(boards => {
         if (boards.length > 0) {
-        // If yes, send all the board items to the client
+        // If board exists, send all the board items to the client
           io.in(boardName).emit('new connection', {items: boards[0].items})
         }
-        // If not send a message back to the client
+        // If not send an error message back to the client
         else {
           io.in(boardName).emit('new connection', {error: 'No board found!'})
         }
       })
       .catch((err) => {
-        // fix this later
+        console.log(err)
       })
     })
 
-
-
     // Update client's username
-    socket.on('new user name', function(userName) {
+    socket.on('new user name', (userName) => {
       clients[socket.id].name = userName
     })
 
-
-
     // Broadcast online users when a new user joins a board
-    socket.on('online users', function(boardName) {
+    socket.on('online users', (boardName) => {
       io.in(boardName).emit('online users', getOnlineUsers(boardName))
     })
 
-
-
     // ADD NEW ITEM
-    socket.on('add new items', function(data){
+    socket.on('add new items',(data) => {
       const filter = {boardName: data.boardName}
-      // Give item the id of the client who draw that item
+      // Give the item the id of the client who drew that item
       // No need to loop through the items since there is one item in data
       data.items.client_id = socket.id
       // Find the board
       dataHelpers.getBoards(filter)
-      .then((boards) => {
-        // If the board is in database, update it
+      .then(boards => {
+        // If the board is in database, update it. If not, create a new board
         if (boards[0]) {
           dataHelpers.updateItem(filter, {$push: {items: data.items}})
-        }
-        // If not, create a new board
-        else {
+        } else {
           dataHelpers.saveBoard(data)
         }
       })
-      .catch((err) => {
-        // fix this later
+      .catch(err => {
+        console.log(err)
       })
       io.in(data.boardName).emit('add new items', {items: data.items})
     })
 
-
-
     // UNDO AN ITEM
-    socket.on('undo an item', function(boardName){
+    socket.on('undo an item', (boardName) => {
       const filter = {boardName: boardName}
       // Find the board
       dataHelpers.getBoards(filter)
-      .then((boards) => {
+      .then(boards => {
         const board = boards[0]
         // Get items on the board in reverse order
         const items = board.items.reverse()
@@ -99,39 +89,32 @@ module.exports = (io, dataHelpers) => {
             })
         })
       }).catch((err) => {
-        // fix later
+        console.log(err)
       })
     })
 
-    socket.on('delete all items', function(boardName) {
+    // CLEAR ALL ITEMS
+    socket.on('delete all items', (boardName) => {
       const filter = {boardName: boardName}
       dataHelpers.deleteAllItems(filter, {$set: {items: []}})
       io.in(boardName).emit('delete all items')
     })
-
     socket.on('delete a board', function(boardName) {
       io.in(boardName).emit('delete a board')
     })
 
-
-
     // DISCONNECT
-    socket.on('disconnect', function () {
+    socket.on('disconnect', () => {
       console.log('Client disconnected: ', socket.id)
       const boardName = clients[socket.id].boardName
       delete clients[socket.id]
       io.in(boardName).emit('online users', getOnlineUsers(boardName))
     })
-
-
-
   })
 }
 
-
-
-
-getOnlineUsers = (boardName) => {
+// Get online users
+const getOnlineUsers = (boardName) => {
   const onlineUsers = []
   for (let id in clients) {
     if (clients[id].boardName === boardName) {
@@ -143,4 +126,3 @@ getOnlineUsers = (boardName) => {
   }
   return onlineUsers
 }
-
