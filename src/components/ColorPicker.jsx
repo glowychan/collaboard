@@ -3,11 +3,11 @@ import { CirclePicker } from 'react-color'
 
 class ColorPicker extends Component {
   state = {
-    background: '#fff',
+    background: '#fff'
   };
 
   handleChangeComplete = color => {
-    this.setState({ background: color.hex });
+    this.setState({ background: color.hex })
     this.props.newColor(this.state.background)
   };
 
