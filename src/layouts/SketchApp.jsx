@@ -42,6 +42,7 @@ export default class SketchApp extends Component
       items: this.props.items,
       poppedOpen: false,
       nameOpen: true,
+      textboxCompleted: false
     }
     this.handleShare = this.handleShare.bind(this);
     this.closePopup = this.closePopup.bind(this);
@@ -82,6 +83,26 @@ export default class SketchApp extends Component
     this.props.newUserName(userName)
   }
 
+  changeTool = (tool) => {
+    if (this.state.tool === TOOL_TEXTBOX) {
+      this.props.sendText()
+      const style= {
+        top: '0px',
+        left: '0px',
+        width: '0px',
+        height: '0px',
+        display: 'none',
+        position: 'absolute',
+        background: 'none',
+        zIndex: 1
+      }
+      this.props.changeTextBoxStyle(style)
+      this.setState({textboxCompleted: true})
+    }
+    this.setState({tool:tool})
+  }
+
+
 
 render() {
     const { tool, size, color, fill, fillColor } = this.state;
@@ -89,9 +110,13 @@ render() {
       <div>
         <Link  style={{ textDecoration: 'none', color: 'black' }} to='/'><h1><img className='logo' src={logo} />TWOODLE</h1></Link>
         <p>{this.state.items}</p>
-        <Sidebar onShare={this.handleShare} boardName={this.props.boardName} deleteBoard={this.props.deleteBoard} />
+        <Sidebar
+          onShare={this.handleShare}
+          boardName={this.props.boardName}
+          deleteBoard={this.props.deleteBoard}
+        />
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
-        {this.state.poppedOpen ? 
+        {this.state.poppedOpen ?
         <div className='popout-container'>
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closePopup} url={this.props.boardName}/>
         </div>
@@ -110,7 +135,7 @@ render() {
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_PENCIL})}
+              onClick={() => this.changeTool(TOOL_PENCIL)}
             ><img className='icon' src={pencil} title='Pencil' alt='Pencil'/></button>
 
             <button
@@ -174,7 +199,10 @@ render() {
             tool={tool}
             onCompleteItem={(item) => this.props.addNewItem(item, this.props.boardName)}
             onSave={this.handleSave}
-            getText={this.props.getText}
+            onTextChange={this.props.onTextChange}
+            textBoxStyle={this.props.textBoxStyle}
+            changeTextBoxStyle={this.props.changeTextBoxStyle}
+            textboxCompleted={this.state.textboxCompleted}
           />
         </div>
         <UsersOnline users={this.props.users} />

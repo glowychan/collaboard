@@ -26,7 +26,22 @@ class Twoodle extends React.Component {
       items: [],
       undo: false,
       clear: false,
-      onlineUsers: []
+      onlineUsers: [],
+      tempTextItem: '',
+
+      textBoxStyle: {
+        top: '0px',
+        left: '0px',
+        width: '100px',
+        height: '100px',
+        display: 'none',
+        position: 'absolute',
+        border: '1px solid red',
+        background: 'none',
+        zIndex: 500
+      }
+
+
     }
     this.onResize = this.onResize.bind(this)
   }
@@ -106,8 +121,11 @@ class Twoodle extends React.Component {
                    newUserName = {this.newUserName}
                    users = {this.state.onlineUsers}
                    deleteBoard = {this.deleteBoard}
-                   getText = {this.getText}/>
-                  />
+                   onTextChange = {this.onTextChange}
+                   sendText={this.sendText}
+                   textBoxStyle={this.state.textBoxStyle}
+                   changeTextBoxStyle={this.changeTextBoxStyle}
+                   />
       </div>
     )
   }
@@ -141,9 +159,31 @@ class Twoodle extends React.Component {
     this.socket.emit('delete a board', this.state.boardName)
   }
 
-  getText = (event) => {
-    event.preventDefault()
-    alert(event.target.text.value)
+  onTextChange = (event) => {
+    console.log(event.target.value)
+    const item = {
+      id: '123',
+      text: event.target.value,
+      tool: 'textbox',
+
+    }
+    this.setState({text: event.target.value})
+  }
+
+  sendText = () => {
+    console.log('I want to send the text', this.state.text)
+    //instead of sending it just add to the state
+    const item = {
+      id: 'test',
+      text: this.state.text,
+      tool: 'textbox'
+    }
+    this.socket.emit('add new items', {items: item, boardName: this.state.boardName})
+  }
+
+  changeTextBoxStyle = (style) => {
+    console.log('I am here')
+    this.setState({textBoxStyle: style})
   }
 
 }

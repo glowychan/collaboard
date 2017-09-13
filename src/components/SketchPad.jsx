@@ -9,6 +9,8 @@ import Textbox, { TOOL_TEXTBOX } from './tools/Textbox';
 import Brush, { TOOL_BRUSH } from './tools/Brush';
 import Eraser, { TOOL_ERASER } from './tools/Eraser';
 import FileSaver from 'file-saver';
+import Draggable from 'react-draggable';
+
 
 
 export const toolsMap = {
@@ -60,12 +62,10 @@ export default class SketchPad extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      tx_top: 0,
-      tx_left: 0,
-      tx_width: 0,
-      tx_height: 0,
-      tx_display: 'none'
+    this.textboxFlag = true
+
+    this.state= {
+      text: ''
     }
 
     this.initTool = this.initTool.bind(this);
@@ -155,9 +155,15 @@ handleSave = () => {
     items
       .filter(item => this.props.items.indexOf(item) === -1)
       .forEach(item => {
-        this.initTool(item.tool);
-        this.tool.draw(item, this.props.animate);
-      });
+        if (item.tool !== 'textbox') {
+          this.initTool(item.tool);
+          this.tool.draw(item, this.props.animate);
+        }
+        else {
+          console.log('I found a text box')
+          this.ctx.strokeText(item.text,100,500);
+        }
+      })
     this.initTool(this.props.tool);
   }
 
@@ -173,21 +179,28 @@ handleSave = () => {
       this.interval = setInterval(this.onDebouncedMove, this.props.debounceTime);
     }
 
-    setTimeout( () => {
-      if (data[0].tool === 'textbox') {
-        this.setState({tx_left: data[0].start.x})
-        this.setState({tx_top: data[0].start.y})
-        console.log(data[0].start, data[0].end)
-        this.setState({tx_height: data[0].end.y - data[0].start.y})
-        this.setState({tx_width: data[0].end.x - data[0].start.x})
-        this.setState({tx_display: ''})
+    if (data && data[0] && this.textboxFlag && data[0].tool === 'textbox') {
+      console.log('change style', this.getCursorPosition(e))
+      // this.sendTextBoxLocation()
+
+      const style = {
+        top: data[0].start.y,
+        left: data[0].start.x,
+        width: '100px',
+        height: '100px',
+        display: '',
+        position: 'absolute',
+        border: '1px dashed black',
+        background: 'none',
+        zIndex: 500
       }
+      this.textboxFlag = false
+      this.props.changeTextBoxStyle(style)
+    } else {
+      this.textboxFlag = true
+    }
 
-    }, 1000);
-    // if (this.tool)
 
-    // console.log(data[0].start)
-    // console.log(data[0])
   }
 
   onDebouncedMove() {
@@ -197,25 +210,26 @@ handleSave = () => {
   }
 
   onMouseMove(e) {
-    const data = this.tool.onMouseMove(...this.getCursorPosition(e));
-    data && data[0] && this.props.onEveryItemChange && this.props.onEveryItemChange.apply(null, data);
-  }
-
-  onMouseUp(e) {
-    const data = this.tool.onMouseUp(...this.getCursorPosition(e));
-    data && data[0] && this.props.onCompleteItem && this.props.onCompleteItem.apply(null, data);
-    if (this.props.onDebouncedItemChange) {
-      clearInterval(this.interval);
-      this.interval = null;
+    if (this.tool.onMouseMove) {
+      const data = this.tool.onMouseMove(...this.getCursorPosition(e));
+      data && data[0] && this.props.onEveryItemChange && this.props.onEveryItemChange.apply(null, data);
     }
   }
 
+  onMouseUp(e) {
+    if (this.tool.onMouseUp) {
+      const data = this.tool.onMouseUp(...this.getCursorPosition(e));
+      data && data[0] && this.props.onCompleteItem && this.props.onCompleteItem.apply(null, data);
+      if (this.props.onDebouncedItemChange) {
+        clearInterval(this.interval);
+        this.interval = null;
+      }
+    }
+  }
+
+
   getCursorPosition(e) {
     const { top, left } = this.canvas.getBoundingClientRect();
-
-    // const ratioH = this.initialHeight/this.canvas.height
-    // const ratioW = this.initialWidth/this.canvas.width
-
     return [
       e.clientX - left,
       e.clientY - top
@@ -230,18 +244,14 @@ handleSave = () => {
     const { width, height, canvasClassName } = this.props;
     return (
       <div>
-
         <div className="canvas-div">
-          <form onSubmit={this.props.getText}>
-            <input style={{
-              position: 'relative',
-              top: this.state.tx_top,
-              left: this.state.tx_left,
-              width: this.state.tx_width,
-              height: this.state.tx_height,
-              display: this.state.tx_display
-          }} name="text" />
-          </form>
+          <textarea style={this.props.textBoxStyle}
+              onChange={(event) => {
+                this.props.onTextChange(event)
+                this.state.text = event.target.value
+                console.log('data is:')
+              }}
+          />
           <canvas
             ref={(canvas) => { this.canvasRef = canvas; }}
             className={canvasClassName}
