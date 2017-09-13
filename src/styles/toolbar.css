@@ -11,8 +11,8 @@
 
 .toolbar{
   position: absolute;
-  top: 5%;
-  right: 2%;
+  top: 3%;
+  right: 1%;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
