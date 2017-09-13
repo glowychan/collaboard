@@ -1,4 +1,5 @@
 const clients = {}
+const randomColor = require('randomcolor');
 
 module.exports = (io, dataHelpers) => {
   io.on('connection', function (socket) {
@@ -7,7 +8,9 @@ module.exports = (io, dataHelpers) => {
     console.log('New connection:', socket.id)
     clients[socket.id] = {
       name: 'Anonymous',
+      color: '#6ED3CF',
       boardName: ''
+    
     }
 
 
@@ -40,7 +43,9 @@ module.exports = (io, dataHelpers) => {
 
     // Update client's username
     socket.on('new user name', function(userName) {
+      const color = randomColor({luminosity: 'light'})
       clients[socket.id].name = userName
+      clients[socket.id].color = color
     })
 
 
@@ -137,7 +142,8 @@ getOnlineUsers = (boardName) => {
     if (clients[id].boardName === boardName) {
       onlineUsers.push({
         id: id,
-        name: clients[id].name
+        name: clients[id].name,
+        color: clients[id].color
       })
     }
   }

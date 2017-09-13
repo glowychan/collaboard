@@ -144,14 +144,15 @@ img.save:hover {
 
 @media only screen and (min-width : 100px) and (max-width : 480px) {
   .toolbar {
-    flex-flow: column nowrap;
+    flex-flow: row nowrap;
     -webkit-flex-direction: column;
-    width: 10%;
-    top: 5%;
+    padding: 8px;
+    top: 0;
+    right: 0;
+    left: 0; 
     justify-content: center;
     align-items: center;
     background-color: rgba(144, 104, 190, 0.5);
-    right: 0;
     position: fixed;
   }
   .size {
@@ -159,8 +160,7 @@ img.save:hover {
   }
 
   .circle-picker {
-    flex-direction: column;
-    width: 0;
+    flex-direction: row;
     align-items: center;
     }
 
@@ -193,19 +193,21 @@ and (max-device-width: 640px)
 and (orientation: landscape) {
   .toolbar {
     flex-flow: row nowrap;
-    -webkit-flex-direction: row;
-    width: 80%;
-    height: 5%;
-    padding: 2%;
+    -webkit-flex-direction: column;
+    padding: 8px;
     top: 0;
-    justify-content: flex-end;
-    align-items: center;
     right: 0;
+    left: 0; 
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(144, 104, 190, 0.5);
     position: fixed;
   }
-  .size {
-    display: none;
-  }
+
+  .circle-picker {
+    flex-direction: row;
+    align-items: center;
+    }
 
   .save {
     display: none;
@@ -219,11 +221,6 @@ and (orientation: landscape) {
     display: none;
 
   }
-
-  .circle-picker {
-    flex-direction: row;
-    align-items: center;
-    }
 
   .fill {
     flex-direction: row;
