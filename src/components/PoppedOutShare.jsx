@@ -8,7 +8,6 @@ const LinkedinIcon = generateShareIcon('linkedin')
 
 const {
         FacebookShareButton,
-        GooglePlusShareButton,
         LinkedinShareButton,
         TwitterShareButton,
         EmailShareButton,

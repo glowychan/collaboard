@@ -31,7 +31,7 @@ class AboutPopout extends Component {
     return null
     return (
       <div ref={this.setWrapperRef} className='about-pop'>
-        <img src={about} />
+        <img src={about} alt='get started on twoodle' />
       </div>
     )
   }

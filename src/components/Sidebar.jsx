@@ -36,10 +36,10 @@ class SideBar extends Component {
     pageWrapId={ "page-wrap" }
     outerContainerId={ "outer-container" }
     width={ '4%' } >
-        <Link className="bm-item-list side-item" to="/"><img className='home' src={home} /></Link>
-        <Link className="bm-item-list side-item" to="/"><img className='twoodle' src={newtwoodle} /></Link>
-        <a className='bm-item-list side-item' onClick={this.popout}><img src={share} /> </a>
-        <a className='bm-item-list side-item' onClick={this.onDeleteClick}><img src={trashcan} /> </a>
+        <Link className="bm-item-list side-item" to="/"><img className='home' src={home} alt='home' /></Link>
+        <Link className="bm-item-list side-item" to="/"><img className='twoodle' src={newtwoodle} alt='new' /></Link>
+        <a className='bm-item-list side-item' onClick={this.popout}><img src={share} alt='share' /></a>
+        <a className='bm-item-list side-item' onClick={this.onDeleteClick}><img src={trashcan} alt='delete' /></a>
     </Menu>
     );
   };
