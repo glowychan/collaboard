@@ -11,16 +11,10 @@ const {
         GooglePlusShareButton,
         LinkedinShareButton,
         TwitterShareButton,
-        TelegramShareButton,
-        WhatsappShareButton,
-        PinterestShareButton,
-        VKShareButton,
-        OKShareButton,
-        RedditShareButton,
         EmailShareButton,
       } = ShareButtons
 
-class PoppedOutShare extends React.Component {
+class PoppedOutShare extends Component {
   constructor(props) {
     super(props)
     this.setWrapperRef = this.setWrapperRef.bind(this)
