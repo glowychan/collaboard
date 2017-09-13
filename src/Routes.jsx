@@ -1,10 +1,9 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch, Link, withRouter } from 'react-router-dom';
-import SketchApp from './layouts/SketchApp';
-import Homepage from './layouts/Homepage';
-import Errorpage from './layouts/Errorpage';
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import SketchApp from './layouts/SketchApp'
+import Homepage from './layouts/Homepage'
+import Errorpage from './layouts/Errorpage'
 import io from 'socket.io-client'
-
 
 const Home = () => (
   <div>
@@ -30,22 +29,20 @@ class Twoodle extends React.Component {
     }
     this.onResize = this.onResize.bind(this)
   }
-  
- 
- onResize() {
-  alert('resize')
-  const items = this.state.items
-  this.setState({
-    items: []
-  })
 
-  this.setState({
-    items: items
-  })
-}
+  onResize() {
+    alert('resize')
+    const items = this.state.items
+    this.setState({
+      items: []
+    })
+    this.setState({
+      items: items
+    })
+  }
 
   componentDidMount() {
-  
+
     // Set up websocket connection
     this.socket = io('http://localhost:3001')
 
@@ -106,13 +103,13 @@ class Twoodle extends React.Component {
                    deleteAllItems = {this.deleteAllItems}
                    newUserName = {this.newUserName}
                    users = {this.state.onlineUsers}
-                   deleteBoard = {this.deleteBoard} 
+                   deleteBoard = {this.deleteBoard}
                    onResize={this.onResize}/>
       </div>
     )
   }
 
-  // Send new items through the websockets to be braodcasted
+  // Send new items through the websockets to be broadcasted
   addNewItem = (item, boardName) => {
     const data = {
       boardName: boardName,
@@ -126,6 +123,7 @@ class Twoodle extends React.Component {
     this.socket.emit('undo an item', this.state.boardName)
   }
 
+ // Send a clear request through websockets
   deleteAllItems = (boardName) => {
     this.socket.emit('delete all items', this.state.boardName)
   }
@@ -140,18 +138,13 @@ class Twoodle extends React.Component {
   deleteBoard = (boardName) => {
     this.socket.emit('delete a board', this.state.boardName)
   }
-
-
 }
-
-
-
 
 const Routes = () => (
   <Router>
     <div className='outer-container'>
-     <main id='page-wrap'>
-     <Switch>
+      <main id='page-wrap'>
+      <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/twoodles/:boardName" component={Twoodle} />
         <Route path="*" component={ErrorComponent}/>
