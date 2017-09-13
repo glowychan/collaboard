@@ -1,11 +1,6 @@
 import React from 'react'
-import About from '../icons/About.png'
 
 class UserNamePopout extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     if(!this.props.isOpen)
     return null
