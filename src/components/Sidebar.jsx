@@ -23,7 +23,7 @@ class SideBar extends Component {
     axios.delete(url)
       .then((response) => {
         this.props.deleteBoard(this.props.boardName)
-        window.location = `/`;
+        window.location = `/`
       })
       .catch((error) => {
         console.log("error", error)
