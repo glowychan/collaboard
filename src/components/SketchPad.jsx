@@ -122,12 +122,23 @@ handleSave = () => {
   }
 
   componentWillReceiveProps({ tool, items }) {
+    this.canvas = findDOMNode(this.canvasRef);
+    this.ctx = this.canvas.getContext('2d');
+
     items
       .filter(item => this.props.items.indexOf(item) === -1)
       .forEach(item => {
+        if (item.tool === 'image') {
+          let img = new Image();
+          img.src = item.url
+          img.width = 400;
+          this.ctx.drawImage(img, 0, 0);
+      } else {
         this.initTool(item.tool);
         this.tool.draw(item, this.props.animate);
+      }
       });
+    
     this.initTool(this.props.tool);
   }
 

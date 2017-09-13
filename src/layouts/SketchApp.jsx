@@ -13,6 +13,7 @@ import ColorPicker from '../components/ColorPicker';
 import FillPicker from '../components/FillPicker';
 import UserNamePopout from '../components/UserNamePopout';
 import UsersOnline from '../components/UsersOnline'
+import AddImage from '../components/AddImage'
 import logo from '../icons/007-square.png';
 import pencil from '../icons/011-tool.png'
 import line from '../icons/008-two.png'
@@ -24,6 +25,7 @@ import save from '../icons/001-symbols-1.png'
 import clear from '../icons/001-circle.png'
 import eraser from '../icons/eraser.png'
 import undo from '../icons/undo.png'
+import picture from '../icons/picture.png'
 
 export default class SketchApp extends Component
 {
@@ -41,10 +43,12 @@ export default class SketchApp extends Component
       items: this.props.items,
       poppedOpen: false,
       nameOpen: true,
+      addImage: false
     }
     this.handleShare = this.handleShare.bind(this);
     this.closePopup = this.closePopup.bind(this);
     this.closeOtherPops = this.closeOtherPops.bind(this);
+    this.addImage = this.addImage.bind(this);
   }
 
 
@@ -77,6 +81,27 @@ export default class SketchApp extends Component
       poppedOpen: false,
     })
   }
+  
+  addImage = (event) => {
+   event.preventDefault()
+   let imageUrl = event.target.imageUrl.value
+   let pattern = /^((http|https|ftp):\/\/)/;
+
+   if (!(pattern.test(imageUrl))) {
+      imageUrl = `https://${imageUrl}`
+   }
+  
+   let image = {
+     url: imageUrl,
+     tool: 'image'
+   }
+
+   this.setState({
+      addImage: false
+    })
+  
+  this.props.addNewItem(image, this.props.boardName)
+  }
 
   closePopup = (event) => {
     event.preventDefault()
@@ -95,6 +120,7 @@ render() {
         <h1><img className='logo' src={logo} />TWOODLE</h1>
         <Sidebar onShare={this.handleShare} boardName={this.props.boardName} deleteBoard={this.props.deleteBoard} />
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
+        <AddImage isOpen={this.state.addImage} onClose={this.addImage}/>
         {this.state.poppedOpen ? 
         <div className='popout-container'>
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closeOtherPops} url={this.props.boardName}/>
@@ -110,6 +136,9 @@ render() {
 
           <button
            onClick={() => this.refs.sketch.handleSave()}><img className='icon save' src={save} title='Save board' alt='Save'/> </button>
+
+          <button
+           onClick={() => this.setState({addImage: true})}><img className='icon image' src={picture} title='Add image' alt='Add image' /> </button>
 
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}

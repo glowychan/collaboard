@@ -1,7 +1,7 @@
 
 
 .checkbox {
-  margin: 16px 12px 0 12px;
+  margin: 14px 10px 0 10px;
   transform: scale(2.0);
 	padding: 30px;
   background: #fff;
@@ -71,11 +71,11 @@ img.icon {
 
 
 .fill span {
-  margin-top: 3px;
+  margin-top: 4%;
 }
 
 .fill label {
-  margin-top: 8%
+  margin-top: 8%;
 }
 
 .circle-pick {

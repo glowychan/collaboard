@@ -118,6 +118,7 @@ class Twoodle extends React.Component {
       boardName: boardName,
       items:  item,
     }
+    console.log(data)
     this.socket.emit('add new items', data)
   }
 
