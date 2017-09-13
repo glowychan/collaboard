@@ -6,7 +6,6 @@ export default (context) => {
   let stroke = null;
   let points = [];
 
-
   const onMouseDown = (x, y, color, size) => {
     stroke = {
       id: v4(),

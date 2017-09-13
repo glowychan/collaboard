@@ -6,14 +6,11 @@ export default (context) => {
   let stroke = null;
   let points = [];
 
- const getRandomInt = (min, max) => {
+  const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   const onMouseDown = (x, y, color, size) => {
-    console.log(x)
-    console.log(y)
-    
     stroke = {
       id: v4(),
       tool: TOOL_PENCIL,
@@ -21,7 +18,6 @@ export default (context) => {
       size,
       points: [{ x, y}]
     };
-
     return [stroke];
   };
 
@@ -37,7 +33,6 @@ export default (context) => {
     context.lineTo(x , y);
     context.stroke();
     context.closePath();
-    
     context.restore();
   };
 

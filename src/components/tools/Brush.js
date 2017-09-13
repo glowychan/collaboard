@@ -6,7 +6,6 @@ export default (context) => {
   let stroke = null;
   let points = [];
 
-
   const onMouseDown = (x, y, color, size) => {
     stroke = {
       id: v4(),
@@ -26,7 +25,7 @@ export default (context) => {
     context.lineWidth = item.size;
     context.strokeStyle = item.color;
     context.globalCompositeOperation = 'source-over';
-    
+
     context.moveTo(start.x, start.y);
     context.lineTo(x, y);
     context.stroke();

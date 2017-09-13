@@ -39,7 +39,6 @@ export default (context) => {
     drawLine(stroke, start, newPoint);
     stroke.points.push(newPoint);
     points.push(newPoint);
-
     return [stroke];
   };
 
