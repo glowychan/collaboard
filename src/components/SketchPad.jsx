@@ -16,7 +16,7 @@ export const toolsMap = {
   [TOOL_RECTANGLE]: Rectangle,
   [TOOL_ELLIPSE]: Ellipse,
   [TOOL_BRUSH]: Brush,
-  [TOOL_ERASER]: Eraser
+  [TOOL_ERASER]: Eraser,
 };
 
 export default class SketchPad extends Component {
@@ -130,9 +130,12 @@ handleSave = () => {
       .forEach(item => {
         if (item.tool === 'image') {
           let img = new Image();
+           let x = Math.floor(Math.random()*this.canvas.width)
+           let y = Math.floor(Math.random()*this.canvas.height)
           img.src = item.url
-          img.width = 400;
-          this.ctx.drawImage(img, 0, 0);
+          img.onload = () => {
+            this.ctx.drawImage(img, x, y);
+          }
       } else {
         this.initTool(item.tool);
         this.tool.draw(item, this.props.animate);
