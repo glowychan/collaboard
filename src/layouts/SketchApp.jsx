@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import SketchPad from '../components/SketchPad';
-import { TOOL_PENCIL } from '../components/tools/Pencil';
-import { TOOL_LINE } from '../components/tools/Line';
-import { TOOL_ELLIPSE } from '../components/tools/Ellipse';
-import { TOOL_RECTANGLE } from '../components/tools/Rectangle';
-import { TOOL_BRUSH } from '../components/tools/Brush';
-import { TOOL_ERASER } from '../components/tools/Eraser';
-import Sidebar from '../components/Sidebar';
-import PoppedOutShare from '../components/PoppedOutShare.jsx';
-import ColorPicker from '../components/ColorPicker';
-import FillPicker from '../components/FillPicker';
-import UserNamePopout from '../components/UserNamePopout';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import SketchPad from '../components/SketchPad'
+import { TOOL_PENCIL } from '../components/tools/Pencil'
+import { TOOL_LINE } from '../components/tools/Line'
+import { TOOL_ELLIPSE } from '../components/tools/Ellipse'
+import { TOOL_RECTANGLE } from '../components/tools/Rectangle'
+import { TOOL_BRUSH } from '../components/tools/Brush'
+import { TOOL_ERASER } from '../components/tools/Eraser'
+import Sidebar from '../components/Sidebar'
+import PoppedOutShare from '../components/PoppedOutShare.jsx'
+import ColorPicker from '../components/ColorPicker'
+import FillPicker from '../components/FillPicker'
+import UserNamePopout from '../components/UserNamePopout'
 import UsersOnline from '../components/UsersOnline'
-import logo from '../icons/007-square.png';
+import logo from '../icons/007-square.png'
 import pencil from '../icons/011-tool.png'
 import line from '../icons/008-two.png'
 import circle from '../icons/009-circle.png'
@@ -25,13 +25,10 @@ import clear from '../icons/001-circle.png'
 import eraser from '../icons/eraser.png'
 import undo from '../icons/undo.png'
 
-export default class SketchApp extends Component
-{
-  socket = null;
-
+export default class SketchApp extends Component {
+  socket = null
   constructor(props) {
-    super(props);
-
+    super(props)
     this.state = {
       tool:TOOL_PENCIL,
       size: 2,
@@ -42,12 +39,11 @@ export default class SketchApp extends Component
       poppedOpen: false,
       nameOpen: true,
     }
-    this.handleShare = this.handleShare.bind(this);
-    this.closePopup = this.closePopup.bind(this);
+    this.handleShare = this.handleShare.bind(this)
+    this.closePopup = this.closePopup.bind(this)
   }
 
-
-  componentWillReceiveProps ({undo, clear}) {
+  componentWillReceiveProps ({ undo, clear }) {
     if (undo || clear) {
       this.refs.sketch.handleClear()
     }
@@ -65,7 +61,7 @@ export default class SketchApp extends Component
     })
   }
 
-  handleShare (popup) {
+  handleShare(popup) {
     this.setState({
       poppedOpen: true
     })
@@ -81,16 +77,15 @@ export default class SketchApp extends Component
     this.props.newUserName(userName)
   }
 
-
-render() {
-    const { tool, size, color, fill, fillColor } = this.state;
+  render() {
+    const { tool, size, color, fill, fillColor } = this.state
     return (
       <div>
-        <Link  style={{ textDecoration: 'none', color: 'black' }} to='/'><h1><img className='logo' src={logo} />TWOODLE</h1></Link>
+        <Link  style={{ textDecoration: 'none', color: 'black' }} to='/'><h1><img className='logo' src={logo} alt='logo' />TWOODLE</h1></Link>
         <p>{this.state.items}</p>
         <Sidebar onShare={this.handleShare} boardName={this.props.boardName} deleteBoard={this.props.deleteBoard} />
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
-        {this.state.poppedOpen ? 
+        {this.state.poppedOpen ?
         <div className='popout-container'>
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closePopup} url={this.props.boardName}/>
         </div>
@@ -107,44 +102,44 @@ render() {
            onClick={() => this.refs.sketch.handleSave()}><img className='icon save' src={save} title='Save board' alt='Save'/> </button>
 
             <button
-              style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
+              style={tool === TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
+              className={tool === TOOL_PENCIL  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_PENCIL})}
             ><img className='icon' src={pencil} title='Pencil' alt='Pencil'/></button>
 
             <button
-              style={tool == TOOL_BRUSH ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_BRUSH  ? 'item-active' : 'item'}
+              style={tool === TOOL_BRUSH ? {fontWeight:'bold'} : undefined}
+              className={tool === TOOL_BRUSH  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_BRUSH})}
             ><img className='icon' src={paint} title='Paint brush' alt='Paint brush' /></button>
 
             <button
-              style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_LINE  ? 'item-active line' : 'item line'}
+              style={tool === TOOL_LINE ? {fontWeight:'bold'} : undefined}
+              className={tool === TOOL_LINE  ? 'item-active line' : 'item line'}
               onClick={() => this.setState({tool:TOOL_LINE})}
             ><img className='icon' src={line} title='Line' alt='Line' /></button>
 
             <button
-              style={tool == TOOL_ELLIPSE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_ELLIPSE  ? 'item-active' : 'item'}
+              style={tool === TOOL_ELLIPSE ? {fontWeight:'bold'} : undefined}
+              className={tool === TOOL_ELLIPSE  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_ELLIPSE})}
             ><img className='icon' src={circle} title='Circle' alt='Circle' /></button>
 
             <button
-              style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
+              style={tool === TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
+              className={tool === TOOL_RECTANGLE  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_RECTANGLE})}
             ><img className='icon' src={sqaure} title='Rectangle' alt='Rectangle'/></button>
 
             <button
-              style={tool == TOOL_ERASER ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
+              style={tool === TOOL_ERASER ? {fontWeight:'bold'} : undefined}
+              className={tool === TOOL_ERASER  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_ERASER})}
             ><img className='icon' src={eraser} title='Eraser' alt='Eraser'/></button>
             <label htmlFor="" className='size'>SIZE: </label>
             <input min="1" max="20" className='size'type="range" value={size} onChange={(e) => this.setState({size: parseInt(e.target.value)})} />
             <ColorPicker value={color} newColor={this.changeColor.bind(this)}/>
-          {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
+          {(this.state.tool === TOOL_ELLIPSE || this.state.tool === TOOL_RECTANGLE) ?
             <div className='fill'>
               <label htmlFor="">FILL:</label>
               <input className="checkbox" type="checkbox" value={fill} style={{margin:'0 8'}}
