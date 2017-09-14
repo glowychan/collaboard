@@ -46,7 +46,6 @@ export default class SketchApp extends Component
       poppedOpen: false,
       nameOpen: true,
       addImage: false,
-      webRTC: false
     }
     this.handleShare = this.handleShare.bind(this);
     this.closePopup = this.closePopup.bind(this);
@@ -112,7 +111,7 @@ export default class SketchApp extends Component
     this.props.newUserName(userName)
     this.setState({
       nameOpen: false,
-      webRTC: true
+      joinCall: true
     })
   }
 
@@ -192,7 +191,10 @@ render() {
                 </span> : ''}
             </div> : ''}
           </div>
-          <WebRTC roomName={this.props.boardName} joinChat={this.state.webRTC}/>
+          {this.state.joinCall && 
+          <WebRTC roomName={this.props.boardName} endChat={this.state.clicked}/>
+           }
+          
         <div>
           <SketchPad
             ref='sketch'
@@ -207,7 +209,6 @@ render() {
             onCompleteItem={(item) => this.props.addNewItem(item, this.props.boardName)}
             onSave={this.handleSave}
           />
-          <button className='hang-up'><img src={phone} /> </button>
         </div>
         <UsersOnline users={this.props.users} />
       </div>
