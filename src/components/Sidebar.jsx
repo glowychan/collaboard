@@ -42,10 +42,10 @@ class SideBar extends Component {
     <Menu className="bm-menu"
     pageWrapId={ "page-wrap" }
     outerContainerId={ "outer-container" }
-    width={ '4%' } >
-        <Link className="bm-item-list side-item" to="/"><img className='home' src={home} /></Link>
-        <Link className="bm-item-list side-item" to="/"><img className='twoodle' src={newtwoodle} /></Link>
-        <a href="#" className='bm-item-list side-item' onClick={this.popout}><img src={share} /> </a>
+    width={ '6%' } >
+        <Link className="bm-item-list side-item" to="/"><i className='flaticon-symbols'></i></Link>
+        <Link className="bm-item-list side-item" to="/"><i className='flaticon-symbol'></i></Link>
+        <a href="#" className='bm-item-list side-item' onClick={this.popout}><i className='flaticon-sign'></i> </a>
         <SweetAlert
         show={this.state.show}
         title="Are you sure?"
@@ -57,7 +57,7 @@ class SideBar extends Component {
             this.setState({ show: false });
           }}
       />
-        <a className='bm-item-list side-item' onClick={() => this.setState({ show: true })}><img src={trashcan} /> </a>
+        <a className='bm-item-list side-item' onClick={() => this.setState({ show: true })}><i className='flaticon-symbol-1'></i> </a>
     </Menu>
 
     );
