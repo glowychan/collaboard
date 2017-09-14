@@ -75,14 +75,37 @@ font-size: 2rem;
   width: 100%;
 }
 
+.flaticon-symbols {
+  color: black;
+}
 
+.flaticon-symbol {
+  color: black;
+}
+
+.flaticon-sign {
+  color: black;
+}
+
+.flaticon-symbol-1 {
+  color: black;
+}
 
 .side-item {
+  text-decoration: none;
   transition: 0.70s;
   -webkit-transition: 0.70s;
   -moz-transition: 0.70s;
   -ms-transition: 0.70s;
   -o-transition: 0.70s;
+}
+
+.side-item a:visited {
+  color: none;
+}
+
+.side-item a:active {
+  color: none;
 }
 
 .side-item:hover {

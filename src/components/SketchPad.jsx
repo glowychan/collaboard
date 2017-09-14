@@ -20,7 +20,7 @@ export const toolsMap = {
   [TOOL_TEXTBOX]: Textbox,
   [TOOL_ELLIPSE]: Ellipse,
   [TOOL_BRUSH]: Brush,
-  [TOOL_ERASER]: Eraser
+  [TOOL_ERASER]: Eraser,
 };
 
 export default class SketchPad extends Component {
@@ -47,8 +47,8 @@ export default class SketchPad extends Component {
   };
 
   static defaultProps = {
-    // width: 500,
-    // height: 500,
+    width: window.innerWidth,
+    height: window.innerHeight,
     color: '#000',
     size: 1,
     fillColor: '',
@@ -76,41 +76,17 @@ export default class SketchPad extends Component {
     this._onTouchStart = this._onTouchStart.bind(this);
     this._onTouchMove = this._onTouchMove.bind(this);
     this._onTouchEnd = this._onTouchEnd.bind(this);
-    this.updateDimensions = this.updateDimensions.bind(this)
-    this.redraw = this.redraw.bind(this)
-
-
   }
 
   componentDidMount() {
     this.canvas = findDOMNode(this.canvasRef);
     this.ctx = this.canvas.getContext('2d');
-    this.canvas.width = this.canvas.offsetWidth;
-    this.canvas.height = this.canvas.offsetHeight
     this.initialHeight = this.canvas.height
     this.initialWidth = this.canvas.width
     this.initTool(this.props.tool);
-    this.ctx.fillStyle = 'white';
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-
-    window.addEventListener('resize', this.updateDimensions)
+    // this.ctx.fillStyle = 'white';
+    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
   }
-
-  updateDimensions () {
-    this.canvas.width = this.canvas.offsetWidth;
-    this.canvas.height = this.canvas.offsetHeight
-    this.redraw()
-  }
-
-  redraw() {
-    this.props.items
-      .forEach(item => {
-        this.initTool(item.tool);
-        this.tool.draw(item, this.props.animate);
-      });
-    this.initTool(this.props.tool);
-   }
-
 
 
   _onTouchStart(e) {
@@ -152,12 +128,26 @@ export default class SketchPad extends Component {
   }
 
   componentWillReceiveProps({ tool, items }) {
+    this.canvas = findDOMNode(this.canvasRef);
+    this.ctx = this.canvas.getContext('2d');
+
     items
       .filter(item => this.props.items.indexOf(item) === -1)
       .forEach(item => {
+        if (item.tool === 'image') {
+          let img = new Image();
+          //  let x = Math.floor(Math.random()*this.canvas.width)
+          //  let y = Math.floor(Math.random()*this.canvas.height)
+          img.src = item.url
+          img.onload = () => {
+            this.ctx.drawImage(img, 10, 10);
+          }
+      } else {
         this.initTool(item.tool);
-        this.tool.draw(item)
+        this.tool.draw(item, this.props.animate);
+      }
       })
+
     this.initTool(this.props.tool);
   }
 
