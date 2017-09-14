@@ -137,7 +137,7 @@ export default class SketchPad extends Component {
 
 
 
-handleSave = () => {
+  handleSave = () => {
   const userinput = prompt("Please enter a filename");
   const filename = userinput.concat('');
 
@@ -187,11 +187,11 @@ handleSave = () => {
         background: 'none',
         zIndex: 500
       }
-      this.textboxFlag = false
-      this.props.changeTextBoxStyle(style, data[0].start)
-    } else {
-      this.textboxFlag = true
-    }
+        this.textboxFlag = false
+        this.props.changeTextBoxStyle(style, data[0].start)
+      } else {
+        this.textboxFlag = true
+      }
 
 
   }
