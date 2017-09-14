@@ -130,8 +130,6 @@ handleSave = () => {
       .forEach(item => {
         if (item.tool === 'image') {
           let img = new Image();
-          //  let x = Math.floor(Math.random()*this.canvas.width)
-          //  let y = Math.floor(Math.random()*this.canvas.height)
           img.src = item.url
           img.onload = () => {
             this.ctx.drawImage(img, 10, 10);
