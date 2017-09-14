@@ -28,6 +28,7 @@ class Twoodle extends React.Component {
       clear: false,
       onlineUsers: [],
       tempTextItem: '',
+      location:'',
 
       textBoxStyle: {
         top: '0px',
@@ -176,13 +177,15 @@ class Twoodle extends React.Component {
     const item = {
       id: 'test',
       text: this.state.text,
-      tool: 'textbox'
+      tool: 'textbox',
+      start: this.state.location
     }
     this.socket.emit('add new items', {items: item, boardName: this.state.boardName})
   }
 
-  changeTextBoxStyle = (style) => {
+  changeTextBoxStyle = (style, location) => {
     console.log('I am here')
+    this.setState({location: location})
     this.setState({textBoxStyle: style})
   }
 

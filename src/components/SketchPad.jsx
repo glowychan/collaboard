@@ -155,14 +155,8 @@ handleSave = () => {
     items
       .filter(item => this.props.items.indexOf(item) === -1)
       .forEach(item => {
-        if (item.tool !== 'textbox') {
-          this.initTool(item.tool);
-          this.tool.draw(item, this.props.animate);
-        }
-        else {
-          console.log('I found a text box')
-          this.ctx.strokeText(item.text,100,500);
-        }
+        this.initTool(item.tool);
+        this.tool.draw(item)
       })
     this.initTool(this.props.tool);
   }
@@ -180,8 +174,7 @@ handleSave = () => {
     }
 
     if (data && data[0] && this.textboxFlag && data[0].tool === 'textbox') {
-      console.log('change style', this.getCursorPosition(e))
-      // this.sendTextBoxLocation()
+
 
       const style = {
         top: data[0].start.y,
@@ -195,7 +188,7 @@ handleSave = () => {
         zIndex: 500
       }
       this.textboxFlag = false
-      this.props.changeTextBoxStyle(style)
+      this.props.changeTextBoxStyle(style, data[0].start)
     } else {
       this.textboxFlag = true
     }
@@ -249,7 +242,6 @@ handleSave = () => {
               onChange={(event) => {
                 this.props.onTextChange(event)
                 this.state.text = event.target.value
-                console.log('data is:')
               }}
           />
           <canvas

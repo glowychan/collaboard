@@ -1,8 +1,9 @@
-import { v4 } from 'uuid';
+import { v4 } from 'uuid'
 
-export const TOOL_TEXTBOX = 'textbox';
+export const TOOL_TEXTBOX = 'textbox'
 
 export default (context) => {
+
   let textbox = null;
   let imageData = null;
 
@@ -15,50 +16,42 @@ export default (context) => {
       text: ''
     };
     return [textbox];
-  };
+  }
+
+  const write = (item, mouseX, mouseY) => {
+    const maxWidth = 100
+    const lineHeight = 24
+    const words = item.text.split(' ')
+
+    let x = item.start.x
+    let y = item.start.y
+
+    let line = ''
+    for (let n = 0; n < words.length; n++) {
+      const testLine = line + words[n] + ' ';
+      console.log(testLine)
+      const metrics = context.measureText(testLine);
+      const testWidth = metrics.width;
+      if (testWidth > maxWidth && n > 0) {
+        context.strokeText(line, x, y);
+        line = words[n] + ' ';
+        y += lineHeight;
+      }
+      else {
+        line = testLine;
+      }
+    }
 
 
+    // context.font="100 16px Arial"
+    // context.strokeText(item.text,item.start.x,item.start.y)
+  }
 
-  const drawText = (item, mouseX, mouseY) => {
-    console.log('in this draw')
-    // const startX = mouseX < item.start.x ? mouseX : item.start.x;
-    // const startY = mouseY < item.start.y ? mouseY : item.start.y;
-    // const widthX = Math.abs(item.start.x - mouseX);
-    // const widthY = Math.abs(item.start.y - mouseY);
 
-    // context.beginPath();
-    // context.lineWidth = item.size;
-    // context.strokeStyle = item.color;
-    // context.fillStyle = item.fill;
-    // context.rect(startX, startY, widthX, widthY);
-    // context.stroke();
-    // if (item.fill) context.fill();
-  };
-
-  // const onMouseMove = (x, y) => {
-  //   if (!rectangle) return;
-  //   context.putImageData(imageData, 0, 0);
-  //   context.save();
-  //   drawText(rectangle, x, y);
-  //   context.restore();
-  // };
-
-  // const onMouseUp = (x, y) => {
-  //   if (!rectangle) return;
-  //   onMouseMove(x, y);
-  //   const item = rectangle;
-  //   imageData = null;
-  //   rectangle = null;
-  //   item.end = { x, y };
-  //   return [item];
-  // };
-
-  const draw = item => drawText(item, item.end.x, item.end.y);
+  const draw = item => write(item, item.start.x, item.start.y);
 
   return {
     onMouseDown,
-    // onMouseMove,
-    // onMouseUp,
     draw,
   };
 };

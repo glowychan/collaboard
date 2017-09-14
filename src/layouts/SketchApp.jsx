@@ -166,7 +166,7 @@ render() {
               style={tool == TOOL_TEXTBOX ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_TEXTBOX  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_TEXTBOX})}
-            >textbox</button>
+            ><img className='icon' src={textbox} title='textbox' alt='textbox'/></button>
 
             <button
               style={tool == TOOL_ERASER ? {fontWeight:'bold'} : undefined}
