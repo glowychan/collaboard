@@ -35,11 +35,8 @@ export default class SketchApp extends Component
       items: this.props.items,
       poppedOpen: false,
       nameOpen: true,
-<<<<<<< HEAD
-      textboxCompleted: false
-=======
+      textboxCompleted: false,
       addImage: false,
->>>>>>> 22cfe03a03dfb7fcdc9938500f6716ef0817d247
     }
     this.handleShare = this.handleShare.bind(this);
     this.closePopup = this.closePopup.bind(this);
@@ -77,7 +74,7 @@ export default class SketchApp extends Component
       poppedOpen: false,
     })
   }
-  
+
   addImage = (event) => {
    event.preventDefault()
    let imageUrl = event.target.imageUrl.value
@@ -86,7 +83,7 @@ export default class SketchApp extends Component
    if (!(pattern.test(imageUrl))) {
       imageUrl = `https://${imageUrl}`
    }
-  
+
    let image = {
      url: imageUrl,
      tool: 'image'
@@ -95,7 +92,7 @@ export default class SketchApp extends Component
    this.setState({
       addImage: false
     })
-  
+
   this.props.addNewItem(image, this.props.boardName)
   }
 
@@ -134,23 +131,11 @@ render() {
     const { tool, size, color, fill, fillColor } = this.state;
     return (
       <div>
-<<<<<<< HEAD
-        <Link  style={{ textDecoration: 'none', color: 'black' }} to='/'><h1><img className='logo' src={logo} />TWOODLE</h1></Link>
-        <p>{this.state.items}</p>
-        <Sidebar
-          onShare={this.handleShare}
-          boardName={this.props.boardName}
-          deleteBoard={this.props.deleteBoard}
-        />
-        <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
-        {this.state.poppedOpen ?
-=======
         <h1><img className='logo' src={logo} />TWOODLE</h1>
         <Sidebar onShare={this.handleShare} boardName={this.props.boardName} deleteBoard={this.props.deleteBoard} />
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
         <AddImage isOpen={this.state.addImage} onClose={this.addImage}/>
-        {this.state.poppedOpen ? 
->>>>>>> 22cfe03a03dfb7fcdc9938500f6716ef0817d247
+        {this.state.poppedOpen ?
         <div className='popout-container'>
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closeOtherPops} url={this.props.boardName}/>
         </div>
@@ -172,13 +157,9 @@ render() {
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
-<<<<<<< HEAD
+
               onClick={() => this.changeTool(TOOL_PENCIL)}
-            ><img className='icon' src={pencil} title='Pencil' alt='Pencil'/></button>
-=======
-              onClick={() => this.setState({tool:TOOL_PENCIL})}
             ><i className='flaticon-tool' title='Pencil' alt='Pencil'></i></button>
->>>>>>> 22cfe03a03dfb7fcdc9938500f6716ef0817d247
 
             <button
               style={tool == TOOL_BRUSH ? {fontWeight:'bold'} : undefined}
@@ -208,7 +189,7 @@ render() {
               style={tool == TOOL_TEXTBOX ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_TEXTBOX  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_TEXTBOX})}
-            ><img className='icon' src={textbox} title='textbox' alt='textbox'/></button>
+            >textbox</button>
 
             <button
               style={tool == TOOL_ERASER ? {fontWeight:'bold'} : undefined}
@@ -228,10 +209,10 @@ render() {
                 </span> : ''}
             </div> : ''}
           </div>
-          {this.state.joinCall && 
+          {this.state.joinCall &&
           <WebRTC roomName={this.props.boardName} endChat={this.state.clicked}/>
            }
-          
+
         <div>
           <SketchPad
             ref='sketch'
