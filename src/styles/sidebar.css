@@ -77,12 +77,22 @@ font-size: 2rem;
 
 
 
+
 .side-item {
+  text-decoration: none;
   transition: 0.70s;
   -webkit-transition: 0.70s;
   -moz-transition: 0.70s;
   -ms-transition: 0.70s;
   -o-transition: 0.70s;
+}
+
+.side-item a:visited {
+  color: none;
+}
+
+.side-item a:active {
+  color: none;
 }
 
 .side-item:hover {

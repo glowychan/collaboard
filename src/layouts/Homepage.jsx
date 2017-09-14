@@ -8,7 +8,6 @@ import facebook from '../icons/facebook.png'
 import twitter from '../icons/twitter.png'
 import instagram from '../icons/instagram.png'
 import alert from '../icons/alert.png'
-import feature from '../icons/features.png'
 
 export default class Homepage extends Component {
 
@@ -69,7 +68,6 @@ export default class Homepage extends Component {
         <p>{this.state.error}</p>
       </div> : ''}
       <div className='jumbotron'>
-      <img className='features' src={feature} />
       <img className='home-logo' src={brand} />
      
         <form className='new-twoodle'

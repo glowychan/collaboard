@@ -30,13 +30,16 @@
 
 .toolbar label {
   margin-top: 1%;
+  margin-left: 1%;
 }
 
 .circle-picker {
   margin-top: 1%;
 }
 
- 
+ .item-active {
+   color: #E62739;
+ }
 
 .save {
   width: 25px;

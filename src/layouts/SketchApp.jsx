@@ -132,52 +132,52 @@ render() {
         <div className='toolbar'>
            <button
              onClick={() => this.props.undoAnItem(this.props.boardName)}
-           ><img className='icon' src={undo} title='Undo' alt='Undo'/></button>
+           ><i className='flaticon-arrows' title='Undo' alt='Undo'></i></button>
 
           <button
-           onClick={() => this.props.deleteAllItems(this.props.boardName)}><img className='icon' src={clear} title='Clear board' alt='Clear board'/> </button>
+           onClick={() => this.props.deleteAllItems(this.props.boardName)}><i className='flaticon-shape' title='Clear board' alt='Clear board'></i> </button>
 
           <button
-           onClick={() => this.refs.sketch.handleSave()}><img className='icon save' src={save} title='Save board' alt='Save'/> </button>
+           onClick={() => this.refs.sketch.handleSave()}><i className='flaticon-symbols-1'  title='Save board' alt='Save'></i> </button>
 
           <button
-           onClick={() => this.setState({addImage: true})}><img className='icon image' src={picture} title='Add image' alt='Add image' /> </button>
+           onClick={() => this.setState({addImage: true})}><i className='flaticon-picture-hanging-in-a-frame-hand-drawn-symbol'  title='Add image' alt='Add image'></i> </button>
 
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_PENCIL})}
-            ><img className='icon' src={pencil} title='Pencil' alt='Pencil'/></button>
+            ><i className='flaticon-tool' title='Pencil' alt='Pencil'></i></button>
 
             <button
               style={tool == TOOL_BRUSH ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_BRUSH  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_BRUSH})}
-            ><img className='icon' src={paint} title='Paint brush' alt='Paint brush' /></button>
+            ><i className='flaticon-paint' title='Paint Brush' alt='Paint Brush'></i></button>
 
             <button
               style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_LINE  ? 'item-active line' : 'item line'}
               onClick={() => this.setState({tool:TOOL_LINE})}
-            ><img className='icon' src={line} title='Line' alt='Line' /></button>
+            ><i className='flaticon-two' title='Line' alt='Line'></i></button>
 
             <button
               style={tool == TOOL_ELLIPSE ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_ELLIPSE  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_ELLIPSE})}
-            ><img className='icon' src={circle} title='Circle' alt='Circle' /></button>
+            ><i className='flaticon-circle'  title='Circle' alt='Circle'></i></button>
 
             <button
               style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_RECTANGLE})}
-            ><img className='icon' src={sqaure} title='Rectangle' alt='Rectangle'/></button>
+            ><i className='flaticon-square' title='Rectangle' alt='Rectangle'></i></button>
 
             <button
               style={tool == TOOL_ERASER ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_ERASER})}
-            ><img className='icon' src={eraser} title='Eraser' alt='Eraser'/></button>
+            ><i className='flaticon-remove' title='Eraser' alt='Eraser'></i></button>
             <label htmlFor="" className='size'>SIZE: </label>
             <input min="1" max="20" className='size'type="range" value={size} onChange={(e) => this.setState({size: parseInt(e.target.value)})} />
             <ColorPicker value={color} newColor={this.changeColor.bind(this)}/>
