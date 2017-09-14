@@ -151,36 +151,35 @@ render() {
         <Sidebar onShare={this.handleShare} boardName={this.props.boardName} deleteBoard={this.props.deleteBoard} />
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
         <AddImage isOpen={this.state.addImage} onClose={this.addImage}/>
-        {this.state.poppedOpen &&
-        <div className='popout-container'>
+      {this.state.poppedOpen &&
+       <div className='popout-container'>
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closeOtherPops} url={this.props.boardName}/>
-        </div> }
-       
-        <Toolbar undoAnItem={this.props.undoAnItem} 
-        boardName={this.props.boardName}
-        deleteAllItems={this.props.deleteAllItems}
-        addImage={() => this.setState({addImage: true})}
-        setPencil={() => this.setState({tool:TOOL_PENCIL})}
-        setBrush={() => this.setState({tool:TOOL_BRUSH})}
-        setLine={() => this.setState({tool:TOOL_LINE})}
-        setCircle={() => this.setState({tool:TOOL_ELLIPSE})}
-        setRect={() => this.setState({tool:TOOL_RECTANGLE})}
-        setEraser={() => this.setState({tool:TOOL_ERASER})}
-        tool={this.state.tool}
-        changeColor={this.changeColor}
-        changeFill={this.changeFill}
-        fillColor={this.state.fillColor}
-        changeFillColor={this.fillColor}
-        fill={this.state.fill}
-        color={this.state.color}
-        size={this.state.size}
-        changeSize={this.changeSize} />
-
-      
-          {this.state.joinCall && 
-          <WebRTC roomName={this.props.boardName} endChat={this.state.clicked}/>
-           }
-          
+      </div> }
+        <Toolbar
+          undoAnItem={this.props.undoAnItem} 
+          boardName={this.props.boardName}
+          deleteAllItems={this.props.deleteAllItems}
+          addImage={() => this.setState({addImage: true})}
+          setPencil={() => this.setState({tool:TOOL_PENCIL})}
+          setBrush={() => this.setState({tool:TOOL_BRUSH})}
+          setLine={() => this.setState({tool:TOOL_LINE})}
+          setCircle={() => this.setState({tool:TOOL_ELLIPSE})}
+          setRect={() => this.setState({tool:TOOL_RECTANGLE})}
+          setEraser={() => this.setState({tool:TOOL_ERASER})}
+          tool={this.state.tool}
+          changeColor={this.changeColor}
+          changeFill={this.changeFill}
+          fillColor={this.state.fillColor}
+          changeFillColor={this.fillColor}
+          fill={this.state.fill}
+          color={this.state.color}
+          size={this.state.size}
+          changeSize={this.changeSize} 
+        />
+        {this.state.joinCall && 
+        <WebRTC 
+          roomName={this.props.boardName} endChat={this.state.clicked}/>
+         }  
         <div>
           <SketchPad
             ref='sketch'
