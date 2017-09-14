@@ -55,8 +55,8 @@
   width: 626px;
   height: 750px;
   position: absolute;
-  top: 15%;
-  left: 33%;
+  top: 10%;
+  left: 30%;
   z-index: 9999;
   flex-shrink: 2;
  }

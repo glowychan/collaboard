@@ -16,7 +16,13 @@ class WebRTC extends React.Component {
       // immediately ask for camera access
       autoRequestMedia: true,
 
-      media: {audio: true, video: false}
+      localVideo: {
+        autoplay: true, // automatically play the video stream on the page
+        mirror: true, // flip the local video to mirror mode (for UX)
+        muted: true // mute local video stream to prevent echo
+      },
+
+      media: {audio: true, video: true}
      
     });
 
@@ -25,13 +31,13 @@ class WebRTC extends React.Component {
             this.webrtc.joinRoom(this.props.roomName);
           });
     }
-
+    
+  
   
 
   render () {
     return (
-    <div>
-      <video id="localVideo" height='300'></video>
+    <div className='chatbar'>
       <div id="remoteVideos"></div>
    </div>
     )

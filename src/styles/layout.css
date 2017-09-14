@@ -13,15 +13,26 @@ body {
   line-height: 30px;
  }
  
-#localVideo {
-  display: none;
-}
 #remoteVideos {
-  display: none;
+  z-index: 9999;
+  position: fixed;
+  display: flex;
+  flex-basis: row wrap;
+  width: 30%;
+  left: 5%;
+  bottom: 2%;
+}
+
+#remoteVideos video {
+  height: 80px;
+  border-radius: 16px;
+  margin:  2px;
+  box-shadow: 8px 8px 3px #848586;
+  
 }
 
 canvas.canvas {
-  margin-left: 48px;
+  margin-left: 30px;
   background: url('http://www.powerpointhintergrund.com/uploads/presentation-background-grids-25.gif');
   top: 0;
   bottom: 0;

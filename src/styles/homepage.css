@@ -98,16 +98,28 @@ span.purple {
 .about {
   width: 300px;
   position: absolute;
-  top: 5%;
-  left: 80%;
+  top: 2%;
+  right: 4%;
 }
-
 
 
 .about:hover {
   -webkit-transform: scale(1.2);
   -ms-transform: scale(1.2);
   transform: scale(1.2);
+}
+
+.features {
+  position: absolute;
+  left: 2%;
+  top: 2%;
+  transform: rotate(-30deg);
+}
+
+.features:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 footer.footer {
@@ -140,7 +152,7 @@ footer.footer {
 
 .copy {
   font-size:  1.5em;
-  margin-left: 12px;
+  margin: 0 12px;
 }
 
 @media only screen and (min-width : 100px) and (max-width : 480px) {
@@ -165,7 +177,7 @@ footer.footer {
     }
 
     .about {
-      width: 30%;
+      width: 40%;
       right: 0;
       left: 70%;
     }
@@ -181,6 +193,9 @@ footer.footer {
     .slogan {
       font-size: 3em;
       text-align: center;
+    }
+    .features {
+      display: none;
     }
 
 }
