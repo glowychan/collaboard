@@ -7,6 +7,7 @@ import { TOOL_ELLIPSE } from '../components/tools/Ellipse';
 import { TOOL_RECTANGLE } from '../components/tools/Rectangle';
 import { TOOL_BRUSH } from '../components/tools/Brush';
 import { TOOL_ERASER } from '../components/tools/Eraser';
+import WebRTC from '../components/WebRTC';
 import Sidebar from '../components/Sidebar';
 import PoppedOutShare from '../components/PoppedOutShare.jsx';
 import ColorPicker from '../components/ColorPicker';
@@ -26,6 +27,7 @@ import clear from '../icons/001-circle.png'
 import eraser from '../icons/eraser.png'
 import undo from '../icons/undo.png'
 import picture from '../icons/picture.png'
+import phone from '../icons/telephone.png'
 
 export default class SketchApp extends Component
 {
@@ -43,7 +45,8 @@ export default class SketchApp extends Component
       items: this.props.items,
       poppedOpen: false,
       nameOpen: true,
-      addImage: false
+      addImage: false,
+      webRTC: false
     }
     this.handleShare = this.handleShare.bind(this);
     this.closePopup = this.closePopup.bind(this);
@@ -108,7 +111,8 @@ export default class SketchApp extends Component
     let userName = event.target.userName.value
     this.props.newUserName(userName)
     this.setState({
-      nameOpen: false
+      nameOpen: false,
+      webRTC: true
     })
   }
 
@@ -188,6 +192,7 @@ render() {
                 </span> : ''}
             </div> : ''}
           </div>
+          <WebRTC roomName={this.props.boardName} joinChat={this.state.webRTC}/>
         <div>
           <SketchPad
             ref='sketch'
@@ -202,6 +207,7 @@ render() {
             onCompleteItem={(item) => this.props.addNewItem(item, this.props.boardName)}
             onSave={this.handleSave}
           />
+          <button className='hang-up'><img src={phone} /> </button>
         </div>
         <UsersOnline users={this.props.users} />
       </div>

@@ -13,7 +13,12 @@ body {
   line-height: 30px;
  }
  
-
+#localVideo {
+  display: none;
+}
+#remoteVideos {
+  display: none;
+}
 
 canvas.canvas {
   margin-left: 48px;
