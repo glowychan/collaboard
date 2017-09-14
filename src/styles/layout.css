@@ -12,6 +12,15 @@ body {
   font-size: 3rem;
   line-height: 30px;
  }
+
+ #localVideo {
+   height: 80px;
+   border-radius: 16px;
+   margin:  4px;
+   box-shadow: 8px 8px 3px #6ED3CF;
+   position: fixed;
+   left: 5%;
+ }
  
 #remoteVideos {
   z-index: 9999;
@@ -19,17 +28,18 @@ body {
   display: flex;
   flex-basis: row wrap;
   width: 30%;
-  left: 5%;
-  bottom: 2%;
+  left: 4%;
+  bottom: 4%;
 }
 
 #remoteVideos video {
   height: 80px;
   border-radius: 16px;
-  margin:  2px;
+  margin:  4px;
   box-shadow: 8px 8px 3px #848586;
   
 }
+
 
 canvas.canvas {
   margin-left: 30px;

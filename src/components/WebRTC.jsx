@@ -1,10 +1,16 @@
 import React from 'react'
 import SimpleWebRTC from 'simplewebrtc'
+import Draggable from 'react-draggable'
+import video from '../icons/video.png'
 
 class WebRTC extends React.Component {
   constructor(props) { 
     super(props);
+    this.state = ({
+      videoOn: true
+    })
 
+   this.toggleVideo = this.toggleVideo.bind(this)
   }
 
   componentDidMount() {
@@ -18,7 +24,6 @@ class WebRTC extends React.Component {
 
       localVideo: {
         autoplay: true, // automatically play the video stream on the page
-        mirror: true, // flip the local video to mirror mode (for UX)
         muted: true // mute local video stream to prevent echo
       },
 
@@ -32,14 +37,30 @@ class WebRTC extends React.Component {
           });
     }
     
+    toggleVideo = () => {
+    if (this.state.videoOn === true) {
+      this.webrtc.pauseVideo()
+      this.setState({
+        videoOn: false
+      })
+    } else {
+      this.webrtc.resumeVideo()
+      this.setState({
+        videoOn: true
+      })
+    }
+  }
   
   
 
   render () {
     return (
     <div className='chatbar'>
+     <video id="localVideo" onClick={this.toggleVideo}></video>
+      <Draggable>
       <div id="remoteVideos"></div>
-   </div>
+      </Draggable>
+    </div>
     )
   }
 
