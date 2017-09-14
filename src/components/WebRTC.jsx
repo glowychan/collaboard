@@ -1,7 +1,7 @@
 import React from 'react'
 import SimpleWebRTC from 'simplewebrtc'
 import Draggable from 'react-draggable'
-import video from '../icons/video.png'
+
 
 class WebRTC extends React.Component {
   constructor(props) { 

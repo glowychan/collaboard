@@ -3,11 +3,7 @@ import AboutPopout from '../components/AboutPopout';
 import axios from 'axios';
 import brand from '../icons/TWOODLE.png';
 import about from '../icons/Howitworks.png';
-import woman from '../icons/woman.png'
-import facebook from '../icons/facebook.png'
-import twitter from '../icons/twitter.png'
-import instagram from '../icons/instagram.png'
-import alert from '../icons/alert.png'
+
 
 export default class Homepage extends Component {
 
@@ -82,9 +78,9 @@ export default class Homepage extends Component {
           <p className='copy'> ©2017 Twoodle Inc.</p>
           <div className= 'built-by'>
             <p>Follow us on </p>
-            <img src={facebook} />
-            <img src={instagram} />
-            <img src={twitter} />
+            <i className='flaticon-facebook-letter-logo-in-a-square-hand-drawn-outline'></i>
+            <i className='flaticon-instagram-hand-drawn-logo'></i>
+            <i className='flaticon-twitter-hand-drawn-logo'></i>
           </div>
         </footer>
       </div>

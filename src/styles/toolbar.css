@@ -122,6 +122,10 @@ img.save:hover {
     background-color: rgba(144, 104, 190, 0.7);
   }
 
+  .item-active {
+    color: #E1E8F0;
+  }
+
   label.size {
     display: none;
   }
@@ -160,6 +164,10 @@ img.save:hover {
   }
   .size {
     display: none;
+  }
+
+  .item-active {
+    color: #E1E8F0;
   }
 
   .circle-picker {
@@ -211,6 +219,10 @@ and (orientation: landscape) {
     flex-direction: row;
     align-items: center;
     }
+
+  .item-active {
+    color: #E1E8F0;
+  }
 
   .save {
     display: none;

@@ -16,18 +16,7 @@ import UserNamePopout from '../components/UserNamePopout';
 import UsersOnline from '../components/UsersOnline'
 import AddImage from '../components/AddImage'
 import logo from '../icons/007-square.png';
-import pencil from '../icons/011-tool.png'
-import line from '../icons/008-two.png'
-import circle from '../icons/009-circle.png'
-import sqaure from '../icons/010-square.png'
-import textbox from '../icons/symbols.png'
-import paint from '../icons/paint.png'
-import save from '../icons/001-symbols-1.png'
-import clear from '../icons/001-circle.png'
-import eraser from '../icons/eraser.png'
-import undo from '../icons/undo.png'
-import picture from '../icons/picture.png'
-import phone from '../icons/telephone.png'
+
 
 export default class SketchApp extends Component
 {
