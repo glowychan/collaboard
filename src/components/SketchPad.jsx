@@ -84,25 +84,32 @@ export default class SketchPad extends Component {
 
 
   _onTouchStart(e) {
+    if (this.tool) {
     const data = this.tool.onMouseDown(...this.getCursorPosition(e.touches[0]), this.props.color, this.props.size, this.props.fillColor);
     data && data[0] && this.props.onItemStart && this.props.onItemStart.apply(null, data);
     if (this.props.onDebouncedItemChange) {
       this.interval = setInterval(this.onDebouncedMove, this.props.debounceTime);
     }
+   }
   }
 
   _onTouchMove(e) {
+   if(this.tool) {
     const data = this.tool.onMouseMove(...this.getCursorPosition(e.touches[0]));
     data && data[0] && this.props.onEveryItemChange && this.props.onEveryItemChange.apply(null, data);
+   }
   }
 
+
   _onTouchEnd(e) {
+   if(this.tool) {
     const data = this.tool.onMouseUp(...this.getCursorPosition(e.changedTouches[0]));
     data && data[0] && this.props.onCompleteItem && this.props.onCompleteItem.apply(null, data);
     if (this.props.onDebouncedItemChange) {
       clearInterval(this.interval);
       this.interval = null;
     }
+   }
   }
 
 
