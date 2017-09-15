@@ -95,8 +95,9 @@ export default class SketchPad extends Component {
       .forEach(item => {
         this.initTool(item.tool);
         this.tool.draw(item, this.props.animate);
+        console.log(item)
       });
-    this.initTool(tool);
+    this.initTool(tool)
     // Clear the textbox after click on another tool
     if (tool === 'textbox' && this.props.tool !== 'textbox') {
       const textarea = findDOMNode(this.textareaRef)

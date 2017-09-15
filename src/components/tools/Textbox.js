@@ -21,6 +21,7 @@ export default (context) => {
   const write = (item, mouseX, mouseY) => {
     const maxWidth = 100
     const lineHeight = 24
+
     const words = item.text.trim().split(' ')
 
     let line = ''
