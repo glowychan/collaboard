@@ -37,7 +37,6 @@ class Twoodle extends React.Component {
 
     // Receive all items of a board on first connection
     this.socket.on('new connection', (data) => {
-      console.log('all board data is: ', data);
       if (data.error) {
         this.props.history.push('/error')
       }
@@ -67,7 +66,9 @@ class Twoodle extends React.Component {
                    boardName = {this.state.boardName}
                    addNewItem = {this.addNewItem}
                    undoAnItem = {this.undoAnItem}
-                   undo = {this.state.undo}/>
+                   undo = {this.state.undo}
+                   onCompleteTextItem = {this.onCompleteTextItem}
+                   />
       </div>
     )
   }
@@ -85,6 +86,14 @@ class Twoodle extends React.Component {
   // Send an undo request through websockets
   undoAnItem = (boardName) => {
     this.socket.emit('undo an item', this.state.boardName)
+  }
+
+  onCompleteTextItem = (item) => {
+    const data = {
+      boardName: this.state.boardName,
+      items:  item,
+    }
+    this.socket.emit('add new items', data)
   }
 
 }
