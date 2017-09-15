@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { findDOMNode } from 'react-dom';
 import SketchPad from '../components/SketchPad';
 import { TOOL_PENCIL } from '../components/tools/Pencil';
 import { TOOL_LINE } from '../components/tools/Line';
 import { TOOL_ELLIPSE } from '../components/tools/Ellipse';
 import { TOOL_RECTANGLE } from '../components/tools/Rectangle';
+import { TOOL_TEXTBOX } from '../components/tools/Textbox';
 import { TOOL_BRUSH } from '../components/tools/Brush';
 import { TOOL_ERASER } from '../components/tools/Eraser';
 import Sidebar from '../components/Sidebar';
@@ -39,13 +41,19 @@ export default class SketchApp extends Component
       fillColor: '#444444',
       items: this.props.items,
       poppedOpen: false,
-      nameOpen: true
+      nameOpen: true,
+      textareaStyle: {
+        display: 'none',
+        width: 0,
+        height: 0
+      },
+      textareaItem: ''
     }
     this.handleShare = this.handleShare.bind(this);
     this.closePopup = this.closePopup.bind(this);
   }
 
-  
+
   componentWillReceiveProps ({undo}) {
     if (undo) {
       this.refs.sketch.handleClear()
@@ -77,8 +85,49 @@ export default class SketchApp extends Component
     })
   }
 
+  moveTextbox = (item) => {
+    const style = {
+      top: `${item.start.y}px`,
+      left: `${item.start.x}px`,
+      width: '100px',
+      height: '100px',
+      position: 'absolute',
+      background: 'none',
+      display: '',
+      border: '1px dashed black',
+      zIndex: 500,
+    }
+    item.text = this.state.text
+    this.setState({textareaItem: item})
+    this.setState({textareaStyle: style})
+  }
 
-render() {
+  changeTool = () => {
+    if (this.state.tool === 'textbox') {
+      const style = {
+        top: 0,
+        left: 0,
+        width: 0,
+        height: 0,
+        background: 'none',
+        display: 'none',
+        border: 'none',
+      }
+      this.setState({textareaStyle: style})
+      this.props.onCompleteTextItem(this.state.textareaItem)
+
+    }
+    this.setState({tool:TOOL_PENCIL})
+  }
+
+  onTextchange = (e) => {
+    const item = this.state.textareaItem
+    item.text = e.target.value
+    this.setState({textareaItem: item})
+  }
+
+
+  render() {
     const { tool, size, color, fill, fillColor } = this.state;
     return (
       <div>
@@ -102,8 +151,10 @@ render() {
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_PENCIL})}
+              onClick={() => this.changeTool(TOOL_PENCIL)}
             ><img className='icon' src={pencil} title='Pencil' alt='Pencil'/></button>
+
+
 
             <button
               style={tool == TOOL_BRUSH ? {fontWeight:'bold'} : undefined}
@@ -128,6 +179,12 @@ render() {
               className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_RECTANGLE})}
             ><img className='icon' src={sqaure} title='Rectangle' alt='Rectangle'/></button>
+
+            <button
+              style={tool == TOOL_TEXTBOX ? {fontWeight:'bold'} : undefined}
+              className={tool == TOOL_TEXTBOX  ? 'item-active' : 'item'}
+              onClick={() => this.setState({tool:TOOL_TEXTBOX})}
+            ><img className='icon' src={textbox} title='textbox' alt='textbox'/></button>
 
             <button
               style={tool == TOOL_ERASER ? {fontWeight:'bold'} : undefined}
@@ -163,6 +220,9 @@ render() {
             tool={tool}
             onCompleteItem={(item) => this.props.addNewItem(item, this.props.boardName)}
             onSave={this.handleSave}
+            textareaStyle={this.state.textareaStyle}
+            moveTextbox={this.moveTextbox}
+            onTextchange={this.onTextchange}
           />
         </div>
       </div>

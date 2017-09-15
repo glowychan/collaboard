@@ -29,7 +29,7 @@ export default (context) => {
       const metrics = context.measureText(testLine);
       const testWidth = metrics.width;
       if (testWidth > maxWidth && n > 0) {
-        context.font = '16px Calibri';
+        context.font = '16px Calibri'
         context.strokeText(line, mouseX, mouseY)
         line = words[n] + ' ';
         mouseY += lineHeight;
