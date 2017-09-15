@@ -51,7 +51,7 @@ export default class SketchPad extends Component {
     canvasClassName: 'canvas',
     debounceTime: 1000,
     animate: false,
-    tool: TOOL_PENCIL,
+    tool: null,
     toolsMap
   };
 
@@ -127,23 +127,21 @@ handleSave = () => {
     items
       .filter(item => this.props.items.indexOf(item) === -1)
       .forEach(item => {
-        if (item.tool === 'image') {
-          let img = new Image();
-          img.src = item.url
-          img.onload = () => {
-            this.ctx.drawImage(img, 10, 10);
-          }
-      } else {
         this.initTool(item.tool);
         this.tool.draw(item, this.props.animate);
-       }
       });
+    if (tool == null) {
+      return
+    } else {
     this.initTool(tool);
+    }
   }
 
 
   initTool(tool) {
+    if (tool) {
     this.tool = this.props.toolsMap[tool](this.ctx);
+    }
   }
 
   onMouseDown(e) {
@@ -201,9 +199,9 @@ handleSave = () => {
             onMouseMove={this.onMouseMove}
             onMouseOut={this.onMouseUp}
             onMouseUp={this.onMouseUp}
-            // onTouchStart={this._onTouchStart}
-            // onTouchMove={this._onTouchMove}
-            // onTouchEnd={this._onTouchEnd}
+            onTouchStart={this._onTouchStart}
+            onTouchMove={this._onTouchMove}
+            onTouchEnd={this._onTouchEnd}
             width={width}
             height={height}
           />

@@ -26,7 +26,7 @@ export default class SketchApp extends Component
     super(props);
 
     this.state = {
-      tool:TOOL_PENCIL,
+      tool: null,
       size: 2,
       color: '#000000',
       fill: false,
@@ -136,6 +136,9 @@ render() {
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_PENCIL})}
+              onTouchStart={() => {
+              this.setState({tool:TOOL_PENCIL})
+              console.log('touch')} }
             ><i className='flaticon-tool' title='Pencil' alt='Pencil'></i></button>
 
             <button
