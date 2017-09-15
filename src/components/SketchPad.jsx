@@ -145,30 +145,38 @@ handleSave = () => {
   }
 
   onMouseDown(e) {
+     if (this.tool) {
     const data = this.tool.onMouseDown(...this.getCursorPosition(e), this.props.color, this.props.size, this.props.fillColor);
     data && data[0] && this.props.onItemStart && this.props.onItemStart.apply(null, data);
     if (this.props.onDebouncedItemChange) {
       this.interval = setInterval(this.onDebouncedMove, this.props.debounceTime);
     }
+     }
   }
 
   onDebouncedMove() {
+    if (this.tool) {
     if (typeof this.tool.onDebouncedMouseMove === 'function' && this.props.onDebouncedItemChange) {
       this.props.onDebouncedItemChange.apply(null, this.tool.onDebouncedMouseMove());
+     }
     }
   }
 
   onMouseMove(e) {
+    if (this.tool) {
     const data = this.tool.onMouseMove(...this.getCursorPosition(e));
     data && data[0] && this.props.onEveryItemChange && this.props.onEveryItemChange.apply(null, data);
+    }
   }
 
   onMouseUp(e) {
+    if (this.tool) {
     const data = this.tool.onMouseUp(...this.getCursorPosition(e));
     data && data[0] && this.props.onCompleteItem && this.props.onCompleteItem.apply(null, data);
     if (this.props.onDebouncedItemChange) {
       clearInterval(this.interval);
       this.interval = null;
+    }
     }
   }
 

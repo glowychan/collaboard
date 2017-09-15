@@ -24,9 +24,9 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
   font-family: Flaticon;
-        font-size: 40px;
+        font-size: 35px;
 font-style: normal;
-margin-left: 20px;
+margin: 10px;
 }
 
 .flaticon-symbol-1:before { content: "\f100"; }
@@ -46,4 +46,3 @@ margin-left: 20px;
 .flaticon-instagram-hand-drawn-logo:before { content: "\f10f"; }
 .flaticon-facebook-letter-logo-in-a-square-hand-drawn-outline:before { content: "\f110"; }
 .flaticon-video:before { content: "\f111"; }
-

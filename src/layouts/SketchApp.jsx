@@ -14,7 +14,6 @@ import ColorPicker from '../components/ColorPicker';
 import FillPicker from '../components/FillPicker';
 import UserNamePopout from '../components/UserNamePopout';
 import UsersOnline from '../components/UsersOnline'
-import AddImage from '../components/AddImage'
 import logo from '../icons/007-square.png';
 
 
@@ -39,7 +38,6 @@ export default class SketchApp extends Component
     this.handleShare = this.handleShare.bind(this);
     this.closePopup = this.closePopup.bind(this);
     this.closeOtherPops = this.closeOtherPops.bind(this);
-    this.addImage = this.addImage.bind(this);
   }
 
 
@@ -73,27 +71,6 @@ export default class SketchApp extends Component
     })
   }
   
-  addImage = (event) => {
-   event.preventDefault()
-   let imageUrl = event.target.imageUrl.value
-   let pattern = /^((http|https|ftp):\/\/)/;
-
-   if (!(pattern.test(imageUrl))) {
-      imageUrl = `https://${imageUrl}`
-   }
-  
-   let image = {
-     url: imageUrl,
-     tool: 'image'
-   }
-
-   this.setState({
-      addImage: false
-    })
-  
-  this.props.addNewItem(image, this.props.boardName)
-  }
-
   closePopup = (event) => {
     event.preventDefault()
     let userName = event.target.userName.value
@@ -112,7 +89,6 @@ render() {
         <h1><img className='logo' src={logo} />TWOODLE</h1>
         <Sidebar onShare={this.handleShare} boardName={this.props.boardName} deleteBoard={this.props.deleteBoard} />
         <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
-        <AddImage isOpen={this.state.addImage} onClose={this.addImage}/>
         {this.state.poppedOpen ? 
         <div className='popout-container'>
         <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closeOtherPops} url={this.props.boardName}/>
@@ -129,16 +105,13 @@ render() {
           <button
            onClick={() => this.refs.sketch.handleSave()}><i className='flaticon-symbols-1'  title='Save board' alt='Save'></i> </button>
 
-          <button
-           onClick={() => this.setState({addImage: true})}><i className='flaticon-picture-hanging-in-a-frame-hand-drawn-symbol'  title='Add image' alt='Add image'></i> </button>
-
             <button
               style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
               className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_PENCIL})}
               onTouchStart={() => {
               this.setState({tool:TOOL_PENCIL})
-              console.log('touch')} }
+              console.log('touch')}}
             ><i className='flaticon-tool' title='Pencil' alt='Pencil'></i></button>
 
             <button
@@ -170,12 +143,10 @@ render() {
               className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
               onClick={() => this.setState({tool:TOOL_ERASER})}
             ><i className='flaticon-remove' title='Eraser' alt='Eraser'></i></button>
-            <label htmlFor="" className='size'>SIZE: </label>
             <input min="1" max="20" className='size'type="range" value={size} onChange={(e) => this.setState({size: parseInt(e.target.value)})} />
             <ColorPicker value={color} newColor={this.changeColor.bind(this)}/>
           {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
             <div className='fill'>
-              <label htmlFor="">FILL:</label>
               <input className="checkbox" type="checkbox" value={fill} style={{margin:'0 8'}}
                      onChange={(e) => this.setState({fill: e.target.checked})} />
               {fill ? <span>
