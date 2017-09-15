@@ -124,14 +124,11 @@ handleSave = () => {
   componentWillReceiveProps({ tool, items }) {
     this.canvas = findDOMNode(this.canvasRef);
     this.ctx = this.canvas.getContext('2d');
-
     items
       .filter(item => this.props.items.indexOf(item) === -1)
       .forEach(item => {
         if (item.tool === 'image') {
           let img = new Image();
-          //  let x = Math.floor(Math.random()*this.canvas.width)
-          //  let y = Math.floor(Math.random()*this.canvas.height)
           img.src = item.url
           img.onload = () => {
             this.ctx.drawImage(img, 10, 10);
@@ -139,10 +136,9 @@ handleSave = () => {
       } else {
         this.initTool(item.tool);
         this.tool.draw(item, this.props.animate);
-      }
+       }
       });
-    
-    this.initTool(this.props.tool);
+    this.initTool(tool);
   }
 
 
@@ -180,9 +176,7 @@ handleSave = () => {
 
   getCursorPosition(e) {
     const { top, left } = this.canvas.getBoundingClientRect();
-   
-    // const ratioH = this.initialHeight/this.canvas.height
-    // const ratioW = this.initialWidth/this.canvas.width
+  
 
     return [
       e.clientX - left,
@@ -207,9 +201,9 @@ handleSave = () => {
             onMouseMove={this.onMouseMove}
             onMouseOut={this.onMouseUp}
             onMouseUp={this.onMouseUp}
-            onTouchStart={this._onTouchStart}
-            onTouchMove={this._onTouchMove}
-            onTouchEnd={this._onTouchEnd}
+            // onTouchStart={this._onTouchStart}
+            // onTouchMove={this._onTouchMove}
+            // onTouchEnd={this._onTouchEnd}
             width={width}
             height={height}
           />
