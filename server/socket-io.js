@@ -1,13 +1,27 @@
-module.exports = (io, dataHelpers) => {
+const clients = {}
+const randomColor = require('randomcolor');
 
+module.exports = (io, dataHelpers) => {
   io.on('connection', function (socket) {
+
+    // Add new users to clients object
+    console.log('New connection:', socket.id)
+    clients[socket.id] = {
+      name: 'Anonymous',
+      color: '#6ED3CF',
+      boardName: ''
+    
+    }
+
 
 
     // NEW CONNECTION
-    console.log('New connection:', socket.id)
     socket.on('new connection', function(boardName){
+      // Join the board
       socket.join(boardName)
-
+      // Add board info to the clienst object
+      clients[socket.id].boardName = boardName
+      // Find the board
       const filter = {boardName: boardName}
       dataHelpers.getBoards(filter)
       .then((boards) => {
@@ -23,6 +37,22 @@ module.exports = (io, dataHelpers) => {
       .catch((err) => {
         // fix this later
       })
+    })
+
+
+
+    // Update client's username
+    socket.on('new user name', function(userName) {
+      const color = randomColor({luminosity: 'light'})
+      clients[socket.id].name = userName
+      clients[socket.id].color = color
+    })
+
+
+
+    // Broadcast online users when a new user joins a board
+    socket.on('online users', function(boardName) {
+      io.in(boardName).emit('online users', getOnlineUsers(boardName))
     })
 
 
@@ -78,10 +108,45 @@ module.exports = (io, dataHelpers) => {
       })
     })
 
+    socket.on('delete all items', function(boardName) {
+      const filter = {boardName: boardName}
+      dataHelpers.deleteAllItems(filter, {$set: {items: []}})
+      io.in(boardName).emit('delete all items')
+    })
+
+    socket.on('delete a board', function(boardName) {
+      io.in(boardName).emit('delete a board')
+    })
+
+
+
+    // DISCONNECT
+    socket.on('disconnect', function () {
+      console.log('Client disconnected: ', socket.id)
+      const boardName = clients[socket.id].boardName
+      delete clients[socket.id]
+      io.in(boardName).emit('online users', getOnlineUsers(boardName))
+    })
+
+
 
   })
 }
 
 
 
+
+getOnlineUsers = (boardName) => {
+  const onlineUsers = []
+  for (let id in clients) {
+    if (clients[id].boardName === boardName) {
+      onlineUsers.push({
+        id: id,
+        name: clients[id].name,
+        color: clients[id].color
+      })
+    }
+  }
+  return onlineUsers
+}
 

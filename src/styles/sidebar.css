@@ -1,0 +1,127 @@
+@media only screen and (min-device-width: 480px) 
+and (max-device-width: 640px) 
+and (orientation: landscape) {
+  .bm-burger-button {
+    display: none;
+  }
+}
+
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+  .bm-burger-button {
+    display: none;
+  }
+}
+
+
+
+
+nav {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+position: absolute;
+width: 36px;
+height: 30px;
+left: 36px;
+top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+background: #9068BE;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+height: 24px;
+width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+background: black;
+margin-top: 30px;
+}
+
+/* General sidebar styles */
+.bm-menu {
+background: #E1E8F0;
+padding: 1em 0.5em 0;
+font-size: 1.15em;
+font-family: 'Patrick Hand SC', cursive;
+display: flex;
+flex-direction: column;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+fill: #373a47;
+}
+
+.bm-overlay {
+  background-color: transparent !important;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+padding-top: 1.5em;
+font-size: 2rem;
+}
+
+.bm-item-list img {
+  width: 100%;
+}
+
+.flaticon-symbols {
+  color: black;
+}
+
+.flaticon-symbol {
+  color: black;
+}
+
+.flaticon-sign {
+  color: black;
+}
+
+.flaticon-symbol-1 {
+  color: black;
+}
+
+.side-item {
+  text-decoration: none;
+  transition: 0.70s;
+  -webkit-transition: 0.70s;
+  -moz-transition: 0.70s;
+  -ms-transition: 0.70s;
+  -o-transition: 0.70s;
+}
+
+.side-item a:visited {
+  color: none;
+}
+
+.side-item a:active {
+  color: none;
+}
+
+.side-item:hover {
+  transition: 0.70s;
+  -webkit-transition: 0.70s;
+  -moz-transition: 0.70s;
+  -ms-transition: 0.70s;
+  -o-transition: 0.70s;
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -o-transform: rotate(10deg);
+  -ms-transform: rotate(10deg);
+  transform: rotate(10deg);
+}
+
+.bm-menu-wrap {
+  bottom: 0;
+  left: 0;
+}

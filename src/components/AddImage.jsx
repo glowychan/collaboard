@@ -1,5 +1,5 @@
 import React from 'react'
-import About from '../icons/About.png'
+
 
 class UserNamePopout extends React.Component {
   constructor(props) { 
@@ -14,10 +14,10 @@ class UserNamePopout extends React.Component {
     return null 
 
     return (
-      <div ref={this.setWrapperRef} className='name-pop'>
-          <h2 className='name-label'>Enter your name:</h2>
+      <div className='name-pop'>
+          <h2 className='name-label'>Enter your image URL</h2>
           <form className='new-user'onSubmit={this.props.onClose}>
-          <input className='user-name' id='user' name="userName"/>
+          <input className='user-name' id='user' name="imageUrl"/>
           <button type='submit' className='user-submit'></button>
           </form>
      </div>

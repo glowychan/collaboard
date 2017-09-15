@@ -1,0 +1,201 @@
+
+.logo {
+  height: 38px;
+  margin: 0 12px;
+  -ms-transform: rotate(7deg);
+  -webkit-transform: rotate(7deg);
+  transform: rotate(20deg)
+}
+
+.home-logo {
+  width: 40%;  
+}
+.main-container {
+  padding: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.jumbotron{
+position: absolute;
+top: 0px;
+left: 0;
+right: 0;
+bottom: 0;
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+background-image: url('../icons/BACKGROUND.png');
+height: 100%;
+flex-shrink: 1;
+justify-content: center;
+padding-top: 75px;
+}
+
+
+.twoodle-name {
+  float: left;
+  padding: 10px;
+  border: none;
+  border-bottom: solid 8px black;
+  transition: border 0.3s;
+  width: 400px;
+  background-color: #6ED3CF;
+  margin: 170px 0 0 40px;
+  font-size: 2.5em;
+  font-family: 'Patrick Hand SC', cursive;
+  outline: none;
+  flex-shrink: 2;
+}
+
+button.twoodle-submit {
+  font-size: 6.0em;
+  margin: 150px 40px 0px 20px;
+  flex-shrink: 2;
+}
+
+button.twoodle-submit:hover {
+  -webkit-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3);
+}
+
+.slogan {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 6.0em;
+  flex-shrink: 2;
+  align-self: flex-start;
+  margin: 0;
+}
+
+span.purple {
+  color: #9068BE;
+}
+
+.error-message {
+  height: 5%;
+  padding: 2px;
+  background:#9068BE;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.error-message p {
+  font-size: 3em;
+  font-family: 'Patrick Hand SC', cursive;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.about {
+  width: 300px;
+  position: absolute;
+  top: 2%;
+  right: 4%;
+}
+
+
+.about:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.features {
+  position: absolute;
+  left: 2%;
+  top: 2%;
+  transform: rotate(-30deg);
+}
+
+.features:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+footer.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #E1E8F0;
+  height: 4%;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  padding: 8px;
+}
+
+.built-by {
+  font-size: 1.5em;
+  font-family: 'Patrick Hand SC', cursive;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.built-by img{
+  margin-left: 8px;
+}
+
+
+.copy {
+  font-size:  1.5em;
+  margin: 0 12px;
+}
+
+@media only screen and (min-width : 100px) and (max-width : 480px) {
+   .jumbotron{
+    flex-direction: column;
+    flex-wrap: nowrap;
+    position: fixed;
+    padding: 3%
+    }
+
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .twoodle-name {
+      margin: 4% 0 0 5%;
+      width: 90%;
+      padding: 2px;
+      font-size: 2em;
+    }
+
+    .about {
+      width: 40%;
+      right: 0;
+      left: 70%;
+    }
+
+    .home-logo {
+      width: 95%;
+    }
+   
+    button.twoodle-submit {
+      margin: 0 30%;
+    }
+
+    .slogan {
+      font-size: 3em;
+      text-align: center;
+    }
+    .features {
+      display: none;
+    }
+
+}
