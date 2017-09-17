@@ -22,7 +22,7 @@ import logo from '../icons/007-square.png';
 
 export default class SketchApp extends Component
 {
-  socket = null;
+  socket = null
 
   constructor(props) {
     super(props);
@@ -44,10 +44,10 @@ export default class SketchApp extends Component
       textareaItem: '',
       addImage: false,
     }
-    this.handleShare = this.handleShare.bind(this);
-    this.closePopup = this.closePopup.bind(this);
-    this.closeOtherPops = this.closeOtherPops.bind(this);
-    this.addImage = this.addImage.bind(this);
+    this.handleShare = this.handleShare.bind(this)
+    this.closePopup = this.closePopup.bind(this)
+    this.closeOtherPops = this.closeOtherPops.bind(this)
+    this.addImage = this.addImage.bind(this)
   }
 
 
@@ -85,7 +85,7 @@ export default class SketchApp extends Component
   addImage = (event) => {
    event.preventDefault()
    let imageUrl = event.target.imageUrl.value
-   let pattern = /^((http|https|ftp):\/\/)/;
+   let pattern = /^((http|https|ftp):\/\/)/
 
    if (!(pattern.test(imageUrl))) {
       imageUrl = `https://${imageUrl}`
@@ -309,17 +309,21 @@ export default class SketchApp extends Component
                 style={{margin:'0 8'}}
                 onChange={(e) => this.setState({fill: e.target.checked})}
               />
-              {fill ? <span>
+              {fill ?
+                <span>
                   <FillPicker value={fill} newFill={this.changeFill.bind(this)}/>
-                </span> : ''}
-            </div> : ''}
-          </div>
-          {this.state.joinCall &&
-            <WebRTC
-            roomName={this.props.boardName}
-            endChat={this.state.clicked}
-            />
-          }
+                </span>
+              : ''}
+            </div>
+          : ''}
+        </div>
+
+        {this.state.joinCall &&
+          <WebRTC
+          roomName={this.props.boardName}
+          endChat={this.state.clicked}
+          />
+        }
 
         <div>
           <SketchPad
