@@ -127,7 +127,8 @@ export default class SketchApp extends Component
       border: '1px dashed black',
       zIndex: 500,
       fontFamily: 'Comic Sans MS',
-      fontSize: '20px'
+      fontSize: '20px',
+      fontWeight: 'bold'
     }
     item.text = this.state.textareaItem.text
     this.setState({textareaItem: item})
@@ -147,7 +148,9 @@ export default class SketchApp extends Component
         border: 'none',
       }
       this.setState({textareaStyle: style})
-      this.props.onCompleteTextItem(this.state.textareaItem)
+      const item = this.state.textareaItem
+      item.color = this.state.color
+      this.props.onCompleteTextItem(item)
     }
     if (data && data.tool) {
       this.setState({tool: data.tool})

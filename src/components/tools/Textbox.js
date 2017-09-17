@@ -20,10 +20,15 @@ export default (context) => {
 
   const write = (item, mouseX, mouseY) => {
     const maxWidth = 220
-    const lineHeight = 24
+    const lineHeight = 28
 
     context.font = '20px Comic Sans MS'
     context.strokeStyle = item.color
+    context.fillStyle = item.color
+
+    // Adjustment
+    mouseX = mouseX - 5
+    mouseY = mouseY + 12
 
     if (item.text) {
       const lines = item.text.trim().split('\n')
@@ -39,6 +44,7 @@ export default (context) => {
             n += 1
           }
           context.strokeText(tempLine, mouseX, mouseY)
+          context.fillText(tempLine, mouseX, mouseY)
           tempLine = ''
           spaceLeft = maxWidth
           mouseY += lineHeight

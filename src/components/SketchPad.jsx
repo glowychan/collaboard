@@ -210,7 +210,7 @@ handleSave = () => {
     return (
       <div>
         <textarea
-          style={this.props.textareaStyle}
+          style={{...this.props.textareaStyle, color: this.props.color}}
           ref={(textarea) => {this.textareaRef = textarea }}
           onChange={this.props.onTextchange}
         />
