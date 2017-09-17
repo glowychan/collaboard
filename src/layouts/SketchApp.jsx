@@ -132,7 +132,8 @@ export default class SketchApp extends Component
     this.setState({textareaStyle: style})
   }
 
-  changeTool = () => {
+  // Check if the tool is textbox (if yes finish the text) before changing the tool
+  changeTool = (tool) => {
     if (this.state.tool === 'textbox') {
       const style = {
         top: 0,
@@ -145,11 +146,16 @@ export default class SketchApp extends Component
       }
       this.setState({textareaStyle: style})
       this.props.onCompleteTextItem(this.state.textareaItem)
-
     }
-    this.setState({tool:TOOL_PENCIL})
+    if (tool) {
+      this.setState({tool: tool})
+    }
+    else {
+      this.setState({tool:TOOL_PENCIL})
+    }
   }
 
+  // On change of the text in the textarea save it in the parent's state (routes)
   onTextchange = (e) => {
     const item = this.state.textareaItem
     item.text = e.target.value
@@ -158,89 +164,162 @@ export default class SketchApp extends Component
 
 
   render() {
-    const { tool, size, color, fill, fillColor } = this.state;
+    const { tool, size, color, fill, fillColor } = this.state
     return (
       <div>
         <h1><img className='logo' src={logo} />TWOODLE</h1>
-        <Sidebar onShare={this.handleShare} boardName={this.props.boardName} deleteBoard={this.props.deleteBoard} />
-        <UserNamePopout isOpen={this.state.nameOpen} onClose={this.closePopup} />
-        <AddImage isOpen={this.state.addImage} onClose={this.addImage}/>
+
+        <Sidebar
+          onShare={this.handleShare}
+          boardName={this.props.boardName}
+          deleteBoard={this.props.deleteBoard}
+        />
+
+        <UserNamePopout
+          isOpen={this.state.nameOpen}
+          onClose={this.closePopup}
+        />
+
+        <AddImage
+          isOpen={this.state.addImage}
+          onClose={this.addImage}
+        />
+
         {this.state.poppedOpen ?
-        <div className='popout-container'>
-        <PoppedOutShare isOpen={this.state.poppedOpen} onClose={this.closeOtherPops} url={this.props.boardName}/>
-        </div>
+          <div className='popout-container'>
+            <PoppedOutShare
+              isOpen={this.state.poppedOpen}
+              onClose={this.closeOtherPops}
+              url={this.props.boardName}
+            />
+          </div>
         : ''}
+
         <div className='toolbar'>
-           <button
-             onClick={() => this.props.undoAnItem(this.props.boardName)}
-           ><i className='flaticon-arrows' title='Undo' alt='Undo'></i></button>
+          <button
+            onClick={() =>
+              {
+                this.changeTool()
+                this.props.undoAnItem(this.props.boardName)}
+              }>
+            <i className='flaticon-arrows' title='Undo' alt='Undo'></i>
+          </button>
 
           <button
-           onClick={() => this.props.deleteAllItems(this.props.boardName)}><i className='flaticon-shape' title='Clear board' alt='Clear board'></i> </button>
+            onClick={() =>
+              {
+                this.changeTool()
+                this.props.deleteAllItems(this.props.boardName)
+              }
+            }>
+            <i className='flaticon-shape' title='Clear board' alt='Clear board'></i>
+          </button>
 
           <button
-           onClick={() => this.refs.sketch.handleSave()}><i className='flaticon-symbols-1'  title='Save board' alt='Save'></i> </button>
+            onClick={() =>
+              {
+                this.changeTool()
+                this.refs.sketch.handleSave()
+              }
+            }>
+            <i className='flaticon-symbols-1'  title='Save board' alt='Save'></i>
+          </button>
 
           <button
-           onClick={() => this.setState({addImage: true})}><i className='flaticon-picture-hanging-in-a-frame-hand-drawn-symbol'  title='Add image' alt='Add image'></i> </button>
+            onClick={() =>
+              {
+                this.changeTool()
+                this.setState({addImage: true})
+              }
+            }>
+            <i className='flaticon-picture-hanging-in-a-frame-hand-drawn-symbol'  title='Add image' alt='Add image'></i>
+          </button>
 
-            <button
-              style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
-              onClick={() => this.changeTool(TOOL_PENCIL)}
-             ><i className='flaticon-tool' title='Pencil' alt='Pencil'></i></button>
+          <button
+            style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
+            className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
+            onClick={() => this.changeTool(TOOL_PENCIL)}>
+            <i className='flaticon-tool' title='Pencil' alt='Pencil'></i>
+          </button>
 
-            <button
-              style={tool == TOOL_BRUSH ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_BRUSH  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_BRUSH})}
-            ><i className='flaticon-paint' title='Paint Brush' alt='Paint Brush'></i></button>
+          <button
+            style={tool == TOOL_BRUSH ? {fontWeight:'bold'} : undefined}
+            className={tool == TOOL_BRUSH  ? 'item-active' : 'item'}
+            onClick={() => this.changeTool(TOOL_BRUSH)}>
+            <i className='flaticon-paint' title='Paint Brush' alt='Paint Brush'></i>
+          </button>
 
-            <button
-              style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_LINE  ? 'item-active line' : 'item line'}
-              onClick={() => this.setState({tool:TOOL_LINE})}
-            ><i className='flaticon-two' title='Line' alt='Line'></i></button>
+          <button
+            style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}
+            className={tool == TOOL_LINE  ? 'item-active line' : 'item line'}
+            onClick={() => this.changeTool(TOOL_LINE)}>
+            <i className='flaticon-two' title='Line' alt='Line'></i>
+          </button>
 
-            <button
-              style={tool == TOOL_ELLIPSE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_ELLIPSE  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_ELLIPSE})}
-            ><i className='flaticon-circle'  title='Circle' alt='Circle'></i></button>
+          <button
+            style={tool == TOOL_ELLIPSE ? {fontWeight:'bold'} : undefined}
+            className={tool == TOOL_ELLIPSE  ? 'item-active' : 'item'}
+            onClick={() => this.changeTool(TOOL_ELLIPSE)}>
+            <i className='flaticon-circle'  title='Circle' alt='Circle'></i>
+          </button>
 
-            <button
-              style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_RECTANGLE})}
-            ><i className='flaticon-square' title='Rectangle' alt='Rectangle'></i></button>
+          <button
+            style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
+            className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
+            onClick={() => this.changeTool(TOOL_RECTANGLE)}>
+            <i className='flaticon-square' title='Rectangle' alt='Rectangle'></i>
+          </button>
 
-            <button
-              style={tool == TOOL_TEXTBOX ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_TEXTBOX  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_TEXTBOX})}
-            >textbox</button>
+          <button
+            style={tool == TOOL_TEXTBOX ? {fontWeight:'bold'} : undefined}
+            className={tool == TOOL_TEXTBOX  ? 'item-active' : 'item'}
+            onClick={() => this.setState(TOOL_TEXTBOX)}>
+            textbox
+          </button>
 
-            <button
-              style={tool == TOOL_ERASER ? {fontWeight:'bold'} : undefined}
-              className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
-              onClick={() => this.setState({tool:TOOL_ERASER})}
-            ><i className='flaticon-remove' title='Eraser' alt='Eraser'></i></button>
-            <label htmlFor="" className='size'>SIZE: </label>
-            <input min="1" max="20" className='size'type="range" value={size} onChange={(e) => this.setState({size: parseInt(e.target.value)})} />
-            <ColorPicker value={color} newColor={this.changeColor.bind(this)}/>
+          <button
+            style={tool == TOOL_ERASER ? {fontWeight:'bold'} : undefined}
+            className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
+            onClick={() => this.changeTool(TOOL_ERASER)}>
+            <i className='flaticon-remove' title='Eraser' alt='Eraser'></i>
+          </button>
+
+          <label htmlFor="" className='size'>SIZE: </label>
+          <input
+            min="1"
+            max="20"
+            className='size'
+            type="range"
+            value={size}
+            onChange={(e) => this.setState({size: parseInt(e.target.value)})}
+          />
+
+          <ColorPicker
+            value={color}
+            newColor={this.changeColor.bind(this)}
+          />
+
           {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
             <div className='fill'>
               <label htmlFor="">FILL:</label>
-              <input className="checkbox" type="checkbox" value={fill} style={{margin:'0 8'}}
-                     onChange={(e) => this.setState({fill: e.target.checked})} />
+              <input
+                className="checkbox"
+                type="checkbox"
+                value={fill}
+                style={{margin:'0 8'}}
+                onChange={(e) => this.setState({fill: e.target.checked})}
+              />
               {fill ? <span>
                   <FillPicker value={fill} newFill={this.changeFill.bind(this)}/>
                 </span> : ''}
             </div> : ''}
           </div>
           {this.state.joinCall &&
-          <WebRTC roomName={this.props.boardName} endChat={this.state.clicked}/>
-           }
+            <WebRTC
+            roomName={this.props.boardName}
+            endChat={this.state.clicked}
+            />
+          }
 
         <div>
           <SketchPad
@@ -262,6 +341,8 @@ export default class SketchApp extends Component
         </div>
         <UsersOnline users={this.props.users} />
       </div>
-    );
+    )
   }
 }
+
+
