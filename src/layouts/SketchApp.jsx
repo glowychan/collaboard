@@ -44,10 +44,12 @@ export default class SketchApp extends Component
       textareaItem: '',
       addImage: false,
     }
+
     this.handleShare = this.handleShare.bind(this)
     this.closePopup = this.closePopup.bind(this)
     this.closeOtherPops = this.closeOtherPops.bind(this)
     this.addImage = this.addImage.bind(this)
+
   }
 
 
