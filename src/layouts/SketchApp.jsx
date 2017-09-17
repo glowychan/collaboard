@@ -133,7 +133,7 @@ export default class SketchApp extends Component
   }
 
   // Check if the tool is textbox (if yes finish the text) before changing the tool
-  changeTool = (tool) => {
+  changeTool = (data) => {
     if (this.state.tool === 'textbox') {
       const style = {
         top: 0,
@@ -147,11 +147,19 @@ export default class SketchApp extends Component
       this.setState({textareaStyle: style})
       this.props.onCompleteTextItem(this.state.textareaItem)
     }
-    if (tool) {
-      this.setState({tool: tool})
+    if (data && data.tool) {
+      this.setState({tool: data.tool})
     }
     else {
       this.setState({tool:TOOL_PENCIL})
+    }
+
+    if (data.delete) {
+      this.props.deleteAllItems(this.props.boardName)
+    }
+
+    if (data.save) {
+      this.refs.sketch.handleSave()
     }
   }
 
@@ -197,32 +205,18 @@ export default class SketchApp extends Component
 
         <div className='toolbar'>
           <button
-            onClick={() =>
-              {
-                this.changeTool()
-                this.props.undoAnItem(this.props.boardName)}
-              }>
+            onClick={() =>this.props.undoAnItem(this.props.boardName)}>
             <i className='flaticon-arrows' title='Undo' alt='Undo'></i>
           </button>
 
           <button
-            onClick={() =>
-              {
-                this.changeTool()
-                this.props.deleteAllItems(this.props.boardName)
-              }
-            }>
+            onClick={() => this.changeTool({delete: true})}>
             <i className='flaticon-shape' title='Clear board' alt='Clear board'></i>
           </button>
 
           <button
-            onClick={() =>
-              {
-                this.changeTool()
-                this.refs.sketch.handleSave()
-              }
-            }>
-            <i className='flaticon-symbols-1'  title='Save board' alt='Save'></i>
+            onClick={() => this.changeTool({save: true})}>
+            save<i className='flaticon-symbols-1'  title='Save board' alt='Save'></i>
           </button>
 
           <button
@@ -238,49 +232,49 @@ export default class SketchApp extends Component
           <button
             style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
             className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
-            onClick={() => this.changeTool(TOOL_PENCIL)}>
+            onClick={() => this.changeTool({tool: TOOL_PENCIL})}>
             <i className='flaticon-tool' title='Pencil' alt='Pencil'></i>
           </button>
 
           <button
             style={tool == TOOL_BRUSH ? {fontWeight:'bold'} : undefined}
             className={tool == TOOL_BRUSH  ? 'item-active' : 'item'}
-            onClick={() => this.changeTool(TOOL_BRUSH)}>
+            onClick={() => this.changeTool({tool: TOOL_BRUSH})}>
             <i className='flaticon-paint' title='Paint Brush' alt='Paint Brush'></i>
           </button>
 
           <button
             style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}
             className={tool == TOOL_LINE  ? 'item-active line' : 'item line'}
-            onClick={() => this.changeTool(TOOL_LINE)}>
+            onClick={() => this.changeTool({tool: TOOL_LINE})}>
             <i className='flaticon-two' title='Line' alt='Line'></i>
           </button>
 
           <button
             style={tool == TOOL_ELLIPSE ? {fontWeight:'bold'} : undefined}
             className={tool == TOOL_ELLIPSE  ? 'item-active' : 'item'}
-            onClick={() => this.changeTool(TOOL_ELLIPSE)}>
+            onClick={() => this.changeTool({tool: TOOL_ELLIPSE})}>
             <i className='flaticon-circle'  title='Circle' alt='Circle'></i>
           </button>
 
           <button
             style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
             className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
-            onClick={() => this.changeTool(TOOL_RECTANGLE)}>
+            onClick={() => this.changeTool({tool: TOOL_RECTANGLE})}>
             <i className='flaticon-square' title='Rectangle' alt='Rectangle'></i>
           </button>
 
           <button
             style={tool == TOOL_TEXTBOX ? {fontWeight:'bold'} : undefined}
             className={tool == TOOL_TEXTBOX  ? 'item-active' : 'item'}
-            onClick={() => this.setState(TOOL_TEXTBOX)}>
+            onClick={() => this.setState({tool: TOOL_TEXTBOX})}>
             textbox
           </button>
 
           <button
             style={tool == TOOL_ERASER ? {fontWeight:'bold'} : undefined}
             className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
-            onClick={() => this.changeTool(TOOL_ERASER)}>
+            onClick={() => this.changeTool({tool: TOOL_ERASER})}>
             <i className='flaticon-remove' title='Eraser' alt='Eraser'></i>
           </button>
 
