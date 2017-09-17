@@ -161,9 +161,7 @@ handleSave = () => {
       }
     }
     else {
-      const data = this.tool.onMouseDown(...this.getCursorPosition(e))
-      const x = data[0].start.x
-      const y = data[0].start.y
+      const data = this.tool.onMouseDown(...this.getCursorPosition(e), this.props.color)
       this.props.moveTextbox(data[0])
     }
   }

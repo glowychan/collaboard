@@ -41,8 +41,8 @@ export default class SketchApp extends Component
         width: 0,
         height: 0
       },
-      textareaItem: ''
-      // addImage: false,
+      textareaItem: '',
+      addImage: false,
     }
     this.handleShare = this.handleShare.bind(this);
     this.closePopup = this.closePopup.bind(this);
@@ -105,7 +105,6 @@ export default class SketchApp extends Component
 
   closePopup = (event) => {
     event.preventDefault()
-     console.log('close pop up')
     let userName = event.target.userName.value
     this.props.newUserName(userName)
     this.setState({
@@ -116,15 +115,17 @@ export default class SketchApp extends Component
 
   moveTextbox = (item) => {
     const style = {
-      top: `${item.start.y}px`,
-      left: `${item.start.x}px`,
-      width: '100px',
-      height: '100px',
+      top: `${item.start.y + 104}px`,
+      left: `${item.start.x + 30}px`,
+      width: '250px',
+      height: '250px',
       position: 'absolute',
       background: 'none',
       display: '',
       border: '1px dashed black',
       zIndex: 500,
+      fontFamily: 'Comic Sans MS',
+      fontSize: '20px'
     }
     item.text = this.state.text
     this.setState({textareaItem: item})
