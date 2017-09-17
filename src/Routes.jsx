@@ -108,22 +108,16 @@ class Twoodle extends React.Component {
       boardName: boardName,
       items:  item,
     }
-    console.log(data)
     this.socket.emit('add new items', data)
   }
+
+
 
   // Send an undo request through websockets
   undoAnItem = (boardName) => {
     this.socket.emit('undo an item', this.state.boardName)
   }
 
-  onCompleteTextItem = (item) => {
-    const data = {
-      boardName: this.state.boardName,
-      items:  item,
-    }
-    this.socket.emit('add new items', data)
-  }
 
   deleteAllItems = (boardName) => {
     this.socket.emit('delete all items', this.state.boardName)

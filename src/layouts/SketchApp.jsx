@@ -150,7 +150,7 @@ export default class SketchApp extends Component
       this.setState({textareaStyle: style})
       const item = this.state.textareaItem
       item.color = this.state.color
-      this.props.onCompleteTextItem(item)
+      this.props.addNewItem(item, this.props.boardName)
     }
     if (data && data.tool) {
       this.setState({tool: data.tool})
@@ -159,11 +159,11 @@ export default class SketchApp extends Component
       this.setState({tool:TOOL_PENCIL})
     }
 
-    if (data.delete) {
+    if (data && data.delete) {
       this.props.deleteAllItems(this.props.boardName)
     }
 
-    if (data.save) {
+    if (data && data.save) {
       this.refs.sketch.handleSave()
     }
   }
