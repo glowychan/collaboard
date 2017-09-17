@@ -193,8 +193,7 @@ handleSave = () => {
   }
 
   getCursorPosition(e) {
-    const { top, left } = this.canvas.getBoundingClientRect();
-
+    const { top, left } = this.canvas.getBoundingClientRect()
 
     return [
       e.clientX - left,

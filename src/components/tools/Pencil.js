@@ -11,9 +11,6 @@ export default (context) => {
   }
 
   const onMouseDown = (x, y, color, size) => {
-    console.log(x)
-    console.log(y)
-    
     stroke = {
       id: v4(),
       tool: TOOL_PENCIL,
@@ -37,7 +34,7 @@ export default (context) => {
     context.lineTo(x , y);
     context.stroke();
     context.closePath();
-    
+
     context.restore();
   };
 
