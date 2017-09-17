@@ -4,8 +4,8 @@ export const TOOL_TEXTBOX = 'textbox'
 
 export default (context) => {
 
-  let textbox = null;
-  let imageData = null;
+  let textbox = null
+  let imageData = null
 
   const onMouseDown = (x, y, color) => {
     textbox = {
@@ -14,9 +14,8 @@ export default (context) => {
       start: { x, y },
       color: color,
       end: null,
-      text: ''
-    };
-    return [textbox];
+    }
+    return [textbox]
   }
 
   const write = (item, mouseX, mouseY) => {
@@ -36,7 +35,6 @@ export default (context) => {
         while (n < words.length) {
           while (context.measureText(words[n]).width < spaceLeft && n < words.length) {
             tempLine  += words[n] + ' '
-            console.log(words.length, words, n, words[n])
             spaceLeft -= context.measureText(words[n]).width
             n += 1
           }
@@ -51,10 +49,10 @@ export default (context) => {
   }
 
 
-  const draw = item => write(item, item.start.x, item.start.y);
+  const draw = item => write(item, item.start.x, item.start.y)
 
   return {
     onMouseDown,
     draw,
-  };
-};
+  }
+}

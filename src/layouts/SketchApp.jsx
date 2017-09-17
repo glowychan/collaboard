@@ -127,7 +127,7 @@ export default class SketchApp extends Component
       fontFamily: 'Comic Sans MS',
       fontSize: '20px'
     }
-    item.text = this.state.text
+    item.text = this.state.textareaItem.text
     this.setState({textareaItem: item})
     this.setState({textareaStyle: style})
   }
