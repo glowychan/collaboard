@@ -163,10 +163,11 @@ export default class SketchApp extends Component
           deleteBoard={this.props.deleteBoard}
         />
 
-        <UserNamePopout
-          isOpen={this.state.nameOpen}
-          onClose={this.closePopup}
-        />
+         {this.state.nameOpen &&
+          <UserNamePopout
+            onClose={this.closePopup}
+          />
+        }
 
         {this.state.poppedOpen ?
           <div className='popout-container'>
