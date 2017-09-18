@@ -49,7 +49,7 @@ class SideBar extends Component {
           showCancelButton
           onConfirm={this.onDeleteClick}
           onCancel={() => {
-            this.setState({ show: false });
+            this.setState({ show: false })
           }}
           />
           <a className='bm-item-list side-item' onClick={() => this.setState({ show: true })}><i className='flaticon-symbol-1'></i></a>
@@ -58,4 +58,4 @@ class SideBar extends Component {
   };
 };
 
-export default SideBar;
+export default SideBar
