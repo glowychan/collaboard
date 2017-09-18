@@ -114,14 +114,17 @@ export default class SketchPad extends Component {
 
 
 
-handleSave = () => {
-  const userinput = prompt("Please enter a filename");
-  const filename = userinput.concat('');
+  handleSave = () => {
 
-   this.canvas.toBlob(function(blob) {
-    FileSaver.saveAs(blob, `${filename}.jpg`);
-    });
-
+    const userinput = prompt("Please enter a filename");
+      if (!userinput) {
+        return
+      } else { 
+        const filename = userinput.concat('');
+        this.canvas.toBlob(function(blob) {
+          FileSaver.saveAs(blob, `${filename}.jpg`);
+          });
+      }
   }
 
   handleClear = () => {
@@ -197,9 +200,7 @@ handleSave = () => {
     ];
   }
 
-  _handleTouchStart =() => {
-    console.log('handleTouchStart');
-  }
+ 
 
   render() {
     const { width, height, canvasClassName } = this.props;

@@ -13,6 +13,9 @@ class WebRTC extends React.Component {
    this.toggleVideo = this.toggleVideo.bind(this)
   }
 
+
+
+
   componentDidMount() {
     this.webrtc = new SimpleWebRTC({
       // the id/element dom element that will hold "our" video
@@ -33,7 +36,7 @@ class WebRTC extends React.Component {
 
         this.webrtc.on('readyToCall', () => {
             
-            this.webrtc.joinRoom(this.props.roomName);
+           this.webrtc.joinRoom(this.props.roomName + 'gra091873');
           });
     }
     
