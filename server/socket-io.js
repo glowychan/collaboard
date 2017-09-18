@@ -10,7 +10,6 @@ module.exports = (io, dataHelpers) => {
       name: 'Anonymous',
       color: '#6ED3CF',
       boardName: ''
-    
     }
 
 
@@ -76,7 +75,7 @@ module.exports = (io, dataHelpers) => {
         }
       })
       .catch((err) => {
-        // fix this later
+        console.log(err)
       })
       io.in(data.boardName).emit('add new items', {items: data.items})
     })
@@ -104,20 +103,28 @@ module.exports = (io, dataHelpers) => {
             })
         })
       }).catch((err) => {
-        // fix later
+        console.log(err)
       })
     })
 
+
+    // Clear all items on a board
     socket.on('delete all items', function(boardName) {
       const filter = {boardName: boardName}
       dataHelpers.deleteAllItems(filter, {$set: {items: []}})
-      io.in(boardName).emit('delete all items')
+        .then(() => {
+          io.in(boardName).emit('delete all items')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     })
 
+
+    // Delete a board
     socket.on('delete a board', function(boardName) {
       io.in(boardName).emit('delete a board')
     })
-
 
 
     // DISCONNECT
@@ -132,7 +139,6 @@ module.exports = (io, dataHelpers) => {
 
   })
 }
-
 
 
 

@@ -5,7 +5,6 @@ export const TOOL_TEXTBOX = 'textbox'
 export default (context) => {
 
   let textbox = null
-  let imageData = null
 
   const onMouseDown = (x, y, color) => {
     textbox = {
@@ -31,20 +30,28 @@ export default (context) => {
     mouseY = mouseY + 12
 
     if (item.text) {
+      // Split the text into lines
       const lines = item.text.trim().split('\n')
       lines.forEach((line) => {
-        const words = line.split(' ')
+        // Split the lines to words
+        let words     = line.split(' ')
         let spaceLeft = maxWidth
-        let tempLine = ''
+        let tempLine  = ''
+
+        // Loop through the words of a line
         let n = 0
         while (n < words.length) {
           while (context.measureText(words[n]).width < spaceLeft && n < words.length) {
+            // Create lines that fit the textarea size
             tempLine  += words[n] + ' '
             spaceLeft -= context.measureText(words[n]).width
             n += 1
           }
+          // Print out the line
           context.strokeText(tempLine, mouseX, mouseY)
           context.fillText(tempLine, mouseX, mouseY)
+
+          // Reset the line
           tempLine = ''
           spaceLeft = maxWidth
           mouseY += lineHeight

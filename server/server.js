@@ -29,7 +29,6 @@ MongoClient.connect(MONGODB_URI)
     const routes = require('./routes.js')(dataHelpers)
     app.use('/', routes)
 
-
     // An interface to websockets
     require('./socket-io')(io, dataHelpers)
 
