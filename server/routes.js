@@ -6,6 +6,7 @@ const Mongo   = require('mongodb')
 
 module.exports = function(dataHelpers) {
 
+  // GET ONE BORAD BY NAME
   routes.get('/', (req, res) => {
     const filter = {boardName: req.query.boardName}
     // Board Name is unique, so getBoards will return just one board here
@@ -27,8 +28,9 @@ module.exports = function(dataHelpers) {
       .catch(err => {
         return res.status(500).send()
       })
-  });
+  })
 
+  // DELETE ONE BOARD
   routes.delete('/twoodles/:boardName', (req, res) => {
     const filter = {boardName: req.params.boardName};
     dataHelpers.deleteBoard(filter)
