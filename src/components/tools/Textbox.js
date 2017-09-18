@@ -3,7 +3,6 @@ import { v4 } from 'uuid'
 export const TOOL_TEXTBOX = 'textbox'
 
 export default (context) => {
-
   let textbox = null
   let imageData = null
 
@@ -32,7 +31,7 @@ export default (context) => {
 
     if (item.text) {
       const lines = item.text.trim().split('\n')
-      lines.forEach((line) => {
+      lines.forEach(line => {
         const words = line.split(' ')
         let spaceLeft = maxWidth
         let tempLine = ''
@@ -49,11 +48,9 @@ export default (context) => {
           spaceLeft = maxWidth
           mouseY += lineHeight
         }
-
       })
     }
   }
-
 
   const draw = item => write(item, item.start.x, item.start.y)
 
