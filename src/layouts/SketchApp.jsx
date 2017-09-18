@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { findDOMNode } from 'react-dom';
 import SketchPad from '../components/SketchPad';
 import { TOOL_PENCIL } from '../components/tools/Pencil';
 import { TOOL_LINE } from '../components/tools/Line';
@@ -19,13 +17,10 @@ import UsersOnline from '../components/UsersOnline'
 import logo from '../icons/007-square.png';
 
 
-export default class SketchApp extends Component
-{
+export default class SketchApp extends Component {
   socket = null
-
   constructor(props) {
-    super(props);
-
+    super(props)
     this.state = {
       tool: null,
       size: 2,
@@ -42,15 +37,12 @@ export default class SketchApp extends Component
       },
       textareaItem: ''
     }
-
     this.handleShare = this.handleShare.bind(this)
     this.closePopup = this.closePopup.bind(this)
     this.closeOtherPops = this.closeOtherPops.bind(this)
   }
 
-
-
-  componentWillReceiveProps ({undo, clear}) {
+  componentWillReceiveProps ({ undo, clear }) {
     if (undo || clear) {
       this.refs.sketch.handleClear()
     }
@@ -68,7 +60,7 @@ export default class SketchApp extends Component
     })
   }
 
-  handleShare (popup) {
+  handleShare(popup) {
     this.setState({
       poppedOpen: true
     })
@@ -80,7 +72,7 @@ export default class SketchApp extends Component
     })
   }
 
-  closePopup = (event) => {
+  closePopup = event => {
     event.preventDefault()
     let userName = event.target.userName.value
     this.props.newUserName(userName)
@@ -90,7 +82,7 @@ export default class SketchApp extends Component
     })
   }
 
-  moveTextbox = (item) => {
+  moveTextbox = item => {
     const style = {
       top: `${item.start.y + 104}px`,
       left: `${item.start.x + 30}px`,
@@ -111,7 +103,7 @@ export default class SketchApp extends Component
   }
 
   // Check if the tool is textbox (if yes finish the text) before changing the tool
-  changeTool = (data) => {
+  changeTool = data => {
     if (this.state.tool === 'textbox') {
       const style = {
         top: 0,
@@ -122,7 +114,7 @@ export default class SketchApp extends Component
         display: 'none',
         border: 'none',
       }
-      this.setState({textareaStyle: style})
+      this.setState({ textareaStyle: style })
       const item = this.state.textareaItem
       item.color = this.state.color
       this.props.addNewItem(item, this.props.boardName)
@@ -144,18 +136,17 @@ export default class SketchApp extends Component
   }
 
   // On change of the text in the textarea save it in the parent's state (routes)
-  onTextchange = (e) => {
+  onTextchange = e => {
     const item = this.state.textareaItem
     item.text = e.target.value
-    this.setState({textareaItem: item})
+    this.setState({ textareaItem: item })
   }
-
 
   render() {
     const { tool, size, color, fill, fillColor } = this.state
     return (
       <div>
-        <h1><img className='logo' src={logo} />TWOODLE</h1>
+        <h1><img className='logo' src={logo} alt='logo' />TWOODLE</h1>
 
         <Sidebar
           onShare={this.handleShare}
@@ -163,11 +154,7 @@ export default class SketchApp extends Component
           deleteBoard={this.props.deleteBoard}
         />
 
-         {this.state.nameOpen &&
-          <UserNamePopout
-            onClose={this.closePopup}
-          />
-        }
+        {this.state.nameOpen && <UserNamePopout onClose={this.closePopup} />}
 
         {this.state.poppedOpen ?
           <div className='popout-container'>
@@ -196,50 +183,50 @@ export default class SketchApp extends Component
           </button>
 
           <button
-            style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
-            className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
+            style={tool === TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
+            className={tool === TOOL_PENCIL  ? 'item-active' : 'item'}
             onClick={() => this.changeTool({tool: TOOL_PENCIL})}>
             <i className='flaticon-tool' title='Pencil' alt='Pencil'></i>
           </button>
 
           <button
-            style={tool == TOOL_BRUSH ? {fontWeight:'bold'} : undefined}
-            className={tool == TOOL_BRUSH  ? 'item-active' : 'item'}
+            style={tool === TOOL_BRUSH ? {fontWeight:'bold'} : undefined}
+            className={tool === TOOL_BRUSH  ? 'item-active' : 'item'}
             onClick={() => this.changeTool({tool: TOOL_BRUSH})}>
             <i className='flaticon-paint' title='Paint Brush' alt='Paint Brush'></i>
           </button>
 
           <button
-            style={tool == TOOL_LINE ? {fontWeight:'bold'} : undefined}
-            className={tool == TOOL_LINE  ? 'item-active line' : 'item line'}
+            style={tool === TOOL_LINE ? {fontWeight:'bold'} : undefined}
+            className={tool === TOOL_LINE  ? 'item-active line' : 'item line'}
             onClick={() => this.changeTool({tool: TOOL_LINE})}>
             <i className='flaticon-two' title='Line' alt='Line'></i>
           </button>
 
           <button
-            style={tool == TOOL_ELLIPSE ? {fontWeight:'bold'} : undefined}
-            className={tool == TOOL_ELLIPSE  ? 'item-active' : 'item'}
+            style={tool === TOOL_ELLIPSE ? {fontWeight:'bold'} : undefined}
+            className={tool === TOOL_ELLIPSE  ? 'item-active' : 'item'}
             onClick={() => this.changeTool({tool: TOOL_ELLIPSE})}>
             <i className='flaticon-circle'  title='Circle' alt='Circle'></i>
           </button>
 
           <button
-            style={tool == TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
-            className={tool == TOOL_RECTANGLE  ? 'item-active' : 'item'}
+            style={tool === TOOL_RECTANGLE ? {fontWeight:'bold'} : undefined}
+            className={tool === TOOL_RECTANGLE  ? 'item-active' : 'item'}
             onClick={() => this.changeTool({tool: TOOL_RECTANGLE})}>
             <i className='flaticon-square' title='Rectangle' alt='Rectangle'></i>
           </button>
 
           <button
-            style={tool == TOOL_TEXTBOX ? {fontWeight:'bold'} : undefined}
-            className={tool == TOOL_TEXTBOX  ? 'item-active' : 'item'}
+            style={tool === TOOL_TEXTBOX ? {fontWeight:'bold'} : undefined}
+            className={tool === TOOL_TEXTBOX  ? 'item-active' : 'item'}
             onClick={() => this.setState({tool: TOOL_TEXTBOX})}>
             textbox
           </button>
 
           <button
-            style={tool == TOOL_ERASER ? {fontWeight:'bold'} : undefined}
-            className={tool == TOOL_ERASER  ? 'item-active' : 'item'}
+            style={tool === TOOL_ERASER ? {fontWeight:'bold'} : undefined}
+            className={tool === TOOL_ERASER  ? 'item-active' : 'item'}
             onClick={() => this.changeTool({tool: TOOL_ERASER})}>
             <i className='flaticon-remove' title='Eraser' alt='Eraser'></i>
           </button>
@@ -259,7 +246,7 @@ export default class SketchApp extends Component
             newColor={this.changeColor.bind(this)}
           />
 
-          {(this.state.tool == TOOL_ELLIPSE || this.state.tool == TOOL_RECTANGLE) ?
+          {(this.state.tool === TOOL_ELLIPSE || this.state.tool === TOOL_RECTANGLE) ?
             <div className='fill'>
               <label htmlFor="">FILL:</label>
               <input
@@ -308,5 +295,3 @@ export default class SketchApp extends Component
     )
   }
 }
-
-
