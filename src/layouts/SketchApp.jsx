@@ -101,7 +101,7 @@ export default class SketchApp extends Component
       display: '',
       border: '1px dashed black',
       zIndex: 500,
-      fontFamily: 'Comic Sans MS',
+      fontFamily: 'Helvetica Neue',
       fontSize: '20px',
       fontWeight: 'bold'
     }
