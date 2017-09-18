@@ -195,16 +195,6 @@ export default class SketchApp extends Component
           </button>
 
           <button
-            onClick={() =>
-              {
-                this.changeTool()
-                this.setState({addImage: true})
-              }
-            }>
-            <i className='flaticon-picture-hanging-in-a-frame-hand-drawn-symbol'  title='Add image' alt='Add image'></i>
-          </button>
-
-          <button
             style={tool == TOOL_PENCIL ? {fontWeight:'bold'} : undefined}
             className={tool == TOOL_PENCIL  ? 'item-active' : 'item'}
             onClick={() => this.changeTool({tool: TOOL_PENCIL})}>
