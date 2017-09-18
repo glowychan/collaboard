@@ -1,8 +1,8 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch, Link, withRouter } from 'react-router-dom';
-import SketchApp from './layouts/SketchApp';
-import Homepage from './layouts/Homepage';
-import Errorpage from './layouts/Errorpage';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import SketchApp from './layouts/SketchApp'
+import Homepage from './layouts/Homepage'
+import Errorpage from './layouts/Errorpage'
 import io from 'socket.io-client'
 
 
@@ -18,7 +18,7 @@ const ErrorComponent = () => (
   </div>
 )
 
-class Twoodle extends React.Component {
+class Twoodle extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -30,32 +30,25 @@ class Twoodle extends React.Component {
     }
   }
 
-
-
-
   componentDidMount() {
-
     // Set up websocket connection
     this.socket = io('http://localhost:3001')
-
     // Send a new connection message to the websocket server
     this.socket.emit('new connection', this.state.boardName)
     this.socket.emit('online users', this.state.boardName)
-
     // Receive all items of a board on first connection
     this.socket.on('new connection', (data) => {
       if (data.error) {
         this.props.history.push('/error')
-      }
-      else {
-        this.setState({items: data.items})
+      } else {
+        this.setState({ items: data.items })
       }
     })
 
     // Recieve new items and add them to state
     this.socket.on('add new items', (data) => {
       const newItems = this.state.items.concat(data.items)
-      this.setState({items: newItems})
+      this.setState({ items: newItems })
     })
 
     // Receive all items of a board after an item is removed (after undo request)
@@ -64,7 +57,6 @@ class Twoodle extends React.Component {
       this.setState({items: data.items})
       this.setState({undo: false})
     })
-
 
     // Clear canvas for all users when clear function has been clicked
     this.socket.on('delete all items', () => {
@@ -102,7 +94,7 @@ class Twoodle extends React.Component {
     )
   }
 
-  // Send new items through the websockets to be braodcasted
+  // Send new items through websockets to be broadcasted
   addNewItem = (item, boardName) => {
     const data = {
       boardName: boardName,
@@ -111,14 +103,12 @@ class Twoodle extends React.Component {
     this.socket.emit('add new items', data)
   }
 
-
-
   // Send an undo request through websockets
   undoAnItem = (boardName) => {
     this.socket.emit('undo an item', this.state.boardName)
   }
 
-
+  // Send a clear board request through websockets
   deleteAllItems = (boardName) => {
     this.socket.emit('delete all items', this.state.boardName)
   }
@@ -133,12 +123,7 @@ class Twoodle extends React.Component {
   deleteBoard = (boardName) => {
     this.socket.emit('delete a board', this.state.boardName)
   }
-
-
 }
-
-
-
 
 const Routes = () => (
   <Router>
