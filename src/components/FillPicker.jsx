@@ -18,7 +18,7 @@ class FillPicker extends React.Component {
         color={ this.state.background } 
         width={145} 
         circleSize={13}
-        colors={["#E62739", "#6ED3CF", "#9068BE", "#464646", "#181818"]}
+        colors={["#FF0000", "#FFC300", "#529749", "#2196f3",  "#000000"]}
         onChangeComplete={ this.handleChangeComplete }
       />
     );

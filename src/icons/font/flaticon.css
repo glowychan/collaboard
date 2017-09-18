@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 15/09/2017 00:02
+  	Creation date: 16/09/2017 00:17
   	*/
 
 @font-face {
@@ -24,26 +24,27 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
   font-family: Flaticon;
-        font-size: 40px;
+        font-size: 30px;
 font-style: normal;
 margin-left: 20px;
 }
 
-.flaticon-symbol-1:before { content: "\f100"; }
-.flaticon-remove:before { content: "\f101"; }
-.flaticon-arrows:before { content: "\f102"; }
-.flaticon-shape:before { content: "\f103"; } 
-.flaticon-sign:before { content: "\f105"; }
-.flaticon-symbol:before { content: "\f106"; }
-.flaticon-symbols:before { content: "\f107"; }
-.flaticon-two:before { content: "\f108"; }
-.flaticon-square:before { content: "\f109"; }
-.flaticon-circle:before { content: "\f10a"; }
-.flaticon-paint:before { content: "\f10b"; }
-.flaticon-tool:before { content: "\f10c"; }
-.flaticon-picture-hanging-in-a-frame-hand-drawn-symbol:before { content: "\f10d"; }
-.flaticon-twitter-hand-drawn-logo:before { content: "\f10e"; }
-.flaticon-instagram-hand-drawn-logo:before { content: "\f10f"; }
-.flaticon-facebook-letter-logo-in-a-square-hand-drawn-outline:before { content: "\f110"; }
-.flaticon-video:before { content: "\f111"; }
-
+.flaticon-symbols-2:before { content: "\f100"; }
+.flaticon-symbol-1:before { content: "\f101"; }
+.flaticon-remove:before { content: "\f102"; }
+.flaticon-arrows:before { content: "\f103"; }
+.flaticon-shape:before { content: "\f104"; }
+.flaticon-symbols-1:before { content: "\f105"; }
+.flaticon-sign:before { content: "\f106"; }
+.flaticon-symbol:before { content: "\f107"; }
+.flaticon-symbols:before { content: "\f108"; }
+.flaticon-two:before { content: "\f109"; }
+.flaticon-square:before { content: "\f10a"; }
+.flaticon-circle:before { content: "\f10b"; }
+.flaticon-paint:before { content: "\f10c"; }
+.flaticon-tool:before { content: "\f10d"; }
+.flaticon-picture-hanging-in-a-frame-hand-drawn-symbol:before { content: "\f10e"; }
+.flaticon-twitter-hand-drawn-logo:before { content: "\f10f"; }
+.flaticon-instagram-hand-drawn-logo:before { content: "\f110"; }
+.flaticon-facebook-letter-logo-in-a-square-hand-drawn-outline:before { content: "\f111"; }
+.flaticon-video:before { content: "\f112"; }

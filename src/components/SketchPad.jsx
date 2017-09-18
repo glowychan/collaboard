@@ -53,7 +53,7 @@ export default class SketchPad extends Component {
     canvasClassName: 'canvas',
     debounceTime: 1000,
     animate: false,
-    tool: TOOL_PENCIL,
+    tool: null,
     toolsMap
   };
 
@@ -77,44 +77,52 @@ export default class SketchPad extends Component {
     this.initialHeight = this.canvas.height
     this.initialWidth = this.canvas.width
     this.initTool(this.props.tool);
-    // this.ctx.fillStyle = 'white';
-    // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
 
 
   _onTouchStart(e) {
+    if (this.tool) {
     const data = this.tool.onMouseDown(...this.getCursorPosition(e.touches[0]), this.props.color, this.props.size, this.props.fillColor);
     data && data[0] && this.props.onItemStart && this.props.onItemStart.apply(null, data);
     if (this.props.onDebouncedItemChange) {
       this.interval = setInterval(this.onDebouncedMove, this.props.debounceTime);
     }
+   }
   }
 
   _onTouchMove(e) {
+   if(this.tool) {
     const data = this.tool.onMouseMove(...this.getCursorPosition(e.touches[0]));
     data && data[0] && this.props.onEveryItemChange && this.props.onEveryItemChange.apply(null, data);
+   }
   }
 
+
   _onTouchEnd(e) {
+   if(this.tool) {
     const data = this.tool.onMouseUp(...this.getCursorPosition(e.changedTouches[0]));
     data && data[0] && this.props.onCompleteItem && this.props.onCompleteItem.apply(null, data);
     if (this.props.onDebouncedItemChange) {
       clearInterval(this.interval);
       this.interval = null;
     }
+   }
   }
 
 
 
-handleSave = () => {
-  const userinput = prompt("Please enter a filename");
-  const filename = userinput.concat('');
+  handleSave = () => {
 
-   this.canvas.toBlob(function(blob) {
-    FileSaver.saveAs(blob, `${filename}.jpg`);
-    });
-
+    const userinput = prompt("Please enter a filename");
+      if (!userinput) {
+        return
+      } else {
+        const filename = userinput.concat('');
+        this.canvas.toBlob(function(blob) {
+          FileSaver.saveAs(blob, `${filename}.jpg`);
+          });
+      }
   }
 
   handleClear = () => {
@@ -127,47 +135,45 @@ handleSave = () => {
     items
       .filter(item => this.props.items.indexOf(item) === -1)
       .forEach(item => {
-        if (item.tool === 'image') {
-          let img = new Image();
-          img.src = item.url
-          img.onload = () => {
-            this.ctx.drawImage(img, 10, 10);
-          }
-      } else {
         this.initTool(item.tool);
         this.tool.draw(item, this.props.animate);
 
+    })
+    if (this.tool)
+      this.initTool(tool)
+      // Clear the textbox after click on another tool
+      if (tool === 'textbox' && this.props.tool !== 'textbox') {
+        const textarea = findDOMNode(this.textareaRef)
+        textarea.value = ''
       }
-    });
-    this.initTool(tool)
-    // Clear the textbox after click on another tool
-    if (tool === 'textbox' && this.props.tool !== 'textbox') {
-      const textarea = findDOMNode(this.textareaRef)
-      textarea.value = ''
-    }
+      else {
+        return
+      }
   }
 
 
   initTool(tool) {
-    this.tool = this.props.toolsMap[tool](this.ctx);
+    if (tool) {
+      this.tool = this.props.toolsMap[tool](this.ctx);
+    }
   }
 
   onMouseDown(e) {
-    if (this.props.tool !== 'textbox') {
+    if (this.tool && this.props.tool && this.props.tool !== 'textbox') {
       const data = this.tool.onMouseDown(...this.getCursorPosition(e), this.props.color, this.props.size, this.props.fillColor);
       data && data[0] && this.props.onItemStart && this.props.onItemStart.apply(null, data);
       if (this.props.onDebouncedItemChange) {
         this.interval = setInterval(this.onDebouncedMove, this.props.debounceTime);
       }
     }
-    else {
+    else if (this.props.tool === 'textbox'){
       const data = this.tool.onMouseDown(...this.getCursorPosition(e), this.props.color)
       this.props.moveTextbox(data[0])
-    }
+     }
   }
 
   onDebouncedMove() {
-    if (this.props.tool !== 'textbox') {
+    if (this.tool && this.props.tool && this.props.tool !== 'textbox') {
       if (typeof this.tool.onDebouncedMouseMove === 'function' && this.props.onDebouncedItemChange) {
         this.props.onDebouncedItemChange.apply(null, this.tool.onDebouncedMouseMove());
       }
@@ -175,14 +181,14 @@ handleSave = () => {
   }
 
   onMouseMove(e) {
-    if (this.props.tool !== 'textbox') {
-      const data = this.tool.onMouseMove(...this.getCursorPosition(e));
+    if (this.tool && this.props.tool && this.props.tool !== 'textbox') {
+      const data = this.tool.onMouseMove(...this.getCursorPosition(e))
       data && data[0] && this.props.onEveryItemChange && this.props.onEveryItemChange.apply(null, data);
     }
   }
 
   onMouseUp(e) {
-    if (this.props.tool !== 'textbox') {
+    if (this.tool && this.props.tool && this.props.tool !== 'textbox') {
       const data = this.tool.onMouseUp(...this.getCursorPosition(e));
       data && data[0] && this.props.onCompleteItem && this.props.onCompleteItem.apply(null, data);
       if (this.props.onDebouncedItemChange) {
@@ -198,15 +204,13 @@ handleSave = () => {
     return [
       e.clientX - left,
       e.clientY - top
-    ];
+    ]
   }
 
-  _handleTouchStart =() => {
-    console.log('handleTouchStart');
-  }
+
 
   render() {
-    const { width, height, canvasClassName } = this.props;
+    const { width, height, canvasClassName } = this.props
     return (
       <div>
         <textarea
@@ -222,9 +226,9 @@ handleSave = () => {
             onMouseMove={this.onMouseMove}
             onMouseOut={this.onMouseUp}
             onMouseUp={this.onMouseUp}
-            // onTouchStart={this._onTouchStart}
-            // onTouchMove={this._onTouchMove}
-            // onTouchEnd={this._onTouchEnd}
+            onTouchStart={this._onTouchStart}
+            onTouchMove={this._onTouchMove}
+            onTouchEnd={this._onTouchEnd}
             width={width}
             height={height}
           />

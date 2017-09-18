@@ -68,6 +68,7 @@ fill: #373a47;
 /* Wrapper for item list */
 .bm-item-list {
 padding-top: 1.5em;
+padding-left: 12%;
 font-size: 2rem;
 }
 

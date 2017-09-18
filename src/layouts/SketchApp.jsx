@@ -16,7 +16,6 @@ import ColorPicker from '../components/ColorPicker';
 import FillPicker from '../components/FillPicker';
 import UserNamePopout from '../components/UserNamePopout';
 import UsersOnline from '../components/UsersOnline'
-import AddImage from '../components/AddImage'
 import logo from '../icons/007-square.png';
 
 
@@ -28,7 +27,7 @@ export default class SketchApp extends Component
     super(props);
 
     this.state = {
-      tool:TOOL_PENCIL,
+      tool: null,
       size: 2,
       color: '#000000',
       fill: false,
@@ -41,15 +40,12 @@ export default class SketchApp extends Component
         width: 0,
         height: 0
       },
-      textareaItem: '',
-      addImage: false,
+      textareaItem: ''
     }
 
     this.handleShare = this.handleShare.bind(this)
     this.closePopup = this.closePopup.bind(this)
     this.closeOtherPops = this.closeOtherPops.bind(this)
-    this.addImage = this.addImage.bind(this)
-
   }
 
 
@@ -82,27 +78,6 @@ export default class SketchApp extends Component
     this.setState({
       poppedOpen: false,
     })
-  }
-
-  addImage = (event) => {
-   event.preventDefault()
-   let imageUrl = event.target.imageUrl.value
-   let pattern = /^((http|https|ftp):\/\/)/
-
-   if (!(pattern.test(imageUrl))) {
-      imageUrl = `https://${imageUrl}`
-   }
-
-   let image = {
-     url: imageUrl,
-     tool: 'image'
-   }
-
-   this.setState({
-      addImage: false
-    })
-
-  this.props.addNewItem(image, this.props.boardName)
   }
 
   closePopup = (event) => {
@@ -191,11 +166,6 @@ export default class SketchApp extends Component
         <UserNamePopout
           isOpen={this.state.nameOpen}
           onClose={this.closePopup}
-        />
-
-        <AddImage
-          isOpen={this.state.addImage}
-          onClose={this.addImage}
         />
 
         {this.state.poppedOpen ?

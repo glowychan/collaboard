@@ -65,7 +65,6 @@ img.icon {
 }
 
 .fill {
-  margin-left: 10px;
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -121,9 +120,9 @@ img.save:hover {
     align-items: center;
     background-color: rgba(144, 104, 190, 0.7);
   }
-
+ 
   .item-active {
-    color: #E1E8F0;
+    color: #000;
   }
 
   label.size {
