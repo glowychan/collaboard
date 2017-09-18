@@ -139,7 +139,7 @@ export default class SketchPad extends Component {
         this.tool.draw(item, this.props.animate);
 
     })
-    if (this.tool)
+    if (tool)
       this.initTool(tool)
       // Clear the textbox after click on another tool
       if (tool === 'textbox' && this.props.tool !== 'textbox') {
