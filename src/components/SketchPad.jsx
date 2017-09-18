@@ -159,17 +159,19 @@ export default class SketchPad extends Component {
   }
 
   onMouseDown(e) {
-    if (this.tool && this.props.tool && this.props.tool !== 'textbox') {
-      const data = this.tool.onMouseDown(...this.getCursorPosition(e), this.props.color, this.props.size, this.props.fillColor);
-      data && data[0] && this.props.onItemStart && this.props.onItemStart.apply(null, data);
-      if (this.props.onDebouncedItemChange) {
-        this.interval = setInterval(this.onDebouncedMove, this.props.debounceTime);
+    if (this.tool && this.props.tool) {
+      if (this.props.tool !== 'textbox') {
+        const data = this.tool.onMouseDown(...this.getCursorPosition(e), this.props.color, this.props.size, this.props.fillColor);
+        data && data[0] && this.props.onItemStart && this.props.onItemStart.apply(null, data);
+        if (this.props.onDebouncedItemChange) {
+          this.interval = setInterval(this.onDebouncedMove, this.props.debounceTime);
+        }
+      }
+      else {
+        const data = this.tool.onMouseDown(...this.getCursorPosition(e), this.props.color)
+        this.props.moveTextbox(data[0])
       }
     }
-    else if (this.props.tool === 'textbox'){
-      const data = this.tool.onMouseDown(...this.getCursorPosition(e), this.props.color)
-      this.props.moveTextbox(data[0])
-     }
   }
 
   onDebouncedMove() {
