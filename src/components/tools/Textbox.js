@@ -20,7 +20,7 @@ export default (context) => {
     const maxWidth = 220
     const lineHeight = 28
 
-    context.font = '20px Comic Sans MS'
+    context.font = '20px Helvetica Neue'
     context.strokeStyle = item.color
     context.fillStyle = item.color
 

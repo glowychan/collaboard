@@ -10,6 +10,7 @@ import Brush, { TOOL_BRUSH } from './tools/Brush'
 import Eraser, { TOOL_ERASER } from './tools/Eraser'
 import FileSaver from 'file-saver'
 
+
 export const toolsMap = {
   [TOOL_PENCIL]: Pencil,
   [TOOL_LINE]: Line,
@@ -198,6 +199,7 @@ export default class SketchPad extends Component {
   render() {
     const { width, height, canvasClassName } = this.props
     return (
+       
       <div>
         <textarea
           style={{...this.props.textareaStyle, color: this.props.color}}

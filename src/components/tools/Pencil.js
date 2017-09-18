@@ -24,6 +24,8 @@ export default (context) => {
     context.beginPath()
     context.lineWidth = item.size
     context.strokeStyle = item.color
+    context.shadowBlur = 2
+    context.shadowColor = item.color
     context.globalCompositeOperation = 'source-over'
     context.moveTo(start.x, start.y)
     context.lineTo(x , y)
