@@ -53,9 +53,8 @@
  .about-pop {
   font-size: 20px;
   width: 626px;
-  height: 750px;
   position: absolute;
-  top: 10%;
+  top: 5%;
   left: 30%;
   z-index: 9999;
   flex-shrink: 2;

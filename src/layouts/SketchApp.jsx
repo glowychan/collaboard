@@ -93,7 +93,7 @@ export default class SketchApp extends Component
   moveTextbox = (item) => {
     const style = {
       top: `${item.start.y + 104}px`,
-      left: `${item.start.x + 30}px`,
+      left: `${item.start.x}px`,
       width: '250px',
       height: '250px',
       position: 'absolute',
