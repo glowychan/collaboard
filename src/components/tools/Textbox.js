@@ -4,7 +4,6 @@ export const TOOL_TEXTBOX = 'textbox'
 
 export default (context) => {
   let textbox = null
-  let imageData = null
 
   const onMouseDown = (x, y, color) => {
     textbox = {

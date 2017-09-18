@@ -31,7 +31,7 @@ render() {
       <div className='error-container'>
         <span className='four'> FOUR<a className='oh'>OH</a>FOUR</span>
           <span className='error-msg'>We are looking for your page... but can't find it</span>
-          <img className='gif' src={this.state.url} />
+          <img className='gif' src={this.state.url} alt='random gif' />
       </div>
     )
   }

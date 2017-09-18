@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { CirclePicker } from 'react-color'
 
-class ColorPicker extends React.Component {
+class ColorPicker extends Component {
   state = {
     background: '#fff',
   }

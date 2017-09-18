@@ -1,5 +1,4 @@
 import React from 'react'
-import About from '../icons/About.png'
 
 const UserNamePopout = ({ setWrapperRef, onClose }) => (
   <div ref={setWrapperRef} className='name-pop'>
