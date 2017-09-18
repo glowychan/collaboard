@@ -191,7 +191,7 @@ export default class SketchApp extends Component
 
           <button
             onClick={() => this.changeTool({save: true})}>
-            save<i className='flaticon-symbols-1'  title='Save board' alt='Save'></i>
+           <i className='flaticon-symbols-1'  title='Save board' alt='Save'></i>
           </button>
 
           <button
@@ -233,7 +233,7 @@ export default class SketchApp extends Component
             style={tool == TOOL_TEXTBOX ? {fontWeight:'bold'} : undefined}
             className={tool == TOOL_TEXTBOX  ? 'item-active' : 'item'}
             onClick={() => this.setState({tool: TOOL_TEXTBOX})}>
-            textbox
+            <i className='flaticon-symbols-2'></i>
           </button>
 
           <button
