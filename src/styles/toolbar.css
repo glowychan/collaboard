@@ -175,9 +175,7 @@ img.save:hover {
     }
 
   .fill {
-    flex-direction: column;
-    width: 0;
-    align-items: center;
+    display: none;
   }
   .size {
     display: none;
@@ -191,10 +189,6 @@ img.save:hover {
     display: none;
   }
   
-  .clear {
-    display: none;
-
-  }
   
 }
 
@@ -208,6 +202,7 @@ and (orientation: landscape) {
     top: 0;
     right: 0;
     left: 0; 
+    width: 100%;
     justify-content: center;
     align-items: center;
     background-color: rgba(144, 104, 190, 0.5);
@@ -231,14 +226,5 @@ and (orientation: landscape) {
     display: none;
   }
  
-  .clear {
-    display: none;
-
-  }
-
-  .fill {
-    flex-direction: row;
-    align-items: center;
-  }
 
 }

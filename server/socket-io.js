@@ -1,5 +1,5 @@
 const clients = {}
-const randomColor = require('randomcolor');
+var randomColor = require('randomcolor');
 
 module.exports = (io, dataHelpers) => {
   io.on('connection', (socket) => {
