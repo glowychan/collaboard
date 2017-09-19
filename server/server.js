@@ -9,7 +9,7 @@ require('dotenv').config()
 
 // Set the port to 3001
 const PORT = 3001
-server.listen(PORT);
+server.listen(process.env.PORT || PORT);
 
 // Express Middlewares
 app.use(cors())
