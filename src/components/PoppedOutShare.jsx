@@ -39,7 +39,7 @@ class PoppedOutShare extends Component {
   }
 
   render() {
-    const URL = `https://twoodle-board.com/${this.props.url}`
+    const URL = `https://twoodle.herokuapp.com/${this.props.url}`
 
     if(!this.props.isOpen)
     return null
@@ -54,7 +54,7 @@ class PoppedOutShare extends Component {
           <FacebookShareButton title="Twoodle" quote="Check out my latest Twoodle" picture='https://static.tumblr.com/a084c14f08f0fa56a12f1c79fc90aa16/sl6w7fs/qQHockr0d/tumblr_static_tumblr_static_axzrmvvucm0c80wwwwc8g8kko_640.jpg' url={URL}>
             <FacebookIcon size={60} round />
           </FacebookShareButton>
-          <TwitterShareButton title="Check out my latest Twoodle" url={URL} hashtags={['Twoodle', 'CollaborationTools']}>
+          <TwitterShareButton title="Check out my latest Twoodle" url={URL} hashtags={['Twoodle', 'LHLDemoDay']}>
             <TwitterIcon size={60} round/>
           </TwitterShareButton>
           <LinkedinShareButton title="Check out my latest Twoodle" url={URL}>
