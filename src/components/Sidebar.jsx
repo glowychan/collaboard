@@ -20,7 +20,7 @@ class SideBar extends Component {
   }
 
   onDeleteClick = event => {
-    const url = `http://twoodle-server.herokuapp.com/twoodles/${this.props.boardName}`
+    const url = `${process.env.REACT_APP_SOCKETSERVER}/twoodles/${this.props.boardName}`
     axios.delete(url)
       .then(response => {
         this.props.deleteBoard(this.props.boardName)

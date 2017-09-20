@@ -32,7 +32,7 @@ class Twoodle extends Component {
 
   componentDidMount() {
     // Set up websocket connection
-    this.socket = io('http://twoodle-server.herokuapp.com/')
+    this.socket = io(`${process.env.REACT_APP_SOCKETSERVER}`)
     // Send a new connection message to the websocket server
     this.socket.emit('new connection', this.state.boardName)
     this.socket.emit('online users', this.state.boardName)
