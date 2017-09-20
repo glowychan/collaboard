@@ -35,7 +35,7 @@ export default class Homepage extends Component {
     boardName = boardName.toLowerCase()
 
      if (regex.test(boardName)) {
-      axios.get(`http://twoodle-server.herokuapp.com/?boardName=${boardName}`)
+      axios.get(`https://twoodle-server.herokuapp.com/?boardName=${boardName}`)
         .then(response => {
           window.location = `/twoodles/${boardName}`
         })
