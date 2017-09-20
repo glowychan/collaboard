@@ -39,7 +39,7 @@ class PoppedOutShare extends Component {
   }
 
   render() {
-    const URL = `https://twoodle.herokuapp.com/${this.props.url}`
+    const URL = window.location.href
 
     if(!this.props.isOpen)
     return null
